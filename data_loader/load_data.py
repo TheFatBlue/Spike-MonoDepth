@@ -1,160 +1,474 @@
-# -*- coding: utf-8 -*-
-"""
-SpikeDataset classes
-"""
+# -*- coding: utf-8 -*- 
 
-from torch.utils.data import Dataset
-from skimage import io
-from os.path import join
+from genericpath import isdir
+from glob import glob
+import os, sys
+import warnings
+
+import ctypes
+
+# sys.path.append('../device/spikevision/m1k40')
+import data_loader.spikelinkapi as link
+
 import numpy as np
-from utils.util import first_element_greater_than, last_element_less_than
-import random
 import torch
+import torchvision.transforms as transforms
+import yaml
 import glob
 
+# from SpikeCV.spkData.sps_parser import SPSParser
+from data_loader.sps_parser import SPSParser
+# from sps_parser import SPSParser
 
-class SpikeDataset(Dataset):
-    """Loads spike tensors from a folder, with different spike representations."""
-    def __init__(self, base_folder, spike_folder, start_time=0, stop_time=0, transform=None, normalize=True):
-        self.base_folder = base_folder
-        self.spike_folder = join(self.base_folder, spike_folder)
-        self.transform = transform
+# sys.path.append("..")
+from utils import path
+import time
+import threading
 
-        self.start_time = start_time
-        self.stop_time = stop_time
+# key-value for generate data loader according to the type of label data
+LABEL_DATA_TYPE = {
+    'raw': 0,
+    'reconstruction': 1,
+    'optical_flow': 2,
+    'mono_depth_estimation': 3.1,
+    'stero_depth_estimation': 3.2,
+    'detection': 4,
+    'tracking': 5,
+    'recognition': 6
+}
 
-        self.normalize = normalize
 
-        if "mvsec" in base_folder or "javi" in base_folder:
-            self.use_mvsec = True
+# generate parameters dictionary according to labeled or not
+def data_parameter_dict(data_filename, label_type):
+    filename = path.split_path_into_pieces(data_filename)
+
+    if os.path.isabs(data_filename):
+        file_root = data_filename
+        if os.path.isdir(file_root):
+            search_root = file_root
         else:
-            self.use_mvsec = False
+            search_root = '\\'.join(filename[0:-1])
+        config_filename = path.seek_file(search_root, 'config.yaml')
+    else:
+        print(filename)
+        file_root = os.path.join('.', *filename)
+        config_filename = os.path.join('.', filename[0], filename[1], 'config.yaml')
 
-        self.read_timestamps()
+    try:
+        with open(config_filename, 'r', encoding='utf-8') as fin:
+            configs = yaml.load(fin, Loader=yaml.FullLoader)
+    except TypeError as err:
+        print("Cannot find config file" + str(err))
+        raise err
 
-        self.parse_event_folder()
+    try:
+        labeled_data_type = configs.get('labeled_data_type')
+        if LABEL_DATA_TYPE[label_type] not in labeled_data_type:
+            raise ValueError('there is no labeled data for this task in the %s dataset' % filename[0])
 
-    def read_timestamps(self):
-        # Load the timestamps file
-        raw_stamps = np.loadtxt(join(self.spike_folder, 'timestamps.txt'))
+    except KeyError as exception:
+        print('ERROR! Task name does not exist')
+        print('Task name must be in %s' % LABEL_DATA_TYPE.keys())
+        raise exception
 
-        if raw_stamps.size == 0:
-            raise IOError('Dataset is empty')
+    is_labeled = configs.get('is_labeled')
 
-        if len(raw_stamps.shape) == 1:
-            # if timestamps.txt has only one entry, the shape will be (2,) instead of (1, 2). fix that.
-            raw_stamps = raw_stamps.reshape((1, 2))
+    paraDict = {'spike_h': configs.get('spike_h'), 'spike_w': configs.get('spike_w')}
+    paraDict['filelist'] = None
 
-        self.stamps = raw_stamps[:, 1]
-        if self.stamps is None:
-            raise IOError('Unable to read timestamp file: '.format(join(self.spike_folder,
-                                                                        'timestamps.txt')))
+    if is_labeled:
+        paraDict['labeled_data_type'] = configs.get('labeled_data_type')
+        paraDict['labeled_data_suffix'] = configs.get('labeled_data_suffix')
+        paraDict['label_root_list'] = None
 
-        # Check that the timestamps are unique and sorted
-        assert(np.alltrue(np.diff(self.stamps) > 0)), "timestamps are not unique and monotonically increasing"
+        if os.path.isdir(file_root):
+            filelist = sorted(glob.glob(file_root + '/*.dat'), key=os.path.getmtime)
+            filepath = filelist[0]
 
-        self.initial_stamp = self.stamps[0]
-        self.stamps = self.stamps - self.initial_stamp  # offset the timestamps so they start at 0
+            labelname = path.replace_identifier(filename, configs.get('data_field_identifier', ''),
+                                                configs.get('label_field_identifier', ''))
+            label_root_list = os.path.join('..', 'spkData', 'datasets', *labelname)
+            paraDict['labeled_data_dir'] = sorted(glob.glob(label_root_list + '/*.' + paraDict['labeled_data_suffix']),
+                                                  key=os.path.getmtime)
 
-        # Find the index of the first spike tensor whose timestamp >= start_time
-        # If there is none, throw an error
-        if self.start_time <= 0.0:
-            self.first_valid_idx, self.first_stamp = 1, self.stamps[1]
+            paraDict['filelist'] = filelist
+            paraDict['label_root_list'] = label_root_list
         else:
-            self.first_valid_idx, self.first_stamp = first_element_greater_than(self.stamps, self.start_time)
-        assert(self.first_stamp is not None)
-        # print('First valid index / stamp = {}, {}'.format(self.first_valid_idx, self.first_stamp))
+            filepath = glob.glob(file_root)[0]
+            rawname = filename[-1].replace('.dat', '')
+            filename.pop(-1)
+            filename.append(rawname)
+            labelname = path.replace_identifier(filename, configs.get('data_field_identifier', ''),
+                                                configs.get('label_field_identifier', ''))
+            label_root = os.path.join('..', 'spkData', 'datasets', *labelname)
+            paraDict['labeled_data_dir'] = glob.glob(label_root + '.' + paraDict['labeled_data_suffix'])[0]
+    else:
+        filepath = file_root
 
-        # Find the index of the last spike tensor whose timestamp <= end_time
-        # If there is None, throw an error
-        if self.stop_time <= 0.0:
-            self.last_valid_idx, self.last_stamp = len(self.stamps) - 1, self.stamps[-1]
+    paraDict['filepath'] = filepath
+
+    return paraDict
+
+
+# generate parameters for initial online device
+def device_parameters(params, params_input, type, input_stream, decode_width, decode_height, cusum=50):
+    picture = link.SVPicture()
+    picture.width = decode_width
+    picture.height = decode_height
+    picture.format = 0x00010000
+    picture.fps.num = 20000
+    picture.fps.den = 1
+    params.mode = 0x00002000
+    params.format = 0x00010000
+    params.picture = picture
+    params.buff_size = 500
+    params.cusum = cusum
+
+    if type == 0:
+        ''' dummy camera source '''
+        params.type = 0x00000024
+        params_input.fps.num = 20000
+        params_input.fps.den = 1
+        params_input.duration = 0
+        params_input.skip = 0
+        params_input.start = 0
+        params_input.end = 0
+        params_input.repeat = 0
+        params_input.fileName = bytes(input_stream, 'utf-8')
+        params.opaque = ctypes.cast(ctypes.byref(params_input), ctypes.c_void_p)
+    elif type == 1:
+        ''' Spike camera PCIE source '''
+        params.type = 0x00000020
+        params_input.channels = 0
+        params_input.channelMode = 0
+        params_input.devName = bytes(input_stream, 'utf-8')
+        params.opaque = ctypes.cast(ctypes.byref(params_input), ctypes.c_void_p)
+    else:
+        ''' Spike camera USB source '''
+        params.type = 0x00000021
+        params_input.openByParam = bytes('000000000001', 'utf-8')
+        params_input.type = 2
+        params_input.packetSize = 262144
+        params_input.queueSize = 16
+        params.opaque = ctypes.cast(ctypes.byref(params_input), ctypes.c_void_p)
+        print('read spikes from usb camera')
+
+    return params
+
+
+# obtain spike matrix
+class SpikeStream:
+
+    def __init__(self, offline=True, camera_type=None, **kwargs):
+        self.SpikeMatrix = None
+        self.offline = True
+        self.filename = kwargs.get('filepath')
+        self.spike_width = kwargs.get('spike_w')
+        self.spike_height = kwargs.get('spike_h')
+        self.print_dat_detail = kwargs.get('print_dat_detail', False)
+
+        self.camera_type = 1
+
+    # get the row number index of the spike files
+    def get_row_index(self):
+        delete_row_index = None
+        if self.camera_type == 0:
+            # sps100 camera
+            delete_row_index = np.hstack((np.arange(500, 512),
+                                         np.arange(1012, 1024)))
+        elif self.camera_type == 1:
+            # sps10 camera
+            delete_row_index = np.arange(400, 416)
+
+        return delete_row_index
+
+    # get spike matrix from device
+    def get_device_matrix(self, _input, _framepool, block_len=500, cusum=50):
+
+        self.count = 1
+        self.brunning = True
+        self.block_len = 1000
+        self.block_len = block_len
+        self.SpikeMatrix = np.zeros([self.block_len, self.height, self.spike_width], np.uint8)
+
+        readthrd = threading.Thread(target=self.get_spikes)
+        readthrd.start()
+
+        self.input.init(ctypes.byref(self.dev_params))
+        self.input.setcallback(self.input_callback)
+        self.input.open()
+        self.input.start()
+
+        readthrd.join()
+        self.brunning = False
+
+        self.input.stop()
+        self.input.close()
+
+        return self.SpikeMatrix
+
+    def get_file_matrix(self, flipud=True, begin_idx=0, block_len=None, with_head=False):
+
+        if self.camera_type == 1:
+            if block_len is None:
+                return self.get_spike_matrix(flipud, with_head)
+            else:
+                return self.get_block_spikes(begin_idx=begin_idx, block_len=block_len, flipud=flipud, with_head=with_head)
         else:
-            self.last_valid_idx, self.last_stamp = last_element_less_than(self.stamps, self.stop_time)
-        assert(self.last_stamp is not None)
-        # print('Last valid index / stamp = {}, {}'.format(self.last_valid_idx, self.last_stamp))
+            return self.get_sps100_matrix(begin_idx=begin_idx, block_len=block_len)
 
-        assert(self.first_stamp <= self.last_stamp)
+    def get_sps100_matrix(self, begin_idx, block_len):
+        file_reader = open(self.filename, 'rb')
+        pix_id = np.arange(0, block_len * self.spike_height * self.decode_width)
+        pix_id = np.reshape(pix_id, (block_len, self.spike_height, self.decode_width))
+        comparator = np.left_shift(1, np.mod(pix_id, 8))
+        byte_id = pix_id // 8
 
-        if self.use_mvsec and not "javi" in self.base_folder:
-            self.length = self.last_valid_idx - self.first_valid_idx + 1 - 1
+        # 1. find the head of frame
+        first_frame_found = False
+        spike_parser = SPSParser("test")
+        one_line_data = bytearray([])
+        frame_data = bytearray([])
+        while not first_frame_found:
+            data = file_reader.read(16)
+            if len(data) == 0:
+                print('file end')
+                break
+            if not spike_parser.is_one_frame_start(data):
+                one_line_data += data
+                if len(one_line_data) > 64:
+                    one_line_data = one_line_data[-64:]
+                continue
+
+            first_frame_found = True
+            one_line_data += data
+            one_line_data = one_line_data[-64:]
+            frame_data += one_line_data
+
+        # 2. read 1024 * 1000 * block_len bit matrix
+        if begin_idx == 0:
+            tmp_len = 64 + 128 * (self.spike_height - 1) + 128 * self.spike_height * (block_len - 1)
+            data = file_reader.read(tmp_len)
+            frame_data += data
         else:
-            self.length = self.last_valid_idx - self.first_valid_idx + 1
-        assert(self.length > 0)
+            # file_index = file_reader.tell()
+            file_reader.read(64 + 128 * (self.spike_height - 1))
+            img_size = self.spike_height * self.decode_width
+            id_start = begin_idx * img_size // 8
+            file_reader.seek(id_start, 1)  # move to the assigned begin frame from the current index
+            matrix_len = img_size * block_len // 8
+            frame_data = file_reader.read(matrix_len)
 
-    def parse_event_folder(self):
-        """Parses the event folder to check its validity and read the parameters of the event representation."""
-        raise NotImplementedError
+        data = np.frombuffer(frame_data, 'b')
+        data_frames = data[byte_id]
+        results = np.bitwise_and(data_frames, comparator)
+        tmp_matrix = (results == comparator)
+        delete_indx = self.get_row_index()
 
-    def __len__(self):
-        return self.length
+        # 3. delete no frame data
+        tmp_matrix = np.delete(tmp_matrix, delete_indx, 2)
+        self.SpikeMatrix = tmp_matrix[:, :, :]
+        file_reader.close()
+        return self.SpikeMatrix
 
-    def get_last_stamp(self):
-        """Returns the last spike timestamp, in seconds."""
-        return self.stamps[self.last_valid_idx]
+    # return all spikes from dat file
+    def get_spike_matrix(self, flipud=True, with_head=False):
 
-    def num_channels(self):
-        """Returns the number of channels of the spike tensor."""
-        raise NotImplementedError
+        file_reader = open(self.filename, 'rb')
+        video_seq = file_reader.read()
+        video_seq = np.frombuffer(video_seq, 'b')
 
-    def get_index_at(self, i):
-        """Returns the index of the ith spike tensor"""
-        return self.first_valid_idx + i
+        video_seq = np.array(video_seq).astype(np.byte)
+        if self.print_dat_detail:
+            print(video_seq)
+        img_size = self.spike_height * self.spike_width
+        img_num = len(video_seq) // (img_size // 8)
 
-    def get_stamp_at(self, i):
-        """Returns the timestamp of the ith spike tensor"""
-        return self.stamps[self.get_index_at(i)]
+        if self.print_dat_detail:
+            print('loading total spikes from dat file -- spatial resolution: %d x %d, total timestamp: %d' %
+                  (self.spike_width, self.spike_height, img_num))
 
-    def __getitem(self, i):
-        """Returns a C x H x W spike tensor for the ith element in the dataset."""
-        raise NotImplementedError
+        SpikeMatrix = np.zeros([img_num, self.spike_height, self.spike_width], np.byte)
+
+        pix_id = np.arange(0, img_num * self.spike_height * self.spike_width)
+        pix_id = np.reshape(pix_id, (img_num, self.spike_height, self.spike_width))
+        comparator = np.left_shift(1, np.mod(pix_id, 8))
+        byte_id = pix_id // 8
+
+        data = video_seq[byte_id]
+        result = np.bitwise_and(data, comparator)
+        tmp_matrix = (result == comparator)
+        # if with head, delete them
+        if with_head:
+            delete_indx = self.get_row_index()
+            tmp_matrix = np.delete(tmp_matrix, delete_indx, 2)
+
+        if flipud:
+            self.SpikeMatrix = tmp_matrix[:, ::-1, :]
+        else:
+            self.SpikeMatrix = tmp_matrix
+
+        file_reader.close()
+
+        # self.SpikeMatrix = SpikeMatrix
+        return self.SpikeMatrix
+
+    # return spikes with specified length and begin index
+    def get_block_spikes(self, begin_idx, block_len=1, flipud=True, with_head=False):
+
+        file_reader = open(self.filename, 'rb')
+        video_seq = file_reader.read()
+        video_seq = np.frombuffer(video_seq, 'b')
+
+        video_seq = np.array(video_seq).astype(np.uint8)
+        img_size = self.spike_height * self.spike_width
+        img_num = len(video_seq) // (img_size // 8)
+
+        end_idx = begin_idx + block_len
+        if end_idx > img_num:
+            warnings.warn("block_len exceeding upper limit! Zeros will be padded in the end. ", ResourceWarning)
+            end_idx = img_num
+
+        if self.print_dat_detail:
+            print(
+                'loading total spikes from dat file -- spatial resolution: %d x %d, begin index: %d total timestamp: %d' %
+                (self.spike_width, self.spike_height, begin_idx, block_len))
+
+        SpikeMatrix = np.zeros([block_len, self.spike_height, self.spike_width], np.uint8)
+
+        pix_id = np.arange(0, block_len * self.spike_height * self.spike_width)
+        pix_id = np.reshape(pix_id, (block_len, self.spike_height, self.spike_width))
+        comparator = np.left_shift(1, np.mod(pix_id, 8))
+        byte_id = pix_id // 8
+        id_start = begin_idx * img_size // 8
+        id_end = id_start + block_len * img_size // 8
+        data = video_seq[id_start:id_end]
+        data_frame = data[byte_id]
+        result = np.bitwise_and(data_frame, comparator)
+        tmp_matrix = (result == comparator)
+        # if with head, delete them
+        if with_head:
+            delete_indx = self.get_row_index()
+            tmp_matrix = np.delete(tmp_matrix, delete_indx, 2)
+
+        if flipud:
+            self.SpikeMatrix = tmp_matrix[:, ::-1, :]
+        else:
+            self.SpikeMatrix = tmp_matrix
+
+        file_reader.close()
+        return self.SpikeMatrix
+
+    def get_pcie_spikes(self, _input, _framepool):
+        """ Reading thread for obtain spikes from spike camera PCIE source """
+        pix_id = np.arange(0, self.cusum * self.spike_height * self.decode_width)
+        pix_id = np.reshape(pix_id, (self.cusum, self.spike_height, self.decode_width))
+        comparator = np.left_shift(1, np.mod(pix_id, 8))
+        byte_id = pix_id // 8
+
+        if _framepool.size() > 0:
+            frame = _framepool.pop()
+            frame2 = ctypes.cast(frame, ctypes.POINTER(link.SpikeLinkVideoFrame))
+            # print("get frame:", frame2.contents.size, frame2.contents.width, frame2.contents.height,
+            #       frame2.contents.pts)
+
+            spkdata = frame2.contents.data[0]
+            CharArr = ctypes.c_char * frame2.contents.size
+            char_arr = CharArr(*spkdata[:frame2.contents.size])
+            data = np.frombuffer(char_arr, 'b')
+            # data = np.array(data).astype(np.byte)
+            data_frames = data[byte_id]
+            results = np.bitwise_and(data_frames, comparator)
+            tmp_matrix = (results == comparator)
+            delete_index = self.get_row_index()
+            tmp_matrix = np.delete(tmp_matrix, delete_index, 2)
+            self.SpikeMatrix = tmp_matrix[:, :, :]
+
+            _input.releaseFrame(frame)
+        else:
+            time.sleep(0.01)
+
+    def get_usb_spikes(self, _input, _framepool):
+        """ Reading thread for obtain spikes from spike camera USB source """
+        pix_id = np.arange(0, self.cusum * self.spike_height * self.spike_width)
+        pix_id = np.reshape(pix_id, (self.cusum, self.spike_height, self.spike_width))
+        comparator = np.left_shift(1, np.mod(pix_id, 8))
+        byte_id = pix_id // 8
+        spatial_resolution = self.spike_height * self.spike_width
+
+        if _framepool.size() > 0:
+            frame = _framepool.pop()
+            frame2 = ctypes.cast(frame, ctypes.POINTER(link.SpikeLinkVideoFrame))
+            # print("get frame:", frame2.contents.size, frame2.contents.width, frame2.contents.height,
+            #       frame2.contents.pts)
+            timestamp = frame2.contents.pts * self.cusum
+            print('process spikes at timestamp: ', timestamp)
+
+            # if 0 < frame2.contents.pts < self.block_len:
+            decode_st = time.time()
+
+            spkdata = frame2.contents.data[0]
+            chararr = ctypes.c_char * frame2.contents.size
+            char_arr = chararr(*spkdata[:frame2.contents.size])
+            data = np.frombuffer(char_arr, 'b')
+            # data = np.array(data, dtype=np.byte)
+
+            data_frames = data[byte_id]
+            results = np.bitwise_and(data_frames, comparator)
+            tmp_matrix = (results == comparator)
+            self.SpikeMatrix = tmp_matrix[:, ::-1, :]
+
+            print('decode one block take %.3f seconds' % (time.time() - decode_st))
+
+            _input.releaseFrame(frame)
+        else:
+            time.sleep(0.01)
 
 
-class VoxelGridDENSESpikeDataset(SpikeDataset):
-    """Load an spike folder containing spike tensors encoded with the VoxelGrid format."""
+class Dataset_RealSpike(torch.utils.data.Dataset):
+    '''数据集组织格式为
 
-    def parse_event_folder(self):
-        """Check that the passed directory has the following form:
+        mydataset
+        |____input
+             |-- xx.dat
+             |-- xx.dat
+             |-- xx.dat
+            ...
 
-        ├── spike_folder
-        |   ├── timestamps.txt
-        |   ├── spike_tensor_0000000000.npy
-        |   ├── ...
-        |   ├── spike_tensor_<N>.npy
-        """
-        self.num_bins = None
+        加载一堆dat文件, 用于真实场景序列, 无GroundTruth。
+    '''
 
-    def num_channels(self):
-        return self.num_bins
+    def __init__(self, root_dir, crop_size):
+        super(Dataset_RealSpike, self).__init__()
+        self.spikefolder = root_dir + "/input/"
 
-    def __getitem__(self, i, transform_seed=None):
-        assert(i >= 0)
-        assert(i < self.length)
+        self.spike_list = os.listdir(self.spikefolder)
 
-        if transform_seed is None:
-            transform_seed = random.randint(0, 2**32)
+        self.crop_size = crop_size
 
-        # if self.use_mvsec:
-        #     event_tensor = np.load(join(self.spike_folder, 'event_tensor_{:010d}.npy'.format(self.first_valid_idx + i)))
-        # else:
-        path_spike = glob.glob(self.spike_folder + '/spike_{:010d}.npy'.format(self.first_valid_idx + i))
-        
-        spike_tensor = np.load(path_spike[0]).astype(np.float32)
+        self.transform = transforms.Compose([
+            transforms.RandomCrop(self.crop_size),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.RandomVerticalFlip(p=0.5),
+            transforms.RandomRotation(90),
+        ])
 
-        if self.normalize:
-            # normalize the spike tensor (voxel grid) in such a way that the mean and stddev of the nonzero values
-            # in the tensor are equal to (0.0, 1.0)
-            mask = np.nonzero(spike_tensor)
-            if mask[0].size > 0:
-                mean, stddev = spike_tensor[mask].mean(), spike_tensor[mask].std()
-                if stddev > 0:
-                    spike_tensor[mask] = (spike_tensor[mask] - mean) / stddev
+    def __getitem__(self, index: int):
+        item_name = self.spike_list[index][:-4]
+        spike_path = os.path.join(self.spikefolder, item_name + '.dat')
 
-        self.num_bins = spike_tensor.shape[0]
+        paraDict = data_parameter_dict(spike_path, 'raw')
+        vidarSpikes = SpikeStream(**paraDict)
+        spikes = vidarSpikes.get_block_spikes(begin_idx=0, block_len=41)  # T H W numpy
+        spikes = torch.from_numpy(spikes.astype(np.float32))
 
-        spikes = torch.from_numpy(spike_tensor)  # [C x H x W]
-        if self.transform:
-            random.seed(transform_seed)
+        if self.crop_size != 0:
             spikes = self.transform(spikes)
 
-        return {'events': spikes}  # [num_bins x H x W] tensor
+        item = {}
+        item['spikes'] = spikes
+
+        return item
+
+    def __len__(self) -> int:
+        return len(self.spike_list)
