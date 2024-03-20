@@ -2,142 +2,24 @@
 
 # here put the import lib
 import os
-import torch
-import numpy as np
-
-from data_loader.load_dat import SpikeStream
-
-# new package, idk which is useful
-from torch.utils.data import Dataset
-from .spike_dataset import VoxelGridDENSESpikeDataset
-from skimage import io
-from os.path import join
-import numpy as np
-from utils.util import first_element_greater_than, last_element_less_than
 import random
-import glob
+
+import numpy as np
 import torch
-import torch.nn as nn
-import torch.nn.functional as f
-from math import fabs
-import cv2
-import matplotlib.pyplot as plt
+from torch.utils.data import Dataset
 
 
-class DatasetSpikeStero(torch.utils.data.Dataset):
-    def __init__(self, **kwargs):
-        super(DatasetSpikeStero, self).__init__()
-        self.split = kwargs.get('split')
-        assert 'train' in self.split or 'val' in self.split, "The \'split\' should be \'train\' of \'val\'"
-
-        self.rootpath = kwargs.get('filepath')
-        self.spike_h = kwargs.get('spike_h', 250)
-        self.spike_w = kwargs.get('spike_w', 400)
-        
-        self.scence = kwargs.get('scence')
-        assert self.scence in ['indoor', 'outdoor', 'both'], "invalid option, \'scence\' should be in [indoor, outdoor, both]."
-
-        self.transform = kwargs.get('transform', None)
-
-        self.path_list = self.__gen_data_list()
-
-    def __gen_data_list(self):
-        path_list = []
-
-        if self.scence in ['indoor', 'outdoor']:
-            print(self.rootpath, self.scence)
-            rootfolders = [os.path.join(self.rootpath, self.scence)]
-        else:
-            rootfolders = [
-                os.path.join(self.rootpath, 'indoor'),
-                os.path.join(self.rootpath, 'outdoor')
-            ]
-
-        for rootfolder in rootfolders:
-            rootfolder_left = os.path.join(rootfolder, 'left')
-            rootfolder_right = os.path.join(rootfolder, 'right')
-            l0_folders = sorted(os.listdir(rootfolder_left))
-            folder_numbers = len(l0_folders)
-            if self.split == 'train':
-                l0_folders = l0_folders[:int(0.8*folder_numbers)]
-            else:
-                l0_folders = l0_folders[int(0.8*folder_numbers):]
-            for l0_folder in l0_folders:
-                l1_folders = os.listdir(os.path.join(rootfolder_left, l0_folder))
-                for l1_folder in l1_folders:
-                    sample = {}
-                    sample['left'] = os.path.join(rootfolder_left, l0_folder, l1_folder)
-                    sample['right'] = os.path.join(rootfolder_right, l0_folder, l1_folder)
-                    path_list.append(sample)
-
-        return path_list
-
-    def __len__(self):
-        return len(self.path_list)
-    
-    def __getitem__(self, index):
-        sample = self.path_list[index]
-        left_path = sample['left']
-        right_path = sample['right']
-
-        left_dict = data_parameter_dict(left_path, 'stero_depth_estimation')
-        right_dict = data_parameter_dict(right_path, 'stero_depth_estimation')
-
-        label_path = left_dict['labeled_data_dir']
-        label = np.load(label_path).astype(np.float32)
-        if len(label.shape) == 2:  # [H x W] grayscale image -> [H x W x 1]
-            label = np.expand_dims(label, -1)
-        label = np.moveaxis(label, -1, 0)  # H x W x 1 -> 1 x H x W
-
-        left_spike_obj = SpikeStream(filepath=left_dict['filepath'], spike_h=250, spike_w=400, print_dat_detail=False)
-        right_spike_obj = SpikeStream(filepath=right_dict['filepath'], spike_h=250, spike_w=400, print_dat_detail=False)
-
-        left_spike = left_spike_obj.get_spike_matrix(flipud=True).astype(np.float32)
-        right_spike = right_spike_obj.get_spike_matrix(flipud=True).astype(np.float32)
-        
-        return {'left': left_spike, 'right': right_spike, 'depth': label}
-
-
-class DatasetSpikeStero_Mono(DatasetSpikeStero):
-    def __getitem__(self, index):
-        sample = self.path_list[index]
-        left_path = sample['left']
-
-        print(left_path)
-        # left_dict = data_parameter_dict(left_path, 'stero_depth_estimation')
-        left_dict = {
-            'labeled_data_dir': os.path.join(left_path, "{}_gt.npy".format(left_path.split('/')[-1])),
-            'filepath': os.path.join(left_path, "{}.dat".format(left_path.split('/')[-1]))
-        }
-        
-        label_path = left_dict['labeled_data_dir']
-        print(label_path)
-        label = np.load(label_path).astype(np.float32)
-        if len(label.shape) == 2:  # [H x W] grayscale image -> [H x W x 1]
-            label = np.expand_dims(label, -1)
-        label = np.moveaxis(label, -1, 0)  # H x W x 1 -> 1 x H x W
-
-        left_spike_obj = SpikeStream(filepath=left_dict['filepath'], spike_h=250, spike_w=400, print_dat_detail=False)
-        
-        left_spike = left_spike_obj.get_spike_matrix(flipud=True).astype(np.float32)
-        
-        return {'spike': left_spike, 'depth': label}
-    
-    
 class SpikeMonoDataset(Dataset):
     """Load sequences of time-synchronized {spike tensors + depth} from a folder."""
 
     def __init__(self, **kwargs):
         '''
-                 base_folder, 
-                 split,
-                 depth_folder='frames', 
-                 transform=None,
-                 clip_distance=100.0,
-                 normalize=True,
-                 reg_factor=5.7):
-                 '''
-                 
+        arg_keys:
+            base_folder, scene, side,
+            spike_h, spike_w,
+            transform, clip_distance, normalize, reg_factor
+        '''
+        
         super().__init__()
         
         self.base_folder = kwargs.get('base_folder')
@@ -171,23 +53,6 @@ class SpikeMonoDataset(Dataset):
         folders = sorted(os.listdir(rootfolder))
         for folder in folders:
             path_list.append(os.path.join(rootfolder, folder))
-
-        '''for rootfolder in rootfolders:
-            rootfolder_side = os.path.join(rootfolder, self.side)
-            l0_folders = sorted(os.listdir(rootfolder_side))
-            folder_numbers = len(l0_folders)
-            
-            if self.split == 'train':
-                l0_folders = l0_folders[:int(0.8*folder_numbers)]
-            else:
-                l0_folders = l0_folders[int(0.8*folder_numbers):]
-                
-            for l0_folder in l0_folders:
-                l1_folders = os.listdir(os.path.join(rootfolder_side, l0_folder))
-                
-                for l1_folder in l1_folders:
-                    sample = os.path.join(rootfolder_side, l0_folder, l1_folder)
-                    path_list.append(sample)'''
 
         return path_list
     
@@ -275,7 +140,7 @@ class SpikeStream:
             print('loading total spikes from dat file -- spatial resolution: %d x %d, total timestamp: %d' %
                   (self.spike_width, self.spike_height, img_num))
 
-        SpikeMatrix = np.zeros([img_num, self.spike_height, self.spike_width], np.byte)
+        # SpikeMatrix = np.zeros([img_num, self.spike_height, self.spike_width], np.byte)
 
         pix_id = np.arange(0, img_num * self.spike_height * self.spike_width)
         pix_id = np.reshape(pix_id, (img_num, self.spike_height, self.spike_width))
