@@ -2,21 +2,23 @@ import os
 import json
 import logging
 import argparse
+import bisect
+from os.path import join
+
 import torch
+import torch.backends.cudnn as cudnn
+import torch.multiprocessing as mp
+import torch.distributed as dist
+from torch.utils.data import DataLoader, ConcatDataset
+
+from data_loader.SpikeMono import *
+from trainer.spiket_trainer import SpikeTTrainer
 from model.model import *
 from model.S2DepthNet import S2DepthTransformerUNetConv
 from model.loss import *
 from model.metric import *
-from torch.utils.data import DataLoader, ConcatDataset
-from data_loader.SpikesDENSE_dataset import *
-from trainer.spiket_trainer import SpikeTTrainer
 from utils.data_augmentation import Compose, RandomRotationFlip, RandomCrop, CenterCrop
-from os.path import join
-import bisect
 
-import torch.backends.cudnn as cudnn
-import torch.multiprocessing as mp
-import torch.distributed as dist
 
 logging.basicConfig(level=logging.INFO, format='')
 
@@ -52,50 +54,40 @@ class ConcatDatasetCustom(ConcatDataset):
         return self.datasets[dataset_idx][sample_idx], dataset_idx
 
 
-def concatenate_subfolders(base_folder, dataset_type, sequence_length,
-                           transform=None, step_size=1,
-                           clip_distance=100.0, every_x_rgb_frame=1, normalize=True, scale_factor=1.0,
-                           use_phased_arch=False, baseline=False, loss_composition=False, reg_factor=5.7,
-                           dataset_idx_flag=False, recurrency=True):
+def concatenate_subfolders(base_folder,
+                           dataset_type,
+                           scene='indoor',
+                           side='left',
+                           transform=None,
+                           clip_distance=100.0,
+                           normalize=True,
+                           reg_factor=5.7,
+                           dataset_idx_flag=False):
     """
     Create an instance of ConcatDataset by aggregating all the datasets in a given folder
     """
-
     subfolders = os.listdir(base_folder)
     print('Found {} samples in {}'.format(len(subfolders), base_folder))
-    
-    arg_dict = {
-        'base_folder': base_folder,
+
+    args_dict = {
+        'base_folder': ''
         'scene': scene,
         'side': side,
-        
+        'transform': transform,
+        'clip_distance': clip_distance,
+        'normalize': normalize,
+        'reg_factor': reg_factor
     }
-
-    train_datasets = []
-    for dataset_name in subfolders:
-        train_datasets.append(eval(dataset_type)(base_folder=join(base_folder, dataset_name),
-                                                 spike_folder=spike_folder,
-                                                 depth_folder=depth_folder,
-                                                 frame_folder=frame_folder,
-                                                 sequence_length=sequence_length,
-                                                 transform=transform,
-                                                 proba_pause_when_running=proba_pause_when_running,
-                                                 proba_pause_when_paused=proba_pause_when_paused,
-                                                 step_size=step_size,
-                                                 clip_distance=clip_distance,
-                                                 every_x_rgb_frame=every_x_rgb_frame,
-                                                 normalize=normalize,
-                                                 scale_factor=scale_factor,
-                                                 use_phased_arch=use_phased_arch,
-                                                 baseline=baseline,
-                                                 loss_composition=loss_composition,
-                                                 reg_factor=reg_factor,
-                                                 recurrency=recurrency))
+    
+    datasets = []
+    for subfolder in subfolders:
+        args_dict['base_folder'] = join(base_folder, subfolder)
+        datasets.append(eval(dataset_type)(**args_dict))
 
     if dataset_idx_flag == False:
-        concat_dataset = ConcatDataset(train_datasets)
+        concat_dataset = ConcatDataset(datasets)
     elif dataset_idx_flag == True:
-        concat_dataset = ConcatDatasetCustom(train_datasets)
+        concat_dataset = ConcatDatasetCustom(datasets)
 
     return concat_dataset
 
@@ -123,8 +115,8 @@ def main_worker(gpu, ngpus_per_node, args):
     assert (L > 0)
 
     dataset_type, base_folder = {}, {}
+    scene, side = {}, {}
     clip_distance = {}
-    every_x_rgb_frame = {}
     reg_factor = {}
     baseline = {}
 
@@ -132,21 +124,21 @@ def main_worker(gpu, ngpus_per_node, args):
     # preprocessed_datasets_folder = os.environ['PREPROCESSED_DATASETS_FOLDER']
 
     use_phased_arch = config['use_phased_arch']
-
+    loss_composition = config['trainer']['loss_composition']
+    loss_weights = config['trainer']['loss_weights']
+    normalize = config['data_loader'].get('normalize', True)
+    
     for split in ['train', 'validation']:
         
         dataset_type[split] = config['data_loader'][split]['type']
         base_folder[split] = config['data_loader'][split]['base_folder']
+        scene[split] = config['data_loader'][split]['scene']
+        side[split] = config['data_loader'][split]['side']
 
         try:
             clip_distance[split] = config['data_loader'][split]['clip_distance']
         except KeyError:
             clip_distance[split] = 100.0
-
-        try:
-            every_x_rgb_frame[split] = config['data_loader'][split]['every_x_rgb_frame']
-        except KeyError:
-            every_x_rgb_frame[split] = 1
 
         try:
             baseline[split] = config['data_loader'][split]['baseline']
@@ -158,60 +150,49 @@ def main_worker(gpu, ngpus_per_node, args):
         except KeyError:
             reg_factor[split] = 5.7
 
-    loss_composition = config['trainer']['loss_composition']
-    loss_weights = config['trainer']['loss_weights']
-    normalize = config['data_loader'].get('normalize', True)
+    train_dataset = concatenate_subfolders(
+        base_folder=join(args.datafolder, base_folder['train']),
+        dataset_type=dataset_type['train'],
+        scene=scene['train'],
+        side=side['train'],
+        transform=Compose([RandomRotationFlip(0.0, 0.5, 0.0), 
+                           RandomCrop(224)]),
+        clip_distance=clip_distance['train'],
+        normalize=normalize,
+        reg_factor=reg_factor['train'],
+    )
 
-    
-    train_dataset = concatenate_subfolders(join(args.datafolder,base_folder['train']),
-                                           dataset_type['train'],
-                                           sequence_length=L,
-                                           transform=Compose([RandomRotationFlip(0.0, 0.5, 0.0),
-                                                              RandomCrop(224)]),
-                                           clip_distance=clip_distance['train'],
-                                           every_x_rgb_frame=every_x_rgb_frame['train'],
-                                           normalize=normalize,
-                                           use_phased_arch=use_phased_arch,
-                                           baseline=baseline['train'],
-                                           loss_composition=loss_composition,
-                                           reg_factor=reg_factor['train'],
-                                           )
-
-    validation_dataset = concatenate_subfolders(join(args.datafolder,base_folder['validation']),
-                                                dataset_type['validation'],
-                                                spike_folder['validation'],
-                                                depth_folder['validation'],
-                                                frame_folder['validation'],
-                                                sequence_length=L,
-                                                transform=CenterCrop(224),
-                                                proba_pause_when_running=proba_pause_when_running['validation'],
-                                                proba_pause_when_paused=proba_pause_when_paused['validation'],
-                                                step_size=step_size['validation'],
-                                                clip_distance=clip_distance['validation'],
-                                                every_x_rgb_frame=every_x_rgb_frame['validation'],
-                                                normalize=normalize,
-                                                scale_factor=scale_factor['train'],
-                                                use_phased_arch=use_phased_arch,
-                                                baseline=baseline['validation'],
-                                                loss_composition=loss_composition,
-                                                reg_factor=reg_factor['validation'],
-                                                recurrency=recurrency['validation']
-                                                )
+    # no data augmentation for validation set
+    validation_dataset = concatenate_subfolders(
+        base_folder=join(args.datafolder, base_folder['validation']),
+        dataset_type=dataset_type['validation'],
+        scene=scene['validation'],
+        side=side['validation'],
+        transform=CenterCrop(224),
+        clip_distance=clip_distance['validation'],
+        normalize=normalize,
+        reg_factor=reg_factor['validation'],
+    )
 
     # Set up data loaders
     kwargs = {'num_workers': config['data_loader']['num_workers'],
               'pin_memory': config['data_loader']['pin_memory']} if config['cuda'] else {}
+    
     train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
-    data_loader = DataLoader(train_dataset, batch_size=int(config['data_loader']['batch_size']/ ngpus_per_node),
-                            #  shuffle=config['data_loader']['shuffle'],
-                             sampler=train_sampler,
-                             **kwargs)
+    data_loader = DataLoader(
+        train_dataset,
+        batch_size=int(config['data_loader']['batch_size']/ ngpus_per_node),
+        sampler=train_sampler,
+        **kwargs
+    )
 
     validation_sampler = torch.utils.data.distributed.DistributedSampler(validation_dataset)
-    valid_data_loader = DataLoader(validation_dataset, batch_size=int(config['data_loader']['batch_size']/ ngpus_per_node),
-                                #    shuffle=config['data_loader']['shuffle'],
-                                   sampler=validation_sampler,
-                                   **kwargs)
+    valid_data_loader = DataLoader(
+        validation_dataset,
+        batch_size=int(config['data_loader']['batch_size']/ ngpus_per_node),
+        sampler=validation_sampler,
+        **kwargs
+    )
 
     config['model']['gpu'] = args.gpu
     config['model']['every_x_rgb_frame'] = config['data_loader']['train']['every_x_rgb_frame']
@@ -259,14 +240,16 @@ def main_worker(gpu, ngpus_per_node, args):
     print("Using %s with config %s" % (config['loss']['type'], config['loss']['config']))
     metrics = [eval(metric) for metric in config['metrics']]
 
-    trainer = SpikeTTrainer(model, args, loss, loss_params, metrics,
-                              resume=resume,
-                              config=config,
-                              train_sampler=train_sampler,
-                              data_loader=data_loader, 
-                              ngpus_per_node=ngpus_per_node,
-                              valid_data_loader=valid_data_loader,
-                              train_logger=train_logger)
+    trainer = SpikeTTrainer(
+        model, args, loss, loss_params, metrics,
+        resume=resume,
+        config=config,
+        train_sampler=train_sampler,
+        data_loader=data_loader, 
+        ngpus_per_node=ngpus_per_node,
+        valid_data_loader=valid_data_loader,
+        train_logger=train_logger
+    )
 
     trainer.train()
 

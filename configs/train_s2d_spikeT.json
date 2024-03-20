@@ -6,6 +6,8 @@
         "train": {
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/train",
+            "scene": "indoor",
+            "side": "left",
             "clip_distance": 1000.0,
             "every_x_rgb_frame": 1,
             "baseline": "s"
@@ -13,6 +15,8 @@
         "validation": {
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/validation",
+            "scene": "indoor",
+            "side": "left",
             "clip_distance": 1000.0,
             "every_x_rgb_frame": 1,
             "baseline": "s"
