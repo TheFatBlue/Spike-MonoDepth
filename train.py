@@ -104,6 +104,10 @@ def main_worker(gpu, ngpus_per_node, args):
         if args.multiprocessing_distributed:
             args.rank = args.rank * ngpus_per_node + gpu
         dist.init_process_group(backend=args.dist_backend, init_method=args.dist_url, world_size=args.world_size, rank=args.rank)
+    else:
+        torch.cuda.set_device(args.gpu)
+        print(f"Training on GPU {args.gpu} ...")
+        dist.init_process_group(backend="nccl", init_method="env://", world_size=1, rank=0)
     
     config = args.config 
     resume = args.resume
