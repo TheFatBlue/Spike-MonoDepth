@@ -70,7 +70,7 @@ def concatenate_subfolders(base_folder,
     print('Found {} samples in {}'.format(len(subfolders), base_folder))
 
     args_dict = {
-        'base_folder': ''
+        'base_folder': '',
         'scene': scene,
         'side': side,
         'transform': transform,
