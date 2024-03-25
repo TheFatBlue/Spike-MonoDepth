@@ -91,6 +91,8 @@ class SpikeMonoDataset(Dataset):
         spike_obj = SpikeStream(filepath=path_dict['spike'], spike_h=250, spike_w=400, print_dat_detail=False)
         
         spike = spike_obj.get_spike_matrix(flipud=True).astype(np.float32)
+        # i don't want so, but temply, i have to
+        spike = spike[:128, :, :]
         
         if self.normalize:
             # normalize the spike tensor (voxel grid) in such a way that the mean and stddev of the nonzero values
