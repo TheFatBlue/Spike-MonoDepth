@@ -24,8 +24,8 @@ class SpikeMonoDataset(Dataset):
         
         self.base_folder = kwargs.get('base_folder')
         
-        self.scence = kwargs.get('scence')
-        assert self.scence in ['indoor', 'outdoor', 'both'], "Invalid option, \'scence\' should be \'indoor\' or \'outdoor\'."
+        self.scene = kwargs.get('scene')
+        assert self.scene in ['indoor', 'outdoor', 'both'], "Invalid option, \'scene\' should be \'indoor\' or \'outdoor\'."
         
         self.side = kwargs.get('side')
         assert self.side in ['left', 'right'], "Invalid option, \'side\' should be in \'left\', \'right\'."
@@ -48,7 +48,7 @@ class SpikeMonoDataset(Dataset):
     def __gen_data_list(self):
         path_list = []
 
-        rootfolders = os.path.join(self.base_folder, self.scence, self.side)
+        rootfolder = os.path.join(self.base_folder, self.scene, self.side)
         
         folders = sorted(os.listdir(rootfolder))
         for folder in folders:
