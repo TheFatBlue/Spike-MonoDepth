@@ -43,7 +43,7 @@ class SpikeMonoDataset(Dataset):
         self.reg_factor = kwargs.get('reg_factor', 5.7)
 
         self.path_list = self.__gen_data_list()
-        self.length = len(self.path_list)
+        self.length = len(self.path_list) * 3
 
     def __gen_data_list(self):
         path_list = []
@@ -65,6 +65,11 @@ class SpikeMonoDataset(Dataset):
 
         seed = random.randint(0, 2**32)
 
+        # the channel nums of the model is 128, but that of the dataset is 400, 
+        # temporarily, I split each data evenly into 3 parts.
+        index = i // 3
+        bias = (i % 3) * 133
+
         path = self.path_list[index]
 
         path_dict = {
@@ -76,7 +81,7 @@ class SpikeMonoDataset(Dataset):
         
         # clip and normalize
         label = np.clip(label, 0.0, self.clip_distance) / self.clip_distance
-        label = 1.0 + np.log(label) / reg_factor
+        label = 1.0 + np.log(label) / self.reg_factor
         label = label.clip(0, 1.0)
         
         if len(label.shape) == 2:  # [H x W] grayscale image -> [H x W x 1]
@@ -91,8 +96,7 @@ class SpikeMonoDataset(Dataset):
         spike_obj = SpikeStream(filepath=path_dict['spike'], spike_h=250, spike_w=400, print_dat_detail=False)
         
         spike = spike_obj.get_spike_matrix(flipud=True).astype(np.float32)
-        # i don't want so, but temply, i have to
-        spike = spike[:128, :, :]
+        spike = spike[bias:bias+128, :, :]
         
         if self.normalize:
             # normalize the spike tensor (voxel grid) in such a way that the mean and stddev of the nonzero values
