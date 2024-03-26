@@ -1,0 +1,414 @@
+Setting up Multi Scale Gradient loss...
+Done
+---- Distributed Training ----
+Added key: store_based_barrier_key:1 to store for rank: 0
+Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 1 nodes.
+/root/miniconda3/envs/scv/lib/python3.9/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Trainable parameters: 20545951
+S2DepthTransformerUNetConv(
+  (encoder): LongSpikeStreamEncoderConv(
+    (swin3d): SwinTransformer3D(
+      (patch_embed): PatchEmbedLocalGlobal(
+        (head): Conv2d(32, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (global_head): Conv2d(128, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (residual_encoding): residual_feature_generator(
+          (resblock1): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock2): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock3): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock4): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (global_residual_encoding): residual_feature_generator(
+          (resblock1): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock2): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock3): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock4): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (proj): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (global_proj): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      )
+      (pos_drop): Dropout(p=0.0, inplace=False)
+      (layers): ModuleList(
+        (0): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=96, out_features=288, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=96, out_features=96, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): Identity()
+              (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=96, out_features=384, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=384, out_features=96, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=96, out_features=288, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=96, out_features=96, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=96, out_features=384, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=384, out_features=96, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+          (downsample): PatchMerging(
+            (reduction): Linear(in_features=384, out_features=192, bias=False)
+            (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (1): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=192, out_features=576, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=192, out_features=192, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=192, out_features=768, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=768, out_features=192, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=192, out_features=576, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=192, out_features=192, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=192, out_features=768, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=768, out_features=192, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+          (downsample): PatchMerging(
+            (reduction): Linear(in_features=768, out_features=384, bias=False)
+            (norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (2): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (2): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (3): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (4): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (5): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+        )
+      )
+      (norm0): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+      (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+    )
+    (conv_layers): ModuleList(
+      (0): ModuleList(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (1): ModuleList(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): ModuleList(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+  (resblocks): ModuleList(
+    (0): ResidualBlock(
+      (conv1): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): ReLU()
+      (conv2): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (1): ResidualBlock(
+      (conv1): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): ReLU()
+      (conv2): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (decoders): ModuleList(
+    (0): UpsampleConvLayer(
+      (conv2d): Conv2d(384, 192, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+    (1): UpsampleConvLayer(
+      (conv2d): Conv2d(192, 96, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+    (2): UpsampleConvLayer(
+      (conv2d): Conv2d(96, 48, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+  )
+  (pred): ConvLayer(
+    (conv2d): Conv2d(48, 1, kernel_size=(1, 1), stride=(1, 1))
+  )
+)
+Setting up Multi Scale Gradient loss...
+Done
+Use GPU: 0 for training
+Found 26 samples in /root/autodl-tmp/Spike-Stero/train
+Found 8 samples in /root/autodl-tmp/Spike-Stero/validation
+-----  [3, 6, 12]
+---- new version 4 ----
+Model Initialized on GPU: 0
+Using scale_invariant_loss with config {'weight': 1.0, 'n_lambda': 1.0}
+Will not use phased architecture
+Using Multi Scale Gradient loss with weight=0.25
+Will not use MSE loss
+[W reducer.cpp:1303] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[W reducer.cpp:347] Warning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [1, 48, 1, 1], strides() = [48, 1, 48, 48]
+bucket_view.sizes() = [1, 48, 1, 1], strides() = [48, 1, 1, 1] (function operator())
+Train Epoch: 1 [0/808 (0%)] loss: 0.0077 L_si: 0.0003 L_grad: 0.0074 
+Train Epoch: 1 [8/808 (1%)] loss: 0.0042 L_si: 0.0002 L_grad: 0.0040 
+Train Epoch: 1 [16/808 (2%)] loss: 0.0019 L_si: 0.0000 L_grad: 0.0019 
+Train Epoch: 1 [24/808 (3%)] loss: 0.0013 L_si: 0.0000 L_grad: 0.0012 
+Train Epoch: 1 [32/808 (4%)] loss: 0.0010 L_si: 0.0000 L_grad: 0.0010 
+Train Epoch: 1 [40/808 (5%)] loss: 0.0008 L_si: 0.0000 L_grad: 0.0008 
+Train Epoch: 1 [48/808 (6%)] loss: 0.0007 L_si: 0.0000 L_grad: 0.0007 
+Train Epoch: 1 [56/808 (7%)] loss: 0.0005 L_si: 0.0000 L_grad: 0.0005 
+Train Epoch: 1 [64/808 (8%)] loss: 0.0004 L_si: 0.0000 L_grad: 0.0004 
+Train Epoch: 1 [72/808 (9%)] loss: 0.0004 L_si: 0.0000 L_grad: 0.0004 
+Train Epoch: 1 [80/808 (10%)] loss: 0.0004 L_si: 0.0000 L_grad: 0.0004 
+Train Epoch: 1 [88/808 (11%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [96/808 (12%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [104/808 (13%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 1 [112/808 (14%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [120/808 (15%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 1 [128/808 (16%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 1 [136/808 (17%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 1 [144/808 (18%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 1 [152/808 (19%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [160/808 (20%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [168/808 (21%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [176/808 (22%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [184/808 (23%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [192/808 (24%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [200/808 (25%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [208/808 (26%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [216/808 (27%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [224/808 (28%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [232/808 (29%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [240/808 (30%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [248/808 (31%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [256/808 (32%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [264/808 (33%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [272/808 (34%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [280/808 (35%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [288/808 (36%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [296/808 (37%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [304/808 (38%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [312/808 (39%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [320/808 (40%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [328/808 (41%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [336/808 (42%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [344/808 (43%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [352/808 (44%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [360/808 (45%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [368/808 (46%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [376/808 (47%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [384/808 (48%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [392/808 (49%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [400/808 (50%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [408/808 (50%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [416/808 (51%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [424/808 (52%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 1 [432/808 (53%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [440/808 (54%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [448/808 (55%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [456/808 (56%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [464/808 (57%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 1 [472/808 (58%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Setting up Multi Scale Gradient loss...
+Done
+Setting up Multi Scale Gradient loss...
+Done
+/root/miniconda3/envs/scv/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 2 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

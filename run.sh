@@ -6,4 +6,4 @@ python='/root/miniconda3/envs/scv/bin/python'
 
 python train.py --config /root/code/smde/configs/train_s2d_spikeT.json \
                 --datafolder /root/autodl-tmp \
-                --multiprocessing_distributed
+                --multiprocessing_distributed; /usr/bin/shutdown

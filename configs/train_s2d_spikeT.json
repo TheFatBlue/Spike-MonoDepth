@@ -21,7 +21,7 @@
             "every_x_rgb_frame": 1,
             "baseline": "s"
         },
-        "batch_size": 4,
+        "batch_size": 6,
         "num_workers": 2,
         "pin_memory": false,
         "normalize": true,
@@ -51,7 +51,7 @@
         "median_error"
     ],
     "trainer": {
-        "epochs": 201,
+        "epochs": 50,
         "sequence_length": 1,
         "save_dir": "s2d_checkpoints/",
         "save_freq": 4,
