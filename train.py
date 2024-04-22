@@ -106,8 +106,8 @@ def main_worker(gpu, ngpus_per_node, args):
         dist.init_process_group(backend=args.dist_backend, init_method=args.dist_url, world_size=args.world_size, rank=args.rank)
     else:
         torch.cuda.set_device(args.gpu)
-        print(f"Training on GPU {args.gpu} ...")
-        dist.init_process_group(backend="nccl", init_method="env://", world_size=1, rank=0)
+        # print(f"Training on GPU {args.gpu} ...")
+        # dist.init_process_group(backend="nccl", init_method="env://", world_size=1, rank=0)
     
     config = args.config 
     resume = args.resume
@@ -115,8 +115,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
     train_logger = None
 
-    L = config['trainer']['sequence_length']
-    assert (L > 0)
+    assert (config['trainer']['sequence_length'] > 0)
 
     dataset_type, base_folder = {}, {}
     scene, side = {}, {}
@@ -124,7 +123,7 @@ def main_worker(gpu, ngpus_per_node, args):
     reg_factor = {}
     baseline = {}
 
-    # this will raise an exception is the env variable is not set
+    # this will raise an exception if the env variable is not set
     # preprocessed_datasets_folder = os.environ['PREPROCESSED_DATASETS_FOLDER']
 
     use_phased_arch = config['use_phased_arch']
@@ -182,19 +181,29 @@ def main_worker(gpu, ngpus_per_node, args):
     kwargs = {'num_workers': config['data_loader']['num_workers'],
               'pin_memory': config['data_loader']['pin_memory']} if config['cuda'] else {}
     
-    train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
+    if args.distributed:
+        train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
+    else:
+        train_sampler = None
+        
     data_loader = DataLoader(
         train_dataset,
         batch_size=int(config['data_loader']['batch_size']/ ngpus_per_node),
         sampler=train_sampler,
+        shuffle=(train_sampler is None),
         **kwargs
     )
 
-    validation_sampler = torch.utils.data.distributed.DistributedSampler(validation_dataset)
+    if args.distributed:
+        validation_sampler = torch.utils.data.distributed.DistributedSampler(validation_dataset)
+    else:
+        validation_sampler = None
+        
     valid_data_loader = DataLoader(
         validation_dataset,
         batch_size=int(config['data_loader']['batch_size']/ ngpus_per_node),
         sampler=validation_sampler,
+        shuffle=(validation_sampler is None),
         **kwargs
     )
 
@@ -206,6 +215,7 @@ def main_worker(gpu, ngpus_per_node, args):
     torch.manual_seed(111)
     model = eval(config['arch'])(config['model'])
     model.summary()
+    
     if args.distributed:
         if args.gpu is not None:
             torch.cuda.set_device(args.gpu)
@@ -216,8 +226,13 @@ def main_worker(gpu, ngpus_per_node, args):
             model.cuda()
             model = DataParallelModel(model, find_unused_parameters=True)
     else:
-        model = torch.nn.DataParallel(model)
-        model.cuda()
+        if args.gpu is not None:
+            torch.cuda.set_device(args.gpu)
+            model.cuda(args.gpu)
+        else:
+            model.cuda()
+
+        args.batch_size = int(config['data_loader']['batch_size'])
 
     if args.distributed:
         print("Model Initialized on GPU: {}".format(args.gpu))
@@ -290,6 +305,7 @@ def main():
         args.world_size = ngpus_per_node * args.world_size
         mp.spawn(main_worker, nprocs=ngpus_per_node, args=(ngpus_per_node, args))
     else:
+        print("---- Single Training ----")
         main_worker(args.gpu, ngpus_per_node, args)
 
 

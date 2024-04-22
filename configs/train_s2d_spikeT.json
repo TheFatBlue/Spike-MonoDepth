@@ -23,7 +23,7 @@
         },
         "batch_size": 6,
         "num_workers": 2,
-        "pin_memory": false,
+        "pin_memory": true,
         "normalize": true,
         "shuffle": true
     },
