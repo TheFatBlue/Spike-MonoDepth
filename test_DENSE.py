@@ -2,21 +2,23 @@ import os
 import json
 import logging
 import argparse
+import bisect
+from os.path import join
+
+import cv2
+import matplotlib as mpl
+import matplotlib.cm as cm
+import matplotlib.pyplot as plt
+import numpy as np
 import torch
+from torch.utils.data import DataLoader, ConcatDataset
+
 from model.model import *
 from model.loss import *
 from model.metric import *
 from model.S2DepthNet import S2DepthTransformerUNetConv
 from data_loader.SpikesDENSE_dataset import *
 from utils.data_augmentation import Compose, RandomRotationFlip, RandomCrop, CenterCrop
-from os.path import join
-import cv2
-import matplotlib as mpl
-import matplotlib.cm as cm
-from torch.utils.data import DataLoader, ConcatDataset
-import matplotlib.pyplot as plt
-import numpy as np
-import bisect
 
 
 class ConcatDatasetCustom(ConcatDataset):
@@ -33,43 +35,41 @@ class ConcatDatasetCustom(ConcatDataset):
         return self.datasets[dataset_idx][sample_idx], dataset_idx
 
 
-def concatenate_subfolders(base_folder, dataset_type, spike_folder, depth_folder, frame_folder, sequence_length,
-                           transform=None, proba_pause_when_running=0.0, proba_pause_when_paused=0.0, step_size=1,
-                           clip_distance=100.0, every_x_rgb_frame=1, normalize=True, scale_factor=1.0,
-                           use_phased_arch=False, baseline=False, loss_composition=False, reg_factor=5.7,
-                           dataset_idx_flag=False, recurrency=True):
+def concatenate_subfolders(base_folder,
+                           dataset_type,
+                           scene='indoor',
+                           side='left',
+                           transform=None,
+                           clip_distance=100.0,
+                           normalize=True,
+                           reg_factor=5.7,
+                           dataset_idx_flag=False):
     """
     Create an instance of ConcatDataset by aggregating all the datasets in a given folder
     """
-
     subfolders = os.listdir(base_folder)
     print('Found {} samples in {}'.format(len(subfolders), base_folder))
 
-    train_datasets = []
-    for dataset_name in subfolders:
-        train_datasets.append(eval(dataset_type)(base_folder=join(base_folder, dataset_name),
-                                                 spike_folder=spike_folder,
-                                                 depth_folder=depth_folder,
-                                                 frame_folder=frame_folder,
-                                                 sequence_length=sequence_length,
-                                                 transform=transform,
-                                                 proba_pause_when_running=proba_pause_when_running,
-                                                 proba_pause_when_paused=proba_pause_when_paused,
-                                                 step_size=step_size,
-                                                 clip_distance=clip_distance,
-                                                 every_x_rgb_frame=every_x_rgb_frame,
-                                                 normalize=normalize,
-                                                 scale_factor=scale_factor,
-                                                 use_phased_arch=use_phased_arch,
-                                                 baseline=baseline,
-                                                 loss_composition=loss_composition,
-                                                 reg_factor=reg_factor,
-                                                 recurrency=recurrency))
+    args_dict = {
+        'base_folder': '',
+        'scene': scene,
+        'side': side,
+        'transform': transform,
+        'clip_distance': clip_distance,
+        'normalize': normalize,
+        'reg_factor': reg_factor
+    }
+    
+    datasets = []
+    for subfolder in subfolders:
+        args_dict['base_folder'] = join(base_folder, subfolder)
+        datasets.append(eval(dataset_type)(**args_dict))
 
     if dataset_idx_flag == False:
-        concat_dataset = ConcatDataset(train_datasets)
+        concat_dataset = ConcatDataset(datasets)
     elif dataset_idx_flag == True:
-        concat_dataset = ConcatDatasetCustom(train_datasets)
+        concat_dataset = ConcatDatasetCustom(datasets)
+
     return concat_dataset
 
 
@@ -102,19 +102,8 @@ def make_colormap(img, color_mapper):
 def main(config, initial_checkpoint, output_folder, data_folder):
     train_logger = None
 
-    # L = config['trainer']['sequence_length']
-    # assert(L > 0)
-    L = 1
     calculate_scale = True
 
-    dataset_type, base_folder, spike_folder, depth_folder, frame_folder = {}, {}, {}, {}, {}
-    proba_pause_when_running, proba_pause_when_paused = {}, {}
-    step_size = {}
-    clip_distance = {}
-    scale_factor = {}
-    every_x_rgb_frame = {}
-    baseline = {}
-    recurrency = {}
     total_metrics = []
 
     # this will raise an exception is the env variable is not set
@@ -147,99 +136,58 @@ def main(config, initial_checkpoint, output_folder, data_folder):
         print('Will write images to: {}'.format(depth_dir))
 
     use_phased_arch = config['use_phased_arch']
-
-    dataset_type['validation'] = config['data_loader']['validation']['type']
-    # change path here if test.py needs to be run on validation or training data
-    if data_folder is not None:
-        base_folder['validation'] = data_folder
-    else:
-        # base_folder['validation'] =  config['data_loader']['validation']['base_folder']
-        print("base_folder not loaded properly!")
-
-    spike_folder['validation'] = config['data_loader']['validation']['spike_folder']
-    depth_folder['validation'] = config['data_loader']['validation']['depth_folder']
-    frame_folder['validation'] = config['data_loader']['validation']['frame_folder']
-    proba_pause_when_running['validation'] = config['data_loader']['validation']['proba_pause_when_running']
-    proba_pause_when_paused['validation'] = config['data_loader']['validation']['proba_pause_when_paused']
-    scale_factor['validation'] = config['data_loader']['validation']['scale_factor']
-    recurrency['validation'] = True
-
-    try:
-        step_size['validation'] = 1
-    except KeyError:
-        step_size['validation'] = 1
-
-    try:
-        clip_distance['validation'] = config['data_loader']['validation']['clip_distance']
-    except KeyError:
-        clip_distance['validation'] = 100.0
-        print("Clip distance not loaded properly!")
-
-    try:
-        every_x_rgb_frame['validation'] = config['data_loader']['validation']['every_x_rgb_frame']
-    except KeyError:
-        every_x_rgb_frame['validation'] = 1
-        print("Every_x_rgb_frame not loaded properly!")
-
-    try:
-        baseline['validation'] = config['data_loader']['validation']['baseline']
-    except KeyError:
-        baseline['validation'] = False
-        print("Baseline not loaded properly!")
-
-    normalize = config['data_loader'].get('normalize', True)
     loss_composition = config['trainer']['loss_composition']
+    normalize = config['data_loader'].get('normalize', True)
 
-    test_dataset = concatenate_subfolders(base_folder['validation'],
-                                          dataset_type['validation'],
-                                          spike_folder['validation'],
-                                          depth_folder['validation'],
-                                          frame_folder['validation'],
-                                          sequence_length=L,
-                                          # change transform to evaluate on different input sizes.
-                                          transform=CenterCrop(224),
-                                          proba_pause_when_running=proba_pause_when_running['validation'],
-                                          proba_pause_when_paused=proba_pause_when_paused['validation'],
-                                          step_size=step_size['validation'],
-                                          clip_distance=clip_distance['validation'],
-                                          every_x_rgb_frame=every_x_rgb_frame['validation'],
-                                          normalize=normalize,
-                                          scale_factor=scale_factor['validation'],
-                                          use_phased_arch=use_phased_arch,
-                                          baseline=baseline['validation'],
-                                          loss_composition=loss_composition,
-                                          dataset_idx_flag=True,
-                                          recurrency=recurrency['validation']
-                                          )
+    dataset_type = config['data_loader']['validation']['type']
+    # base_folder['validation'] = data_folder
+    scene = config['data_loader']['validation']['scene']
+    side = config['data+loader']['validation']['scene']
+
+    try:
+        clip_distance = config['data_loader']['validation']['clip_distance']
+    except KeyError:
+        clip_distance = 100.0
+
+    try:
+        baseline = config['data_loader']['validation']['baseline']
+    except KeyError:
+        baseline = False
+
+    try:
+        reg_factor = config['data_loader']['validation']['reg_factor']
+    except KeyError:
+        reg_factor = 5.7
+
+    test_dataset = concatenate_subfolders(
+        base_folder=data_folder,
+        dataset_type=dataset_type,
+        scene=scene,
+        side=side,
+        transform=CenterCrop(224),
+        clip_distance=clip_distance,
+        normalize=normalize,
+        reg_factor=reg_factor,
+        dataset_idx_flag=True,
+    )
 
     config['model']['gpu'] = config['gpu']
     config['model']['every_x_rgb_frame'] = config['data_loader']['train']['every_x_rgb_frame']
     config['model']['baseline'] = config['data_loader']['train']['baseline']
     config['model']['loss_composition'] = config['trainer']['loss_composition']
-
-    reg_factor = None
-
-    try:
-        reg_factor = config['data_loader']['train']['reg_factor']
-    except KeyError:
-        reg_factor = 5.7
     
     model = eval(config['arch'])(config['model'])
     model.summary()
 
-
-    if initial_checkpoint is not None:
-        print('Loading initial model weights from: {}'.format(initial_checkpoint))
-        checkpoint = torch.load(initial_checkpoint)
-        model = torch.nn.DataParallel(model).cuda()
-        if use_phased_arch:
-            C, (H, W) = config["model"]["num_bins_events"], config["model"]["spatial_resolution"]
-            dummy_input = torch.Tensor(1, C, H, W)
-            times = torch.Tensor(1)
-            _ = model.forward(dummy_input, times=times, prev_states=None)
-        model.load_state_dict(checkpoint['state_dict'])
-
-    # model.summary()
+    print('Loading initial model weights from: {}'.format(initial_checkpoint))
+    checkpoint = torch.load(initial_checkpoint)
+    # model = torch.nn.DataParallel(model).cuda()
+    if use_phased_arch:
+        C, (H, W) = config["model"]["num_bins_events"], config["model"]["spatial_resolution"]
+        dummy_input = torch.Tensor(1, C, H, W)
+        times = torch.Tensor(1)
+        _ = model.forward(dummy_input, times=times, prev_states=None)
+    model.load_state_dict(checkpoint['state_dict'])
 
     gpu = torch.device('cuda:' + str(config['gpu']))
     model.to(gpu)
