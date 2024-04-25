@@ -32,7 +32,7 @@ parser.add_argument('--world_size', type=int,   help='number of nodes for distri
 parser.add_argument('--rank', type=int,   help='node rank for distributed training', default=0)
 parser.add_argument('--dist_url', type=str,   help='url used to set up distributed training', default='tcp://127.0.0.1:1241')
 parser.add_argument('--dist_backend', type=str,   help='distributed backend', default='nccl')
-parser.add_argument('--gpu', type=int,   help='GPU id to use.', default=None)
+parser.add_argument('--gpu', type=int,   help='GPU id to use.', default=0)
 parser.add_argument('--multiprocessing_distributed', help='Use multi-processing distributed training to launch '
                                                     'N processes per node, which has N GPUs. This is the '
                                                     'fastest way to use PyTorch for either single node or '

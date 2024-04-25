@@ -1,0 +1,1918 @@
+/root/miniconda3/envs/scv/lib/python3.9/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Trainable parameters: 20545951
+S2DepthTransformerUNetConv(
+  (encoder): LongSpikeStreamEncoderConv(
+    (swin3d): SwinTransformer3D(
+      (patch_embed): PatchEmbedLocalGlobal(
+        (head): Conv2d(32, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (global_head): Conv2d(128, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (residual_encoding): residual_feature_generator(
+          (resblock1): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock2): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock3): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock4): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (global_residual_encoding): residual_feature_generator(
+          (resblock1): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock2): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock3): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock4): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (proj): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (global_proj): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      )
+      (pos_drop): Dropout(p=0.0, inplace=False)
+      (layers): ModuleList(
+        (0): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=96, out_features=288, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=96, out_features=96, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): Identity()
+              (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=96, out_features=384, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=384, out_features=96, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=96, out_features=288, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=96, out_features=96, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=96, out_features=384, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=384, out_features=96, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+          (downsample): PatchMerging(
+            (reduction): Linear(in_features=384, out_features=192, bias=False)
+            (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (1): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=192, out_features=576, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=192, out_features=192, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=192, out_features=768, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=768, out_features=192, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=192, out_features=576, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=192, out_features=192, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=192, out_features=768, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=768, out_features=192, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+          (downsample): PatchMerging(
+            (reduction): Linear(in_features=768, out_features=384, bias=False)
+            (norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (2): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (2): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (3): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (4): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (5): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+        )
+      )
+      (norm0): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+      (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+    )
+    (conv_layers): ModuleList(
+      (0): ModuleList(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (1): ModuleList(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): ModuleList(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+  (resblocks): ModuleList(
+    (0): ResidualBlock(
+      (conv1): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): ReLU()
+      (conv2): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (1): ResidualBlock(
+      (conv1): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): ReLU()
+      (conv2): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (decoders): ModuleList(
+    (0): UpsampleConvLayer(
+      (conv2d): Conv2d(384, 192, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+    (1): UpsampleConvLayer(
+      (conv2d): Conv2d(192, 96, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+    (2): UpsampleConvLayer(
+      (conv2d): Conv2d(96, 48, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+  )
+  (pred): ConvLayer(
+    (conv2d): Conv2d(48, 1, kernel_size=(1, 1), stride=(1, 1))
+  )
+)
+Setting up Multi Scale Gradient loss...
+Done
+---- Single Training ----
+Use GPU: 0 for training
+Found 26 samples in /root/autodl-tmp/Spike-Stero/train
+Found 8 samples in /root/autodl-tmp/Spike-Stero/validation
+-----  [3, 6, 12]
+---- new version 4 ----
+Model Initialized
+Using scale_invariant_loss with config {'weight': 1.0, 'n_lambda': 1.0}
+Will not use phased architecture
+Using Multi Scale Gradient loss with weight=0.25
+Will not use MSE loss
+Train Epoch: 1 [0/816 (0%)] loss: 0.0224 L_si: 0.0003 L_grad: 0.0221 
+Train Epoch: 1 [36/816 (4%)] loss: 0.0072 L_si: 0.0001 L_grad: 0.0072 
+Train Epoch: 1 [72/816 (9%)] loss: 0.0059 L_si: 0.0000 L_grad: 0.0059 
+Train Epoch: 1 [108/816 (13%)] loss: 0.0028 L_si: 0.0000 L_grad: 0.0028 
+Train Epoch: 1 [144/816 (18%)] loss: 0.0020 L_si: 0.0000 L_grad: 0.0020 
+Train Epoch: 1 [180/816 (22%)] loss: 0.0014 L_si: 0.0000 L_grad: 0.0014 
+Train Epoch: 1 [216/816 (26%)] loss: 0.0011 L_si: 0.0000 L_grad: 0.0011 
+Train Epoch: 1 [252/816 (31%)] loss: 0.0009 L_si: 0.0000 L_grad: 0.0009 
+Train Epoch: 1 [288/816 (35%)] loss: 0.0006 L_si: 0.0000 L_grad: 0.0006 
+Train Epoch: 1 [324/816 (40%)] loss: 0.0005 L_si: 0.0000 L_grad: 0.0005 
+Train Epoch: 1 [360/816 (44%)] loss: 0.0005 L_si: 0.0000 L_grad: 0.0005 
+Train Epoch: 1 [396/816 (49%)] loss: 0.0004 L_si: 0.0000 L_grad: 0.0004 
+Train Epoch: 1 [432/816 (53%)] loss: 0.0004 L_si: 0.0000 L_grad: 0.0004 
+Train Epoch: 1 [468/816 (57%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [504/816 (62%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [540/816 (66%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [576/816 (71%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [612/816 (75%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [648/816 (79%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 1 [684/816 (84%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 1 [720/816 (88%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 1 [756/816 (93%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 1 [792/816 (97%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [0.0002421479148324579, 0.00024115759879350662, 0.0002533891820348799, 0.00025989898131228983, 0.00020633249368984252, 0.0002344908134546131, 0.000238157415878959, 0.000222748116357252, 0.0002031369076576084, 0.00023325407528318465, 0.00026207490009255707, 0.0002127965708496049, 0.000252178986556828, 0.00022654664644505829, 0.00021565667702816427, 0.0002475125656928867, 0.00022538253688253462, 0.00024213810684159398, 6.633313023485243e-05], 'L_si': [1.1920928955078125e-07, 5.960464477539063e-08, 1.1920928955078125e-07, 8.940696716308594e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 1.1920928955078125e-07, 8.940696716308594e-08, 0.0, 2.9802322387695312e-08, 8.940696716308594e-08, 5.960464477539063e-08, 1.1920928955078125e-07, 5.960464477539063e-08, 5.960464477539063e-08, 8.940696716308594e-08, 5.960464477539063e-08, 5.960464477539063e-08, 1.1920928955078125e-07], 'L_grad': [0.00024202870554290712, 0.00024109799414873123, 0.00025326997274532914, 0.00025980957434512675, 0.00020627288904506713, 0.0002344610111322254, 0.00023803820658940822, 0.00022265870939008892, 0.0002031369076576084, 0.00023322427296079695, 0.000261985493125394, 0.00021273696620482951, 0.00025205977726727724, 0.0002264870418002829, 0.00021559707238338888, 0.0002474231587257236, 0.00022532293223775923, 0.0002420785021968186, 6.621392094530165e-05]}
+Train Epoch: 2 [0/816 (0%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [36/816 (4%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [72/816 (9%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [108/816 (13%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [144/816 (18%)] loss: 0.0003 L_si: 0.0000 L_grad: 0.0003 
+Train Epoch: 2 [180/816 (22%)] loss: 0.0004 L_si: 0.0000 L_grad: 0.0004 
+Train Epoch: 2 [216/816 (26%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [252/816 (31%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [288/816 (35%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [324/816 (40%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [360/816 (44%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [396/816 (49%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 2 [432/816 (53%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [468/816 (57%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [504/816 (62%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 2 [540/816 (66%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [576/816 (71%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 2 [612/816 (75%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [648/816 (79%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 2 [684/816 (84%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 2 [720/816 (88%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 2 [756/816 (93%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 2 [792/816 (97%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [0.0002114425878971815, 0.00021156761795282364, 0.00021414211369119585, 0.0002143202000297606, 0.00020255355047993362, 0.00021873465448152274, 0.00022441247710958123, 0.0002152886299882084, 0.00020312135166022927, 0.00021225838281679899, 0.00020655232947319746, 0.00019920837075915188, 0.00020502961706370115, 0.00022299223928712308, 0.00021162180928513408, 0.00020286280778236687, 0.00020477036014199257, 0.00020485669665504247, 5.189910007175058e-05], 'L_si': [5.960464477539063e-08, 1.1920928955078125e-07, 1.1920928955078125e-07, 5.960464477539063e-08, 8.940696716308594e-08, 1.1920928955078125e-07, 8.940696716308594e-08, 8.940696716308594e-08, 1.1920928955078125e-07, 2.9802322387695312e-08, 1.1920928955078125e-07, 8.940696716308594e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, 8.940696716308594e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 1.1920928955078125e-07], 'L_grad': [0.00021138298325240612, 0.00021144840866327286, 0.00021402290440164506, 0.0002142605953849852, 0.00020246414351277053, 0.00021861544519197196, 0.00022432307014241815, 0.00021519922302104533, 0.00020300214237067848, 0.0002122285804944113, 0.00020643312018364668, 0.0001991189637919888, 0.00020499981474131346, 0.0002229326346423477, 0.00021156220464035869, 0.00020277340081520379, 0.00020474055781960487, 0.00020479709201026708, 5.17798907821998e-05]}
+Train Epoch: 3 [0/816 (0%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [36/816 (4%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [72/816 (9%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [108/816 (13%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [144/816 (18%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [180/816 (22%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [216/816 (26%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [252/816 (31%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [288/816 (35%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [324/816 (40%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [360/816 (44%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [396/816 (49%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [432/816 (53%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [468/816 (57%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 3 [504/816 (62%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [540/816 (66%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 3 [576/816 (71%)] loss: 0.0002 L_si: 0.0000 L_grad: 0.0002 
+Train Epoch: 3 [612/816 (75%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [648/816 (79%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [684/816 (84%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [720/816 (88%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [756/816 (93%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 3 [792/816 (97%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [0.000141802680445835, 0.00014242193719837815, 0.00016629115270916373, 0.00016534407041035593, 0.00015749296289868653, 0.0001530021836515516, 0.0001459244085708633, 0.00015714866458438337, 0.00015001089195720851, 0.00015268319111783057, 0.00014284330245573074, 0.00015919964062049985, 0.00013689517800230533, 0.00014249494415707886, 0.00015462616283912212, 0.0001435127924196422, 0.00013412303815130144, 0.0001428499526809901, 4.034441371913999e-05], 'L_si': [2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, 1.1920928955078125e-07, 5.960464477539063e-08, 1.1920928955078125e-07, 5.960464477539063e-08, 5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 5.960464477539063e-08], 'L_grad': [0.0001417728781234473, 0.00014239213487599045, 0.00016629115270916373, 0.00016534407041035593, 0.00015746316057629883, 0.00015294257900677621, 0.00014586480392608792, 0.0001570294552948326, 0.00014995128731243312, 0.0001525639818282798, 0.00014278369781095535, 0.00015914003597572446, 0.00013686537567991763, 0.00014252474647946656, 0.00015462616283912212, 0.0001435425947420299, 0.00013406343350652605, 0.0001428499526809901, 4.02848090743646e-05]}
+Train Epoch: 4 [0/816 (0%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 4 [36/816 (4%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [72/816 (9%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [108/816 (13%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [144/816 (18%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [180/816 (22%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [216/816 (26%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [252/816 (31%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [288/816 (35%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 4 [324/816 (40%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 4 [360/816 (44%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [396/816 (49%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [432/816 (53%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [468/816 (57%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [504/816 (62%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [540/816 (66%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [576/816 (71%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [612/816 (75%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [648/816 (79%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [684/816 (84%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [720/816 (88%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [756/816 (93%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 4 [792/816 (97%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch004-loss-0.0001.pth.tar ...
+all losses in batch in validation:  {'loss': [7.750550867058337e-05, 8.454189810436219e-05, 8.664337656227872e-05, 8.153912494890392e-05, 7.580448436783627e-05, 7.690631900914013e-05, 7.855636067688465e-05, 8.00529815023765e-05, 7.875415758462623e-05, 8.327746763825417e-05, 8.563145092921332e-05, 7.386116340057924e-05, 8.382102532777935e-05, 9.404266893398017e-05, 8.300828631035984e-05, 7.890166307333857e-05, 9.007417975226417e-05, 8.242740295827389e-05, 1.9359096768312156e-05], 'L_si': [-5.960464477539063e-08, 2.9802322387695312e-08, 0.0, 0.0, 5.960464477539063e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 0.0, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0], 'L_grad': [7.756511331535876e-05, 8.45120957819745e-05, 8.664337656227872e-05, 8.153912494890392e-05, 7.574487972306088e-05, 7.690631900914013e-05, 7.858616299927235e-05, 8.00231791799888e-05, 7.872435526223853e-05, 8.324766531586647e-05, 8.563145092921332e-05, 7.386116340057924e-05, 8.382102532777935e-05, 9.407247125636786e-05, 8.300828631035984e-05, 7.893146539572626e-05, 9.007417975226417e-05, 8.245720528066158e-05, 1.9359096768312156e-05]}
+Train Epoch: 5 [0/816 (0%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [36/816 (4%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [72/816 (9%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [108/816 (13%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [144/816 (18%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [180/816 (22%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [216/816 (26%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [252/816 (31%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [288/816 (35%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [324/816 (40%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 5 [360/816 (44%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [396/816 (49%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [432/816 (53%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 5 [468/816 (57%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [504/816 (62%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [540/816 (66%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [576/816 (71%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 5 [612/816 (75%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 5 [648/816 (79%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [684/816 (84%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [720/816 (88%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [756/816 (93%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 5 [792/816 (97%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [9.495766425970942e-05, 9.436554682906717e-05, 9.622779180062935e-05, 8.692349365446717e-05, 9.188686090055853e-05, 8.872802573023364e-05, 9.46024083532393e-05, 9.52067130128853e-05, 8.693034760653973e-05, 9.340750693809241e-05, 9.79672622634098e-05, 8.959522529039532e-05, 9.286109707318246e-05, 8.844505646266043e-05, 9.268679423257709e-05, 9.633885201765224e-05, 9.655942267272621e-05, 8.890579192666337e-05, 2.544830203987658e-05], 'L_si': [2.9802322387695312e-08, 8.940696716308594e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 8.940696716308594e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 2.9802322387695312e-08], 'L_grad': [9.492786193732172e-05, 9.427613986190408e-05, 9.619798947824165e-05, 8.689369133207947e-05, 9.185705857817084e-05, 8.869822340784594e-05, 9.45726060308516e-05, 9.517691069049761e-05, 8.690054528415203e-05, 9.34373092604801e-05, 9.787785529624671e-05, 8.956542296800762e-05, 9.280149242840707e-05, 8.844505646266043e-05, 9.268679423257709e-05, 9.630904969526455e-05, 9.652962035033852e-05, 8.884618728188798e-05, 2.5418499717488885e-05]}
+Train Epoch: 6 [0/816 (0%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 6 [36/816 (4%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [72/816 (9%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 6 [108/816 (13%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [144/816 (18%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [180/816 (22%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [216/816 (26%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [252/816 (31%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [288/816 (35%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [324/816 (40%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [360/816 (44%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [396/816 (49%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 6 [432/816 (53%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [468/816 (57%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 6 [504/816 (62%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 6 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 6 [576/816 (71%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [612/816 (75%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [648/816 (79%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [684/816 (84%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [720/816 (88%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 6 [756/816 (93%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 6 [792/816 (97%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [5.1184342737542465e-05, 5.158330895937979e-05, 5.5575532314833254e-05, 5.31455734744668e-05, 6.063972978154197e-05, 5.077757305116393e-05, 5.9225822042208165e-05, 6.441171717597172e-05, 5.8014873502543196e-05, 5.6910255807451904e-05, 5.009427331970073e-05, 5.729356416850351e-05, 5.489423710969277e-05, 5.116582178743556e-05, 5.774560122517869e-05, 6.077753641875461e-05, 5.6317414419027045e-05, 5.606337799690664e-05, 1.2860054994234815e-05], 'L_si': [2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0, -5.960464477539063e-08, 5.960464477539063e-08, 5.960464477539063e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 0.0], 'L_grad': [5.115454041515477e-05, 5.15535066369921e-05, 5.551592767005786e-05, 5.31455734744668e-05, 6.0699334426317364e-05, 5.0717968406388536e-05, 5.9166217397432774e-05, 6.435211253119633e-05, 5.79850711801555e-05, 5.688045348506421e-05, 5.009427331970073e-05, 5.73233664908912e-05, 5.486443478730507e-05, 5.1136019465047866e-05, 5.7775403547566384e-05, 6.074773409636691e-05, 5.6317414419027045e-05, 5.606337799690664e-05, 1.2860054994234815e-05]}
+Train Epoch: 7 [0/816 (0%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [36/816 (4%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [72/816 (9%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [108/816 (13%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [144/816 (18%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [180/816 (22%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 7 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 7 [288/816 (35%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 7 [324/816 (40%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [360/816 (44%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 7 [396/816 (49%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [432/816 (53%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [468/816 (57%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 7 [504/816 (62%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 7 [540/816 (66%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [576/816 (71%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [612/816 (75%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 7 [648/816 (79%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 7 [684/816 (84%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [720/816 (88%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [756/816 (93%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 7 [792/816 (97%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [0.00010039997869171202, 0.00010478893091203645, 0.00010348224896006286, 9.707190474728122e-05, 0.0001022481155814603, 9.699538350105286e-05, 9.635926835471764e-05, 0.00010616278450470418, 0.00010632431076373905, 0.00010175003262702376, 0.00010287707846146077, 0.00010544648102950305, 9.660684008849785e-05, 9.753885387908667e-05, 0.00010071608994621783, 0.00010351338278269395, 0.00010542589006945491, 0.0001029055638355203, 2.3002183297649026e-05], 'L_si': [-5.960464477539063e-08, 2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 0.0, 8.940696716308594e-08, 0.0, 5.960464477539063e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, 0.0, 0.0, -8.940696716308594e-08, -2.9802322387695312e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 0.0], 'L_grad': [0.00010045958333648741, 0.00010475912858964875, 0.00010348224896006286, 9.701230010250583e-05, 0.0001022481155814603, 9.690597653388977e-05, 9.635926835471764e-05, 0.00010610317985992879, 0.00010626470611896366, 0.00010172023030463606, 0.00010281747381668538, 0.00010538687638472766, 9.660684008849785e-05, 9.753885387908667e-05, 0.00010080549691338092, 0.00010354318510508165, 0.00010536628542467952, 0.0001028757615131326, 2.3002183297649026e-05]}
+Train Epoch: 8 [0/816 (0%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [36/816 (4%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [72/816 (9%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [108/816 (13%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [144/816 (18%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [180/816 (22%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [216/816 (26%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [252/816 (31%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [288/816 (35%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [324/816 (40%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [360/816 (44%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 8 [396/816 (49%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [432/816 (53%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [468/816 (57%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [504/816 (62%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [540/816 (66%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [576/816 (71%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [612/816 (75%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [648/816 (79%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 8 [684/816 (84%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [720/816 (88%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 8 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 8 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch008-loss-0.0001.pth.tar ...
+all losses in batch in validation:  {'loss': [4.247600008966401e-05, 4.2598785512382165e-05, 3.7755435187136754e-05, 3.3876855013659224e-05, 4.550025187199935e-05, 4.8941426939563826e-05, 4.0990227716974914e-05, 3.912664033123292e-05, 4.017966421088204e-05, 4.1273367969552055e-05, 4.474852903513238e-05, 4.108086068299599e-05, 4.022323264507577e-05, 4.080229336977936e-05, 4.13254092563875e-05, 4.803308183909394e-05, 4.155448914389126e-05, 3.639570059021935e-05, 1.064210846379865e-05], 'L_si': [0.0, 5.960464477539063e-08, -5.960464477539063e-08, 0.0, 0.0, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 8.940696716308594e-08, -2.9802322387695312e-08, 8.940696716308594e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 2.9802322387695312e-08], 'L_grad': [4.247600008966401e-05, 4.2539180867606774e-05, 3.7815039831912145e-05, 3.3876855013659224e-05, 4.550025187199935e-05, 4.891162461717613e-05, 4.0990227716974914e-05, 3.9156442653620616e-05, 4.017966421088204e-05, 4.130317029193975e-05, 4.468892439035699e-05, 4.108086068299599e-05, 4.013382567791268e-05, 4.083209569216706e-05, 4.1236002289224416e-05, 4.800327951670624e-05, 4.149488449911587e-05, 3.636589826783165e-05, 1.0612306141410954e-05]}
+Train Epoch: 9 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 9 [180/816 (22%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 9 [216/816 (26%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 9 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [324/816 (40%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 9 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 9 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [576/816 (71%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 9 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 9 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 9 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [6.0687059885822237e-05, 6.419808050850406e-05, 5.662678449880332e-05, 5.9228786994935945e-05, 6.296999345067888e-05, 6.50255533400923e-05, 5.577991760219447e-05, 5.7122168072964996e-05, 5.812269591842778e-05, 5.777386832050979e-05, 6.516017310786992e-05, 5.9830868849530816e-05, 6.471749657066539e-05, 5.782807420473546e-05, 6.362448038998991e-05, 6.242754898266867e-05, 6.092904368415475e-05, 5.967955075902864e-05, 1.4540578376909252e-05], 'L_si': [2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0], 'L_grad': [6.065725756343454e-05, 6.422788283089176e-05, 5.662678449880332e-05, 5.919898467254825e-05, 6.29103888059035e-05, 6.49957510177046e-05, 5.572031295741908e-05, 5.7062563428189605e-05, 5.8092893596040085e-05, 5.780367064289749e-05, 6.513037078548223e-05, 5.986067117191851e-05, 6.471749657066539e-05, 5.779827188234776e-05, 6.362448038998991e-05, 6.239774666028097e-05, 6.0899241361767054e-05, 5.961994611425325e-05, 1.4540578376909252e-05]}
+Train Epoch: 10 [0/816 (0%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 10 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [108/816 (13%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 10 [144/816 (18%)] loss: 0.0001 L_si: -0.0000 L_grad: 0.0001 
+Train Epoch: 10 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 10 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [252/816 (31%)] loss: 0.0001 L_si: 0.0000 L_grad: 0.0001 
+Train Epoch: 10 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 10 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 10 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 10 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [4.242744034854695e-05, 3.880709846271202e-05, 4.186796286376193e-05, 4.344960325397551e-05, 4.2280269553884864e-05, 3.787852983805351e-05, 4.136806819587946e-05, 3.951486723963171e-05, 3.9668262616032735e-05, 4.4113774492871016e-05, 3.9463364373659715e-05, 3.922568430425599e-05, 3.721698885783553e-05, 4.2177369323326275e-05, 4.316774720791727e-05, 4.2827748984564096e-05, 4.121063830098137e-05, 3.6769597500097007e-05, 8.825695658742916e-06], 'L_si': [8.940696716308594e-08, 2.9802322387695312e-08, 0.0, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 8.940696716308594e-08, 5.960464477539063e-08, 5.960464477539063e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0], 'L_grad': [4.2338033381383866e-05, 3.8777296140324324e-05, 4.186796286376193e-05, 4.344960325397551e-05, 4.231007187627256e-05, 3.7848727515665814e-05, 4.1338265873491764e-05, 3.948506491724402e-05, 3.969806493842043e-05, 4.4113774492871016e-05, 3.937395740649663e-05, 3.91660796594806e-05, 3.715738421306014e-05, 4.2117764678550884e-05, 4.319754953030497e-05, 4.27979466621764e-05, 4.124044062336907e-05, 3.673979517770931e-05, 8.825695658742916e-06]}
+Train Epoch: 11 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 11 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 11 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 11 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 11 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 11 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 11 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 11 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [3.0436935048783198e-05, 3.1935429433360696e-05, 3.0000199330970645e-05, 2.8293163268244825e-05, 3.0430643164436333e-05, 3.175475285388529e-05, 3.1700285035185516e-05, 2.637067882460542e-05, 3.371977436472662e-05, 3.182705768267624e-05, 3.428765921853483e-05, 3.091052349191159e-05, 3.196948819095269e-05, 3.117770393146202e-05, 3.2431576983071864e-05, 2.9890301448176615e-05, 3.0303202947834507e-05, 2.9945613277959637e-05, 6.446240149671212e-06], 'L_si': [2.9802322387695312e-08, -5.960464477539063e-08, 5.960464477539063e-08, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, 0.0], 'L_grad': [3.0407132726395503e-05, 3.1995034078136086e-05, 2.9940594686195254e-05, 2.8293163268244825e-05, 3.0400840842048638e-05, 3.178455517627299e-05, 3.1700285035185516e-05, 2.637067882460542e-05, 3.374957668711431e-05, 3.1797255360288545e-05, 3.431746154092252e-05, 3.091052349191159e-05, 3.196948819095269e-05, 3.1147901609074324e-05, 3.246137930545956e-05, 2.9890301448176615e-05, 3.0333005270222202e-05, 2.9945613277959637e-05, 6.446240149671212e-06]}
+Train Epoch: 12 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 12 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 12 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 12 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch012-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [3.383624061825685e-05, 3.294652560725808e-05, 3.5623597796075046e-05, 3.314903733553365e-05, 3.453695171629079e-05, 3.2457708584843203e-05, 3.5000190109713e-05, 3.508136796881445e-05, 3.3324882679153234e-05, 3.280113742221147e-05, 3.401689900783822e-05, 3.3774966141209006e-05, 3.1296494853449985e-05, 3.47424102074001e-05, 3.448344796197489e-05, 3.402256334084086e-05, 3.2250805816147476e-05, 3.321549957036041e-05, 8.183180398191325e-06], 'L_si': [0.0, 0.0, 0.0, -5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 0.0, 2.9802322387695312e-08, 5.960464477539063e-08], 'L_grad': [3.383624061825685e-05, 3.294652560725808e-05, 3.5623597796075046e-05, 3.320864198030904e-05, 3.456675403867848e-05, 3.242790626245551e-05, 3.50299924321007e-05, 3.511117029120214e-05, 3.3384487323928624e-05, 3.2830939744599164e-05, 3.4046701330225915e-05, 3.38047684635967e-05, 3.126669253106229e-05, 3.47126078850124e-05, 3.44238433171995e-05, 3.402256334084086e-05, 3.2250805816147476e-05, 3.318569724797271e-05, 8.123575753415935e-06]}
+Train Epoch: 13 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 13 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 13 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 13 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 13 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 13 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 13 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [3.358079266035929e-05, 2.9527684091590345e-05, 3.319392635603435e-05, 3.291853499831632e-05, 2.632288305903785e-05, 3.069287049584091e-05, 2.934608346549794e-05, 3.771941192098893e-05, 3.76802017854061e-05, 3.367594035807997e-05, 3.0111154046608135e-05, 2.838513501046691e-05, 3.244457911932841e-05, 3.0778035579714924e-05, 2.837192005245015e-05, 3.3657732274150476e-05, 3.502010440570302e-05, 3.4727891033980995e-05, 7.313435617106734e-06], 'L_si': [0.0, -2.9802322387695312e-08, 0.0, -5.960464477539063e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08, 0.0, 0.0, 5.960464477539063e-08], 'L_grad': [3.358079266035929e-05, 2.955748641397804e-05, 3.319392635603435e-05, 3.297813964309171e-05, 2.6293080736650154e-05, 3.069287049584091e-05, 2.9316281143110245e-05, 3.771941192098893e-05, 3.762059714063071e-05, 3.3646138035692275e-05, 3.014095636899583e-05, 2.8355332688079216e-05, 3.244457911932841e-05, 3.074823325732723e-05, 2.843152469722554e-05, 3.368753459653817e-05, 3.502010440570302e-05, 3.4727891033980995e-05, 7.253830972331343e-06]}
+Train Epoch: 14 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [36/816 (4%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 14 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 14 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 14 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 14 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 14 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [3.5952500184066594e-05, 3.6701963836094365e-05, 3.613063017837703e-05, 4.202852142043412e-05, 3.690714220283553e-05, 3.38283134624362e-05, 3.9193568227346987e-05, 3.447130438871682e-05, 3.591133645386435e-05, 4.2174768168479204e-05, 3.8402937207138166e-05, 3.4524520742706954e-05, 3.2580206607235596e-05, 3.989031756646e-05, 3.8514717743964866e-05, 3.729552190634422e-05, 3.3393429475836456e-05, 3.777559322770685e-05, 1.2165684893261641e-05], 'L_si': [-5.960464477539063e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 0.0, 2.9802322387695312e-08, 0.0], 'L_grad': [3.6012104828841984e-05, 3.667216151370667e-05, 3.610082785598934e-05, 4.205832374282181e-05, 3.684753755806014e-05, 3.3798511140048504e-05, 3.916376590495929e-05, 3.444150206632912e-05, 3.5881534131476656e-05, 4.22045704908669e-05, 3.8402937207138166e-05, 3.449471842031926e-05, 3.2580206607235596e-05, 3.9920119888847694e-05, 3.8455113099189475e-05, 3.729552190634422e-05, 3.3393429475836456e-05, 3.7745790905319154e-05, 1.2165684893261641e-05]}
+Train Epoch: 15 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [36/816 (4%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 15 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 15 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 15 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 15 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 15 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 15 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 15 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [1.81121431523934e-05, 2.2270089175435714e-05, 1.8221682694274932e-05, 1.939712092280388e-05, 1.922952833410818e-05, 2.0031517124152742e-05, 2.171397500205785e-05, 2.0489635062403977e-05, 2.0120676708756946e-05, 1.9477607565931976e-05, 1.9562958186725155e-05, 2.0428880816325545e-05, 1.8744518456514925e-05, 1.814364622987341e-05, 1.865435297077056e-05, 2.1240601199679077e-05, 1.893047920020763e-05, 2.05112955882214e-05, 5.006745141145075e-06], 'L_si': [-2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, -5.960464477539063e-08, -5.960464477539063e-08, 2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, 0.0, 0.0, -5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08], 'L_grad': [1.8141945474781096e-05, 2.2270089175435714e-05, 1.816207804949954e-05, 1.9367318600416183e-05, 1.916992368933279e-05, 1.9971912479377352e-05, 2.177357964683324e-05, 2.0549239707179368e-05, 2.009087438636925e-05, 1.9477607565931976e-05, 1.9562958186725155e-05, 2.039907849393785e-05, 1.8744518456514925e-05, 1.814364622987341e-05, 1.871395761554595e-05, 2.121079887729138e-05, 1.8960281522595324e-05, 2.0541097910609096e-05, 4.9769428187573794e-06]}
+Train Epoch: 16 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 16 [36/816 (4%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 16 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 16 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 16 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 16 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 16 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 16 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch016-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [1.7864351320895366e-05, 1.7518743334221654e-05, 1.6546244296478108e-05, 1.697404331935104e-05, 1.6858828530530445e-05, 1.7013730030157603e-05, 1.7036129065672867e-05, 1.6386893548769876e-05, 1.5229893506329972e-05, 1.5662089936085977e-05, 1.6664127542753704e-05, 1.6035983207984827e-05, 1.6108671843539923e-05, 1.66425797942793e-05, 1.6462978237541392e-05, 1.657618850003928e-05, 1.6062127542681992e-05, 1.6697984392521903e-05, 3.919747086911229e-06], 'L_si': [0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 0.0, 0.0, 5.960464477539063e-08, 0.0, -5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, -5.960464477539063e-08], 'L_grad': [1.7864351320895366e-05, 1.748894101183396e-05, 1.6516441974090412e-05, 1.6944240996963345e-05, 1.682902620814275e-05, 1.6983927707769908e-05, 1.7036129065672867e-05, 1.6386893548769876e-05, 1.5229893506329972e-05, 1.5662089936085977e-05, 1.6604522897978313e-05, 1.6035983207984827e-05, 1.6168276488315314e-05, 1.66425797942793e-05, 1.6433175915153697e-05, 1.6546386177651584e-05, 1.6062127542681992e-05, 1.6668182070134208e-05, 3.97935173168662e-06]}
+Train Epoch: 17 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 17 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 17 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 17 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [1.5367770174634643e-05, 1.5425919627887197e-05, 1.4483353879768401e-05, 1.5359322787844576e-05, 1.4893136722093914e-05, 1.617863745195791e-05, 1.417354269506177e-05, 1.4772259419260081e-05, 1.5683066521887667e-05, 1.6877736925380304e-05, 1.641699782339856e-05, 1.4324339645099826e-05, 1.614037319086492e-05, 1.483125834056409e-05, 1.5590168914059177e-05, 1.557370887894649e-05, 1.6279678675346076e-05, 1.5289489965653047e-05, 4.541349881037604e-06], 'L_si': [5.960464477539063e-08, 0.0, 0.0, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08], 'L_grad': [1.5308165529859252e-05, 1.5425919627887197e-05, 1.4483353879768401e-05, 1.5359322787844576e-05, 1.4863334399706218e-05, 1.617863745195791e-05, 1.4143740372674074e-05, 1.471265477448469e-05, 1.5712868844275363e-05, 1.684793460299261e-05, 1.635739317862317e-05, 1.4324339645099826e-05, 1.6110570868477225e-05, 1.483125834056409e-05, 1.5560366591671482e-05, 1.5603511201334186e-05, 1.624987635295838e-05, 1.5289489965653047e-05, 4.571152203425299e-06]}
+Train Epoch: 18 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 18 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 18 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [1.5921201338642277e-05, 1.660374073253479e-05, 1.7931897673406638e-05, 1.783093102858402e-05, 1.6666142983012833e-05, 1.598818380443845e-05, 1.544324550195597e-05, 1.6235288057941943e-05, 1.5352854461525567e-05, 1.6338635759893805e-05, 1.6466734450659715e-05, 1.7089067114284262e-05, 1.7284159184782766e-05, 1.716326005407609e-05, 1.8166778318118304e-05, 1.7498910892754793e-05, 1.6726255125831813e-05, 1.708340823824983e-05, 4.422925030667102e-06], 'L_si': [-2.9802322387695312e-08, -2.9802322387695312e-08, -8.940696716308594e-08, 0.0, -2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 0.0], 'L_grad': [1.5951003661029972e-05, 1.6633543054922484e-05, 1.8021304640569724e-05, 1.783093102858402e-05, 1.6695945305400528e-05, 1.6017986126826145e-05, 1.538364085718058e-05, 1.626509038032964e-05, 1.5382656783913262e-05, 1.630883343750611e-05, 1.6407129805884324e-05, 1.7059264791896567e-05, 1.731396150717046e-05, 1.7133457731688395e-05, 1.8196580640506e-05, 1.7469108570367098e-05, 1.6666650481056422e-05, 1.708340823824983e-05, 4.422925030667102e-06]}
+Train Epoch: 19 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 19 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 19 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 19 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 19 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 19 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [2.9867049306631088e-05, 4.0348400943912566e-05, 3.27595516864676e-05, 2.8339174605207518e-05, 3.1030489481054246e-05, 3.286788705736399e-05, 2.9944385460112244e-05, 3.30632392433472e-05, 3.067586294491775e-05, 3.139397449558601e-05, 3.5363587812753394e-05, 3.2557476515648887e-05, 3.3614815038163215e-05, 2.684733408386819e-05, 3.1084306101547554e-05, 3.8306956412270665e-05, 2.600605512270704e-05, 3.1800031138118356e-05, 7.520382951042848e-06], 'L_si': [5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, -5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, -5.960464477539063e-08, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08], 'L_grad': [2.9807444661855698e-05, 4.037820326630026e-05, 3.272974936407991e-05, 2.8309372282819822e-05, 3.1030489481054246e-05, 3.283808473497629e-05, 2.9944385460112244e-05, 3.312284388812259e-05, 3.067586294491775e-05, 3.136417217319831e-05, 3.53337854903657e-05, 3.261708116042428e-05, 3.3614815038163215e-05, 2.6817531761480495e-05, 3.111410842393525e-05, 3.827715408988297e-05, 2.5976252800319344e-05, 3.1800031138118356e-05, 7.490580628655152e-06]}
+Train Epoch: 20 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [36/816 (4%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 20 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 20 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch020-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [2.617559948703274e-05, 2.887845585064497e-05, 3.0341547244461253e-05, 3.0564104235963896e-05, 2.6839185011340305e-05, 2.2692520360578783e-05, 4.064130916958675e-05, 2.3082289771991782e-05, 2.2545134925167076e-05, 3.056397326872684e-05, 2.7041845896746963e-05, 2.0848967324127443e-05, 2.0848659914918244e-05, 2.287887218699325e-05, 3.667316195787862e-05, 2.8594577088369988e-05, 2.50307894020807e-05, 3.029344225069508e-05, 1.1076828741352074e-05], 'L_si': [-2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 0.0, 5.960464477539063e-08, 0.0, 0.0, -5.960464477539063e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, -5.960464477539063e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0], 'L_grad': [2.6205401809420437e-05, 2.887845585064497e-05, 3.0281942599685863e-05, 3.0564104235963896e-05, 2.6779580366564915e-05, 2.2692520360578783e-05, 4.064130916958675e-05, 2.3141894416767173e-05, 2.257493724755477e-05, 3.0593775591114536e-05, 2.7041845896746963e-05, 2.087876964651514e-05, 2.0848659914918244e-05, 2.2849069864605553e-05, 3.6643359635490924e-05, 2.865418173314538e-05, 2.5000987079693004e-05, 3.023383760591969e-05, 1.1076828741352074e-05]}
+Train Epoch: 21 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 21 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 21 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 21 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 21 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 21 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 21 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 21 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 21 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [2.198852234869264e-05, 1.4641158486483619e-05, 1.917011286423076e-05, 1.6581803720328026e-05, 2.2760626961826347e-05, 1.795596836018376e-05, 1.7169588318211026e-05, 1.4524573998642154e-05, 1.682579386397265e-05, 2.129612403223291e-05, 1.3593246876553167e-05, 1.7720358300721273e-05, 1.5945295672281645e-05, 1.9711893401108682e-05, 1.4983701476012357e-05, 1.7504102288512513e-05, 2.2879568859934807e-05, 2.182433490816038e-05, 5.2811742534686346e-06], 'L_si': [2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 0.0, 0.0, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -5.960464477539063e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0], 'L_grad': [2.1958720026304945e-05, 1.4670960808871314e-05, 1.917011286423076e-05, 1.6581803720328026e-05, 2.2760626961826347e-05, 1.795596836018376e-05, 1.713978599582333e-05, 1.4524573998642154e-05, 1.6795991541584954e-05, 2.1266321709845215e-05, 1.3563444554165471e-05, 1.7690555978333578e-05, 1.591549334989395e-05, 1.9682091078720987e-05, 1.4983701476012357e-05, 1.7563706933287904e-05, 2.2909371182322502e-05, 2.1854137230548076e-05, 5.2811742534686346e-06]}
+Train Epoch: 22 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 22 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 22 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 22 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 22 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [2.1202198695391417e-05, 1.4589466445613652e-05, 1.6924641386140138e-05, 1.70040329976473e-05, 1.80488405021606e-05, 1.276501097891014e-05, 1.3576255696534645e-05, 1.4508352251141332e-05, 1.627083111088723e-05, 1.5645498933736235e-05, 1.7614955140743405e-05, 1.5359024473582394e-05, 1.4086643204791471e-05, 1.6690904885763302e-05, 1.5263121895259246e-05, 1.8408991309115663e-05, 1.3577118807006627e-05, 1.9323626474943012e-05, 4.485425051825587e-06], 'L_si': [-2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 0.0, 5.960464477539063e-08, 0.0, -5.960464477539063e-08, 0.0, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, 0.0], 'L_grad': [2.1232001017779112e-05, 1.4559664123225957e-05, 1.6954443708527833e-05, 1.6974230675259605e-05, 1.80488405021606e-05, 1.276501097891014e-05, 1.354645337414695e-05, 1.4448747606365941e-05, 1.627083111088723e-05, 1.5645498933736235e-05, 1.7555350495968014e-05, 1.5359024473582394e-05, 1.4146247849566862e-05, 1.6690904885763302e-05, 1.529292421764694e-05, 1.8408991309115663e-05, 1.3547316484618932e-05, 1.9323626474943012e-05, 4.485425051825587e-06]}
+Train Epoch: 23 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 23 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 23 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 23 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 23 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 23 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 23 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 23 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [1.5863677617744543e-05, 1.709016942186281e-05, 1.7213336832355708e-05, 1.887575854198076e-05, 1.5876550605753437e-05, 1.578816954861395e-05, 1.5102049474080559e-05, 1.5562589396722615e-05, 1.5879293641773984e-05, 1.5804398572072387e-05, 1.5962388715706766e-05, 1.4074504179006908e-05, 1.7995716916630045e-05, 1.5101049029908609e-05, 1.78054251591675e-05, 1.7121696146205068e-05, 1.5251366676238831e-05, 1.696105937298853e-05, 3.8432772271335125e-06], 'L_si': [-2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, -2.9802322387695312e-08, -5.960464477539063e-08, 0.0, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 8.940696716308594e-08, 0.0, -2.9802322387695312e-08, 0.0, 0.0, 0.0, -2.9802322387695312e-08, 8.940696716308594e-08], 'L_grad': [1.5893479940132238e-05, 1.7060367099475116e-05, 1.7153732187580317e-05, 1.8905560864368454e-05, 1.5936155250528827e-05, 1.578816954861395e-05, 1.5131851796468254e-05, 1.5562589396722615e-05, 1.590909596416168e-05, 1.5744793927296996e-05, 1.593258639331907e-05, 1.3985097211843822e-05, 1.7995716916630045e-05, 1.5130851352296304e-05, 1.78054251591675e-05, 1.7121696146205068e-05, 1.5251366676238831e-05, 1.6990861695376225e-05, 3.7538702599704266e-06]}
+Train Epoch: 24 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 24 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 24 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 24 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 24 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 24 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 24 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 24 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 24 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch024-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [2.0311530533945188e-05, 2.1020958229200915e-05, 1.8899774659075774e-05, 2.890201358241029e-05, 2.026819493039511e-05, 2.4862170903361402e-05, 1.6756264813011512e-05, 1.7912649127538316e-05, 2.1543994080275297e-05, 2.2944928787183017e-05, 1.4141339306661393e-05, 2.874082565540448e-05, 1.653424624237232e-05, 1.6859132301760837e-05, 2.520576526876539e-05, 2.3569284167024307e-05, 2.1323678083717823e-05, 2.2154528778628446e-05, 8.398625141126104e-06], 'L_si': [-2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, -5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, -8.940696716308594e-08], 'L_grad': [2.0341332856332883e-05, 2.1020958229200915e-05, 1.892957698146347e-05, 2.8931815904797986e-05, 2.0297997252782807e-05, 2.4891973225749098e-05, 1.669666016823612e-05, 1.7972253772313707e-05, 2.1543994080275297e-05, 2.291512646479532e-05, 1.4111536984273698e-05, 2.8711023333016783e-05, 1.653424624237232e-05, 1.6859132301760837e-05, 2.5175962946377695e-05, 2.3569284167024307e-05, 2.135348040610552e-05, 2.2154528778628446e-05, 8.48803210828919e-06]}
+Train Epoch: 25 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 25 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 25 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [2.275079896207899e-05, 2.1300209482433274e-05, 1.9548973796190694e-05, 2.2510907001560554e-05, 2.596026024548337e-05, 2.781568400678225e-05, 3.161178028676659e-05, 3.2531708711758256e-05, 2.044018401647918e-05, 2.230316385976039e-05, 2.1093299437779933e-05, 1.8934304534923285e-05, 2.104283521475736e-05, 2.2403224647860043e-05, 2.563778434705455e-05, 2.9334321880014613e-05, 1.4310735423350707e-05, 1.91116523637902e-05, 5.81834456170327e-06], 'L_si': [0.0, 8.940696716308594e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, 0.0, 5.960464477539063e-08, -5.960464477539063e-08, 5.960464477539063e-08, 5.960464477539063e-08, 0.0, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08], 'L_grad': [2.275079896207899e-05, 2.121080251527019e-05, 1.9519171473803e-05, 2.248110467917286e-05, 2.596026024548337e-05, 2.781568400678225e-05, 3.158197796437889e-05, 3.2531708711758256e-05, 2.038057937170379e-05, 2.236276850453578e-05, 2.1033694793004543e-05, 1.8874699890147895e-05, 2.104283521475736e-05, 2.2403224647860043e-05, 2.5607982024666853e-05, 2.9304519557626918e-05, 1.4310735423350707e-05, 1.9141454686177894e-05, 5.788542239315575e-06]}
+Train Epoch: 26 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 26 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 26 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [9.484750989940949e-06, 8.711309419595636e-06, 9.85386304819258e-06, 9.275930096919183e-06, 8.71361498866463e-06, 9.087714715860784e-06, 1.019519186229445e-05, 1.0207209925283678e-05, 9.007122571347281e-06, 9.275339834857732e-06, 9.785190741240513e-06, 8.86472116690129e-06, 9.928051440510899e-06, 9.74287831922993e-06, 9.004948879010044e-06, 9.11309507500846e-06, 9.21401078812778e-06, 8.18563967186492e-06, 1.9815704490611097e-06], 'L_si': [0.0, 2.9802322387695312e-08, 0.0, 0.0, 5.960464477539063e-08, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 0.0, 0.0, 0.0, 5.960464477539063e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08], 'L_grad': [9.484750989940949e-06, 8.681507097207941e-06, 9.85386304819258e-06, 9.275930096919183e-06, 8.65401034388924e-06, 9.087714715860784e-06, 1.0165389539906755e-05, 1.0237012247671373e-05, 9.036924893734977e-06, 9.215735190082341e-06, 9.725586096465122e-06, 8.894523489288986e-06, 9.928051440510899e-06, 9.74287831922993e-06, 9.004948879010044e-06, 9.053490430233069e-06, 9.184208465740085e-06, 8.126035027089529e-06, 1.921965804285719e-06]}
+Train Epoch: 27 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 27 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 27 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 27 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 27 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 27 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 27 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 27 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 27 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [9.301902537117712e-06, 8.570014870201703e-06, 1.1534930308698677e-05, 1.1565185559447855e-05, 1.0340510925743729e-05, 1.095605875889305e-05, 1.112427344196476e-05, 1.3412000043899752e-05, 1.3804376067128032e-05, 1.109978347813012e-05, 1.2113254342693835e-05, 1.1181236914126202e-05, 1.0380451385572087e-05, 9.505860361969098e-06, 9.355429028801154e-06, 1.070549842552282e-05, 1.1097781680291519e-05, 9.385786142956931e-06, 2.259254188174964e-06], 'L_si': [-8.940696716308594e-08, 0.0, 5.960464477539063e-08, 8.940696716308594e-08, 0.0, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, -5.960464477539063e-08, 0.0, 5.960464477539063e-08, -2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, -5.960464477539063e-08, 2.9802322387695312e-08], 'L_grad': [9.391309504280798e-06, 8.570014870201703e-06, 1.1475325663923286e-05, 1.1475778592284769e-05, 1.0340510925743729e-05, 1.095605875889305e-05, 1.1154075764352456e-05, 1.3382197721512057e-05, 1.3804376067128032e-05, 1.1129585800517816e-05, 1.2053649697918445e-05, 1.1240841558901593e-05, 1.0380451385572087e-05, 9.446255717193708e-06, 9.38523135118885e-06, 1.0645893780747429e-05, 1.1038177035516128e-05, 9.445390787732322e-06, 2.2294518657872686e-06]}
+Train Epoch: 28 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 28 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 28 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch028-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [2.2494239601655863e-05, 2.2413434635382146e-05, 3.129137621726841e-05, 2.643491461640224e-05, 2.8034795832354575e-05, 2.5551998987793922e-05, 3.252636452089064e-05, 2.502975257812068e-05, 2.7352416509529576e-05, 1.9574526959331706e-05, 3.2051349990069866e-05, 3.126304000033997e-05, 2.3979373509064317e-05, 3.428711715969257e-05, 2.5661071049398743e-05, 2.476843656040728e-05, 2.9643331799888983e-05, 2.886492438847199e-05, 4.2137530726904515e-06], 'L_si': [2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 0.0, 0.0, 0.0, 0.0, 0.0, -5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 5.960464477539063e-08], 'L_grad': [2.2464437279268168e-05, 2.238363231299445e-05, 3.123177157249302e-05, 2.6464716938789934e-05, 2.8034795832354575e-05, 2.5551998987793922e-05, 3.252636452089064e-05, 2.502975257812068e-05, 2.7352416509529576e-05, 1.9634131604107097e-05, 3.202154766768217e-05, 3.1292842322727665e-05, 2.4009175831452012e-05, 3.428711715969257e-05, 2.5631268727011047e-05, 2.4798238882794976e-05, 2.9583727155113593e-05, 2.886492438847199e-05, 4.154148427915061e-06]}
+Train Epoch: 29 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 29 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 29 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 29 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 29 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 29 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [1.1392358828743454e-05, 8.013432307052426e-06, 1.343836174783064e-05, 1.4080765140533913e-05, 1.068894471245585e-05, 1.1168434866704047e-05, 1.155027530330699e-05, 1.2264918950677384e-05, 1.425654954800848e-05, 1.334973694611108e-05, 1.009009065455757e-05, 1.2034170140395872e-05, 1.2808691280952189e-05, 1.2146430890425108e-05, 1.1867974535562098e-05, 1.1336458555888385e-05, 1.096913001674693e-05, 1.0260698218189646e-05, 3.11509165840107e-06], 'L_si': [-8.940696716308594e-08, 0.0, 0.0, 0.0, 0.0, -2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 8.940696716308594e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 8.940696716308594e-08, 5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08], 'L_grad': [1.148176579590654e-05, 8.013432307052426e-06, 1.343836174783064e-05, 1.4080765140533913e-05, 1.068894471245585e-05, 1.1198237189091742e-05, 1.1580077625694685e-05, 1.2235116628289688e-05, 1.4286351870396174e-05, 1.3379539268498775e-05, 1.0000683687394485e-05, 1.2004367818008177e-05, 1.2778888958564494e-05, 1.2057023923262022e-05, 1.1808369890786707e-05, 1.130665623350069e-05, 1.0998932339134626e-05, 1.0201093573414255e-05, 3.0554870136256795e-06]}
+Train Epoch: 30 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 30 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 30 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 30 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 30 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 30 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 30 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [1.9798164430540055e-05, 1.4405719412025064e-05, 1.5256602637236938e-05, 1.0649544492480345e-05, 1.3697345821128692e-05, 1.9462606360320933e-05, 9.607616448192857e-06, 1.2640577551792376e-05, 1.0206278602709062e-05, 1.2869466445408762e-05, 1.496603545092512e-05, 1.672169855737593e-05, 1.3604774721898139e-05, 1.4424766050069593e-05, 1.4486484360531904e-05, 1.6353564205928706e-05, 1.1701034054567572e-05, 1.3596381904790178e-05, 3.6212170471117133e-06], 'L_si': [-2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 8.940696716308594e-08, 0.0, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 0.0, 8.940696716308594e-08, 8.940696716308594e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08], 'L_grad': [1.982796675292775e-05, 1.4375917089637369e-05, 1.5226800314849243e-05, 1.0589939847704954e-05, 1.3607938853965607e-05, 1.9462606360320933e-05, 9.577814125805162e-06, 1.2580972907016985e-05, 1.0146673957933672e-05, 1.2869466445408762e-05, 1.4936233128537424e-05, 1.672169855737593e-05, 1.3515367754735053e-05, 1.4335359082906507e-05, 1.4426879715756513e-05, 1.632376188354101e-05, 1.1701034054567572e-05, 1.3626184227177873e-05, 3.591414724724018e-06]}
+Train Epoch: 31 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 31 [36/816 (4%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 31 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 31 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 31 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 31 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 31 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 31 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [2.1880843632970937e-05, 1.9795716070802882e-05, 1.374784369545523e-05, 2.081083948723972e-05, 2.2537640688824467e-05, 1.8807215383276343e-05, 2.061038867395837e-05, 1.5116007489268668e-05, 1.8284843463334255e-05, 2.0365141608635895e-05, 1.7631678929319605e-05, 1.563129626447335e-05, 2.4285847757710144e-05, 2.121084980899468e-05, 1.6344094547093846e-05, 2.031147050729487e-05, 2.061285704257898e-05, 2.042932464974001e-05, 6.415505595214199e-06], 'L_si': [2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, -5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, 0.0, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08], 'L_grad': [2.185104131058324e-05, 1.9825518393190578e-05, 1.374784369545523e-05, 2.0781037164852023e-05, 2.2537640688824467e-05, 1.8777413060888648e-05, 2.066999331873376e-05, 1.5086205166880973e-05, 1.831464578572195e-05, 2.0365141608635895e-05, 1.76614812517073e-05, 1.5601493942085654e-05, 2.4285847757710144e-05, 2.1240652131382376e-05, 1.6344094547093846e-05, 2.031147050729487e-05, 2.061285704257898e-05, 2.0459126972127706e-05, 6.355900950438809e-06]}
+Train Epoch: 32 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 32 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 32 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch032-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [1.0087404007208534e-05, 1.0174845556321088e-05, 1.0068659321404994e-05, 1.0897825632127933e-05, 1.0309974641131703e-05, 1.2202731340948958e-05, 9.362760465592146e-06, 1.1357347830198705e-05, 1.1349164196872152e-05, 1.113438975153258e-05, 1.1139208254462574e-05, 1.1108704711659811e-05, 1.1141170034534298e-05, 1.165982484963024e-05, 1.0599420420476235e-05, 9.92982677416876e-06, 1.0271041901432909e-05, 1.1208880096091889e-05, 2.824371449605678e-06], 'L_si': [8.940696716308594e-08, 0.0, 8.940696716308594e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 5.960464477539063e-08, 0.0, 0.0, -5.960464477539063e-08, -5.960464477539063e-08], 'L_grad': [9.997997040045448e-06, 1.0174845556321088e-05, 9.979252354241908e-06, 1.0927627954515629e-05, 1.0280172318744007e-05, 1.2232533663336653e-05, 9.392562787979841e-06, 1.132754550781101e-05, 1.1319361874484457e-05, 1.113438975153258e-05, 1.1109405932074878e-05, 1.1078902389272116e-05, 1.1141170034534298e-05, 1.165982484963024e-05, 1.0539815775700845e-05, 9.92982677416876e-06, 1.0271041901432909e-05, 1.126848474086728e-05, 2.883976094381069e-06]}
+Train Epoch: 33 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [36/816 (4%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 33 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 33 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [6.381077128025936e-06, 6.594359547307249e-06, 5.43780333828181e-06, 5.699010216630995e-06, 6.39028212390258e-06, 4.731758963316679e-06, 6.145736733742524e-06, 6.075641067582183e-06, 7.1271379056270234e-06, 6.402427970897406e-06, 7.091553925420158e-06, 6.358985046972521e-06, 5.527187568077352e-06, 5.500465249497211e-06, 5.100244379718788e-06, 5.503377906279638e-06, 6.810851118643768e-06, 5.5747923397575505e-06, 1.4490776720776921e-06], 'L_si': [-5.960464477539063e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, 0.0], 'L_grad': [6.440681772801327e-06, 6.594359547307249e-06, 5.467605660669506e-06, 5.6692078942433e-06, 6.39028212390258e-06, 4.731758963316679e-06, 6.115934411354829e-06, 6.075641067582183e-06, 7.097335583239328e-06, 6.402427970897406e-06, 7.061751603032462e-06, 6.329182724584825e-06, 5.497385245689657e-06, 5.470662927109515e-06, 5.130046702106483e-06, 5.503377906279638e-06, 6.8406534410314634e-06, 5.5747923397575505e-06, 1.4490776720776921e-06]}
+Train Epoch: 34 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 34 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 34 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 34 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 34 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 34 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 34 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 34 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [6.336682417895645e-06, 5.677866283804178e-06, 4.915715635434026e-06, 6.037536422809353e-06, 6.139641300251242e-06, 5.7793281484919135e-06, 7.045317488518776e-06, 4.524338692135643e-06, 6.146179657662287e-06, 5.222890649747569e-06, 4.817327408090932e-06, 6.3466450228588656e-06, 4.818585694010835e-06, 7.13669305696385e-06, 5.683343715645606e-06, 5.145240720594302e-06, 5.121341928315815e-06, 5.016795057599666e-06, 1.7802130969357677e-06], 'L_si': [2.9802322387695312e-08, -5.960464477539063e-08, 2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08, 0.0, -5.960464477539063e-08, 0.0, -2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 5.960464477539063e-08, -5.960464477539063e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08], 'L_grad': [6.30688009550795e-06, 5.737470928579569e-06, 4.885913313046331e-06, 6.097141067584744e-06, 6.169443622638937e-06, 5.7793281484919135e-06, 7.104922133294167e-06, 4.524338692135643e-06, 6.175981980049983e-06, 5.222890649747569e-06, 4.757722763315542e-06, 6.287040378083475e-06, 4.878190338786226e-06, 7.077088412188459e-06, 5.713146038033301e-06, 5.1154383982066065e-06, 5.091539605928119e-06, 5.076399702375056e-06, 1.810015419323463e-06]}
+Train Epoch: 35 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 35 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 35 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 35 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 35 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 35 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 35 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 35 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [2.4707853299332783e-05, 1.644443727855105e-05, 2.6625442842487246e-05, 1.8042937881546095e-05, 3.12020601995755e-05, 2.7524432880454697e-05, 1.8111877579940483e-05, 2.20833026105538e-05, 2.467150625307113e-05, 3.0183196940924972e-05, 2.5264109353884123e-05, 2.5453080525039695e-05, 2.1777428628411144e-05, 2.237202897958923e-05, 2.6615676688379608e-05, 2.007811053772457e-05, 1.889462146209553e-05, 2.232976839877665e-05, 7.021667897788575e-06], 'L_si': [0.0, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, 0.0, 5.960464477539063e-08, 2.9802322387695312e-08, 0.0, 0.0, 0.0, -5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, 0.0], 'L_grad': [2.4707853299332783e-05, 1.644443727855105e-05, 2.659564052009955e-05, 1.8042937881546095e-05, 3.11722578771878e-05, 2.7524432880454697e-05, 1.8111877579940483e-05, 2.202369796577841e-05, 2.4641703930683434e-05, 3.0183196940924972e-05, 2.5264109353884123e-05, 2.5453080525039695e-05, 2.1837033273186535e-05, 2.237202897958923e-05, 2.6585874365991913e-05, 2.007811053772457e-05, 1.8924423784483224e-05, 2.232976839877665e-05, 7.021667897788575e-06]}
+Train Epoch: 36 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [36/816 (4%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 36 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 36 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 36 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 36 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 36 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 36 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 36 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch036-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [1.9993080059066415e-05, 2.3947002773638815e-05, 1.829124812502414e-05, 2.669053355930373e-05, 1.3243083230918273e-05, 1.7151141946669668e-05, 1.3302738807396963e-05, 2.3160420823842287e-05, 1.198607606056612e-05, 2.0334809960331768e-05, 1.9472619896987453e-05, 2.7817943191621453e-05, 2.2151030862005427e-05, 1.2469514331314713e-05, 1.8223330698674545e-05, 2.0223360479576513e-05, 2.5684763386379927e-05, 2.6505273126531392e-05, 4.472054115467472e-06], 'L_si': [0.0, -2.9802322387695312e-08, 0.0, 0.0, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, -2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08, -5.960464477539063e-08, 0.0, 8.940696716308594e-08, -2.9802322387695312e-08, 0.0, 0.0, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0], 'L_grad': [1.9993080059066415e-05, 2.397680509602651e-05, 1.829124812502414e-05, 2.669053355930373e-05, 1.3243083230918273e-05, 1.7180944269057363e-05, 1.3243134162621573e-05, 2.3190223146229982e-05, 1.204568070534151e-05, 2.0364612282719463e-05, 1.9532224541762844e-05, 2.7817943191621453e-05, 2.206162389484234e-05, 1.2499316653702408e-05, 1.8223330698674545e-05, 2.0223360479576513e-05, 2.5714565708767623e-05, 2.6535075448919088e-05, 4.472054115467472e-06]}
+Train Epoch: 37 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 37 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 37 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 37 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 37 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 37 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 37 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 37 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [2.2724223526893184e-05, 1.972618338186294e-05, 1.8305445337318815e-05, 2.145944381481968e-05, 2.1610214389511384e-05, 1.6377161955460906e-05, 2.3716602299828082e-05, 1.9284219888504595e-05, 2.1837804524693638e-05, 2.1499783542822115e-05, 2.3102147679310292e-05, 2.2753443772671744e-05, 2.3143002181313932e-05, 2.785600008792244e-05, 2.122525984304957e-05, 1.9927361790905707e-05, 1.3188112461648416e-05, 1.996707942453213e-05, 5.389247689890908e-06], 'L_si': [2.9802322387695312e-08, 5.960464477539063e-08, -8.940696716308594e-08, 5.960464477539063e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, -2.9802322387695312e-08, 8.940696716308594e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08], 'L_grad': [2.2694421204505488e-05, 1.9666578737087548e-05, 1.83948523044819e-05, 2.1399839170044288e-05, 2.158041206712369e-05, 1.634735963307321e-05, 2.3686799977440387e-05, 1.92544175661169e-05, 2.1808002202305943e-05, 2.146998122043442e-05, 2.3072345356922597e-05, 2.2753443772671744e-05, 2.3172804503701627e-05, 2.7885802410310134e-05, 2.1135852875886485e-05, 1.9927361790905707e-05, 1.3217914784036111e-05, 1.9937277102144435e-05, 5.359445367503213e-06]}
+Train Epoch: 38 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 38 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 38 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 38 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 38 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 38 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 38 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [1.4825176549493335e-05, 1.0931954420811962e-05, 1.2620548659469932e-05, 1.2457304364943411e-05, 1.6113299352582544e-05, 1.2984482054889668e-05, 1.533252179797273e-05, 1.2238966519362293e-05, 1.6509762645000592e-05, 1.1171050573466346e-05, 9.143866918748245e-06, 1.2028196579194628e-05, 1.1619142242125235e-05, 1.4019835361978039e-05, 1.3421520634437911e-05, 1.1470265235402621e-05, 1.2728063666145317e-05, 1.664819683355745e-05, 1.1510584272400592e-06], 'L_si': [2.9802322387695312e-08, 0.0, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, 0.0, -2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 5.960464477539063e-08, 5.960464477539063e-08, 0.0], 'L_grad': [1.479537422710564e-05, 1.0931954420811962e-05, 1.2620548659469932e-05, 1.2487106687331107e-05, 1.6053694707807153e-05, 1.2984482054889668e-05, 1.5362324120360427e-05, 1.2238966519362293e-05, 1.64501580002252e-05, 1.1171050573466346e-05, 9.11406459636055e-06, 1.2028196579194628e-05, 1.164894456451293e-05, 1.3990033039590344e-05, 1.3421520634437911e-05, 1.1470265235402621e-05, 1.2668459021369927e-05, 1.658859218878206e-05, 1.1510584272400592e-06]}
+Train Epoch: 39 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 39 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 39 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 39 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 39 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [2.0055071217939258e-05, 1.7079384633689187e-05, 1.5802634152350947e-05, 1.0898380423896015e-05, 1.769704613252543e-05, 2.0647690689656883e-05, 1.359377165499609e-05, 2.1207608369877562e-05, 1.7331727576674893e-05, 2.0896717614959925e-05, 1.7459376977058128e-05, 1.60286854224978e-05, 1.6364747352781706e-05, 1.9402310499572195e-05, 1.6979010979412124e-05, 1.521331250842195e-05, 1.9426199287408963e-05, 1.5112367691472173e-05, 1.5949443650242756e-06], 'L_si': [2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0], 'L_grad': [2.0025268895551562e-05, 1.7109186956076883e-05, 1.5832436474738643e-05, 1.0957985068671405e-05, 1.7726848454913124e-05, 2.0617888367269188e-05, 1.3563969332608394e-05, 2.1207608369877562e-05, 1.7331727576674893e-05, 2.092651993734762e-05, 1.7429574654670432e-05, 1.6088290067273192e-05, 1.63945496751694e-05, 1.93725081771845e-05, 1.6949208657024428e-05, 1.5243114830809645e-05, 1.9426199287408963e-05, 1.5082565369084477e-05, 1.5949443650242756e-06]}
+Train Epoch: 40 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 40 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 40 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [324/816 (40%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 40 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 40 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 40 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 40 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 40 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 40 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 40 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch040-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [1.83192369149765e-05, 2.3267521100933664e-05, 1.9364677427802235e-05, 2.487250094418414e-05, 1.9455226720310748e-05, 1.652835271670483e-05, 1.2692839845840354e-05, 1.962840906344354e-05, 1.6454683645861223e-05, 1.7740130715537816e-05, 1.3391520951699931e-05, 1.84597956831567e-05, 2.4774219127721153e-05, 1.500852158642374e-05, 2.0618965208996087e-05, 1.6023808711906895e-05, 1.6894889995455742e-05, 2.275319093314465e-05, 2.6818979677045718e-06], 'L_si': [2.9802322387695312e-08, 0.0, 5.960464477539063e-08, -2.9802322387695312e-08, 0.0, -5.960464477539063e-08, 0.0, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, -8.940696716308594e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08], 'L_grad': [1.8289434592588805e-05, 2.3267521100933664e-05, 1.9305072783026844e-05, 2.4902303266571835e-05, 1.9455226720310748e-05, 1.658795736148022e-05, 1.2692839845840354e-05, 1.962840906344354e-05, 1.6424881323473528e-05, 1.776993303792551e-05, 1.3421323274087626e-05, 1.8549202650319785e-05, 2.4774219127721153e-05, 1.4978719264036044e-05, 2.0589162886608392e-05, 1.605361103429459e-05, 1.6924692317843437e-05, 2.275319093314465e-05, 2.711700290092267e-06]}
+Train Epoch: 41 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 41 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 41 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 41 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 41 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 41 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 41 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 41 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 41 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 41 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [1.3263059372548014e-05, 9.662177035352215e-06, 7.815164281055331e-06, 1.1046343388443347e-05, 8.904715286917053e-06, 9.794423931452911e-06, 8.569420970161445e-06, 1.020250692818081e-05, 9.041452358360402e-06, 6.257350378291449e-06, 1.040089591697324e-05, 1.1026326319552027e-05, 5.789496299257735e-06, 1.0345086593588348e-05, 1.0528940947551746e-05, 1.0532686246733647e-05, 1.5312161849578843e-05, 8.945463378040586e-06, 3.1855345241638133e-06], 'L_si': [8.940696716308594e-08, 2.9802322387695312e-08, 0.0, 0.0, 0.0, 5.960464477539063e-08, -2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08, 0.0, 0.0, -5.960464477539063e-08, 5.960464477539063e-08, -5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 8.940696716308594e-08], 'L_grad': [1.3173652405384928e-05, 9.63237471296452e-06, 7.815164281055331e-06, 1.1046343388443347e-05, 8.904715286917053e-06, 9.73481928667752e-06, 8.59922329254914e-06, 1.02621115729562e-05, 9.071254680748098e-06, 6.257350378291449e-06, 1.040089591697324e-05, 1.1085930964327417e-05, 5.729891654482344e-06, 1.0404691238363739e-05, 1.0528940947551746e-05, 1.0502883924345952e-05, 1.5312161849578843e-05, 8.91566105565289e-06, 3.0961275570007274e-06]}
+Train Epoch: 42 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 42 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 42 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 42 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 42 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 42 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 42 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 42 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 42 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [4.0142502257367596e-05, 3.807616303674877e-05, 3.890940570272505e-05, 4.79154841741547e-05, 3.0649003747384995e-05, 5.341955693438649e-05, 4.727728810394183e-05, 4.594702477334067e-05, 5.317719842423685e-05, 3.8492315070470795e-05, 2.411062450846657e-05, 3.337836096761748e-05, 3.172128344886005e-05, 3.761139669222757e-05, 3.9825561543693766e-05, 1.934622196131386e-05, 2.605827830848284e-05, 4.3414322135504335e-05, 8.164390237652697e-06], 'L_si': [2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 5.960464477539063e-08], 'L_grad': [4.01126999349799e-05, 3.8016558391973376e-05, 3.890940570272505e-05, 4.7885681851767004e-05, 3.0589399102609605e-05, 5.341955693438649e-05, 4.724748578155413e-05, 4.591722245095298e-05, 5.3147396101849154e-05, 3.8432710425695404e-05, 2.4140426830854267e-05, 3.334855864522979e-05, 3.172128344886005e-05, 3.755179204745218e-05, 3.979575922130607e-05, 1.9316419638926163e-05, 2.6028475986095145e-05, 4.3414322135504335e-05, 8.104785592877306e-06]}
+Train Epoch: 43 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 43 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 43 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 43 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 43 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [720/816 (88%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 43 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 43 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [3.9785891203791834e-06, 5.2753548516193405e-06, 5.043244527769275e-06, 5.8169098338112235e-06, 5.169361429580022e-06, 4.077267021784792e-06, 4.7448984332731925e-06, 5.204201443120837e-06, 5.684712050424423e-06, 3.2567895686952397e-06, 6.221369403647259e-06, 4.301307399146026e-06, 5.2327941375551745e-06, 6.1017281041131355e-06, 5.420899469754659e-06, 5.620293450192548e-06, 5.323533514456358e-06, 4.079995960637461e-06, 1.58296063546004e-06], 'L_si': [5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, 0.0, 5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, -5.960464477539063e-08], 'L_grad': [3.918984475603793e-06, 5.2753548516193405e-06, 5.01344220538158e-06, 5.787107511423528e-06, 5.139559107192326e-06, 4.077267021784792e-06, 4.774700755660888e-06, 5.204201443120837e-06, 5.684712050424423e-06, 3.197184923919849e-06, 6.251171726034954e-06, 4.271505076758331e-06, 5.2327941375551745e-06, 6.042123459337745e-06, 5.391097147366963e-06, 5.620293450192548e-06, 5.353335836844053e-06, 4.079995960637461e-06, 1.6425652802354307e-06]}
+Train Epoch: 44 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 44 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 44 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 44 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 44 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 44 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 44 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 44 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 44 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch044-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [2.755356763373129e-05, 4.450903361430392e-05, 2.8537342586787418e-05, 4.165339487371966e-05, 4.244650335749611e-05, 4.155289934715256e-05, 3.785536682698876e-05, 3.9321123040281236e-05, 3.7934114516247064e-05, 4.170849933871068e-05, 2.744713128777221e-05, 3.4289849281776696e-05, 3.941459726775065e-05, 3.1918407330522314e-05, 2.787714038277045e-05, 4.0615756006445736e-05, 3.237558848923072e-05, 1.4046862816030625e-05, 3.0435198823397513e-06], 'L_si': [0.0, 5.960464477539063e-08, 5.960464477539063e-08, 0.0, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 8.940696716308594e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, 0.0, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, -2.9802322387695312e-08], 'L_grad': [2.755356763373129e-05, 4.4449428969528526e-05, 2.8477737942012027e-05, 4.165339487371966e-05, 4.241670103510842e-05, 4.155289934715256e-05, 3.782556450460106e-05, 3.923171607311815e-05, 3.790431219385937e-05, 4.1678697016322985e-05, 2.7387526642996818e-05, 3.4230244637001306e-05, 3.941459726775065e-05, 3.1918407330522314e-05, 2.7906942705158144e-05, 4.058595368405804e-05, 3.240539081161842e-05, 1.4046862816030625e-05, 3.0733222047274467e-06]}
+Train Epoch: 45 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 45 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 45 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 45 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 45 [576/816 (71%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 45 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 45 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 45 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 45 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [4.428410466061905e-05, 5.2511062676785514e-05, 6.354659126373008e-05, 5.247295121080242e-05, 5.631778549286537e-05, 5.776670514023863e-05, 5.820549631607719e-05, 6.080863386159763e-05, 1.297520338994218e-05, 7.510482100769877e-05, 5.179542495170608e-05, 4.877846367890015e-05, 4.536296910373494e-05, 5.213333497522399e-05, 6.251695594983175e-05, 5.898775270907208e-05, 4.054088640259579e-05, 4.533058745437302e-05, 1.9482495190459304e-05], 'L_si': [2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 8.940696716308594e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 8.940696716308594e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 8.940696716308594e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 8.940696716308594e-08], 'L_grad': [4.4254302338231355e-05, 5.2511062676785514e-05, 6.348698661895469e-05, 5.241334656602703e-05, 5.6347587815253064e-05, 5.767729817307554e-05, 5.817569399368949e-05, 6.074902921682224e-05, 1.2885796422779094e-05, 7.507501868531108e-05, 5.173582030693069e-05, 4.871885903412476e-05, 4.5392771426122636e-05, 5.210353265283629e-05, 6.245735130505636e-05, 5.8898345741909e-05, 4.0570688724983484e-05, 4.536038977676071e-05, 1.9393088223296218e-05]}
+Train Epoch: 46 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [216/816 (26%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [288/816 (35%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [504/816 (62%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 46 [756/816 (93%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 46 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [5.4536994866793975e-06, 6.173966539790854e-06, 3.5800230762106366e-06, 5.956489530944964e-06, 4.915073077427223e-06, 6.622766704822425e-06, 4.2451911212992854e-06, 5.9879730542888865e-06, 5.188948762224754e-06, 6.818070232839091e-06, 7.63130265113432e-06, 5.565822903008666e-06, 8.873881597537547e-06, 8.803576747595798e-06, 5.988838893244974e-06, 4.954334144713357e-06, 6.727725576638477e-06, 6.737019248248544e-06, 1.2034574865538161e-06], 'L_si': [2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, -5.960464477539063e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, -2.9802322387695312e-08, 2.9802322387695312e-08], 'L_grad': [5.423897164291702e-06, 6.203768862178549e-06, 3.609825398598332e-06, 5.956489530944964e-06, 4.974677722202614e-06, 6.5929643824347295e-06, 4.2451911212992854e-06, 5.958170731901191e-06, 5.21875108461245e-06, 6.818070232839091e-06, 7.601500783493975e-06, 5.536020580620971e-06, 8.873881597537547e-06, 8.773774425208103e-06, 5.988838893244974e-06, 4.984136467101052e-06, 6.668120931863086e-06, 6.766821570636239e-06, 1.1736551641661208e-06]}
+Train Epoch: 47 [0/816 (0%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 47 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 47 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 47 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [360/816 (44%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 47 [396/816 (49%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 47 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 47 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 47 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 47 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 47 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [1.158051600214094e-05, 8.768214684096165e-06, 7.237039881147211e-06, 1.1296782759018242e-05, 1.0195291906711645e-05, 1.694835736998357e-05, 9.772481462277938e-06, 7.3186956797144376e-06, 8.864460141921882e-06, 1.2773994058079552e-05, 1.2870846148871351e-05, 9.051371307577938e-06, 1.6940128261921927e-05, 1.3668451174453367e-05, 1.2411250281729735e-05, 8.096410965663381e-06, 1.8179176549892873e-05, 1.156662983703427e-05, 1.9507135675667087e-06], 'L_si': [2.9802322387695312e-08, 0.0, -2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, 0.0, 5.960464477539063e-08, 0.0, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, -2.9802322387695312e-08], 'L_grad': [1.1550713679753244e-05, 8.768214684096165e-06, 7.266842203534907e-06, 1.1296782759018242e-05, 1.0195291906711645e-05, 1.6918555047595873e-05, 9.772481462277938e-06, 7.259091034939047e-06, 8.864460141921882e-06, 1.2803796380467247e-05, 1.2841043826483656e-05, 9.021568985190243e-06, 1.6940128261921927e-05, 1.3638648852065671e-05, 1.244105260411743e-05, 8.066608643275686e-06, 1.8149374227505177e-05, 1.156662983703427e-05, 1.980515889954404e-06]}
+Train Epoch: 48 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [72/816 (9%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 48 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 48 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 48 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [468/816 (57%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [540/816 (66%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 48 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 48 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 48 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving checkpoint: /root/autodl-tmp/s2d_checkpoints/train_s2d_SpikeTransformer/checkpoint-epoch048-loss-0.0000.pth.tar ...
+all losses in batch in validation:  {'loss': [1.5686793631175533e-05, 1.7877009668154642e-05, 1.2689948562183417e-05, 1.1633129361143801e-05, 1.3418912203633226e-05, 1.392350168316625e-05, 1.2376199265418109e-05, 1.1317406460875645e-05, 1.4523247045872267e-05, 1.4566086974809878e-05, 9.684459655545652e-06, 6.9609291131200735e-06, 2.33489008678589e-05, 1.631596387596801e-05, 1.0798381481436081e-05, 1.119201351684751e-05, 1.1718741006916389e-05, 1.733205863274634e-05, 8.021806934266351e-07], 'L_si': [-2.9802322387695312e-08, -5.960464477539063e-08, 2.9802322387695312e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, -5.960464477539063e-08, 2.9802322387695312e-08, 5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, 0.0, -2.9802322387695312e-08, 5.960464477539063e-08, -5.960464477539063e-08], 'L_grad': [1.5716595953563228e-05, 1.7936614312930033e-05, 1.2660146239795722e-05, 1.1603327038756106e-05, 1.3448714526020922e-05, 1.3953304005553946e-05, 1.2376199265418109e-05, 1.128760413848795e-05, 1.4553049368259963e-05, 1.4625691619585268e-05, 9.654657333157957e-06, 6.901324468344683e-06, 2.3319098545471206e-05, 1.6345766198355705e-05, 1.073877683666069e-05, 1.119201351684751e-05, 1.1748543329304084e-05, 1.7272453987970948e-05, 8.617853382020257e-07]}
+Train Epoch: 49 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [108/816 (13%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [144/816 (18%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [180/816 (22%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [252/816 (31%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [432/816 (53%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [612/816 (75%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [648/816 (79%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [684/816 (84%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 49 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 49 [792/816 (97%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+all losses in batch in validation:  {'loss': [1.5622706996509805e-05, 7.876454219513107e-06, 1.0651023330865428e-05, 9.598546967026778e-06, 9.052477253135294e-06, 1.1405507393646985e-05, 1.1024512787116691e-05, 8.923203495214693e-06, 8.945613444666378e-06, 5.897352366446285e-06, 9.879899153020233e-06, 1.336953846475808e-05, 1.026066456688568e-05, 1.2222222721902654e-05, 1.0919080523308367e-05, 1.0224267498415429e-05, 8.772661203693133e-06, 9.834334377956111e-06, 1.6698259059921838e-06], 'L_si': [5.960464477539063e-08, 0.0, -5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 0.0, 0.0, -2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, -5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 5.960464477539063e-08, -5.960464477539063e-08, -2.9802322387695312e-08, 5.960464477539063e-08], 'L_grad': [1.5563102351734415e-05, 7.876454219513107e-06, 1.0710627975640818e-05, 9.568744644639082e-06, 9.082279575522989e-06, 1.143530971603468e-05, 1.1024512787116691e-05, 8.923203495214693e-06, 8.945613444666378e-06, 5.92715468883398e-06, 9.909701475407928e-06, 1.3309933819982689e-05, 1.032026921166107e-05, 1.2192420399514958e-05, 1.0948882845696062e-05, 1.0164662853640039e-05, 8.832265848468523e-06, 9.864136700343806e-06, 1.6102212612167932e-06]}
+Train Epoch: 50 [0/816 (0%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [36/816 (4%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [72/816 (9%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [108/816 (13%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [144/816 (18%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [180/816 (22%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [216/816 (26%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [252/816 (31%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [288/816 (35%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [324/816 (40%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [360/816 (44%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [396/816 (49%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [432/816 (53%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [468/816 (57%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Train Epoch: 50 [504/816 (62%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [540/816 (66%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [576/816 (71%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [612/816 (75%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [648/816 (79%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [684/816 (84%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [720/816 (88%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [756/816 (93%)] loss: 0.0000 L_si: 0.0000 L_grad: 0.0000 
+Train Epoch: 50 [792/816 (97%)] loss: 0.0000 L_si: -0.0000 L_grad: 0.0000 
+Validation: [0/228 (0%)]
+Validation: [36/228 (16%)]
+Validation: [72/228 (32%)]
+Validation: [108/228 (47%)]
+Validation: [144/228 (63%)]
+Validation: [180/228 (79%)]
+Validation: [216/228 (95%)]
+Saving current best: model_best.pth.tar ...
+all losses in batch in validation:  {'loss': [2.3718100692349253e-06, 2.0549819055304397e-06, 2.283707999595208e-06, 2.5550830287102144e-06, 2.0858233256149106e-06, 2.1828554963576607e-06, 2.1560240384133067e-06, 2.2132649064587895e-06, 2.436535396554973e-06, 2.51607298196177e-06, 2.5261733753723092e-06, 2.5001993435580516e-06, 2.4875218969100388e-06, 2.257041160191875e-06, 2.3442075871571433e-06, 2.1642390493070707e-06, 2.3180871266959002e-06, 2.3862821763032116e-06, 4.425093607096642e-07], 'L_si': [-5.960464477539063e-08, -5.960464477539063e-08, 2.9802322387695312e-08, -2.9802322387695312e-08, 2.9802322387695312e-08, 0.0, 0.0, 2.9802322387695312e-08, -2.9802322387695312e-08, -5.960464477539063e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, -2.9802322387695312e-08, 0.0, 2.9802322387695312e-08, 0.0, -8.940696716308594e-08, 2.9802322387695312e-08, 0.0], 'L_grad': [2.431414714010316e-06, 2.1145865503058303e-06, 2.2539056772075128e-06, 2.5848853510979097e-06, 2.0560210032272153e-06, 2.1828554963576607e-06, 2.1560240384133067e-06, 2.183462584071094e-06, 2.4663377189426683e-06, 2.5756776267371606e-06, 2.5559756977600046e-06, 2.530001665945747e-06, 2.517324219297734e-06, 2.257041160191875e-06, 2.314405264769448e-06, 2.1642390493070707e-06, 2.407494093858986e-06, 2.3564798539155163e-06, 4.425093607096642e-07]}

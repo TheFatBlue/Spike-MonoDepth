@@ -5,5 +5,4 @@ export LD_PRELOAD=/root/miniconda3/pkgs/libstdcxx-ng-11.2.0-h1234567_1/lib/libst
 python='/root/miniconda3/envs/scv/bin/python'
 
 python train.py --config /root/code/smde/configs/train_s2d_spikeT.json \
-                --datafolder /root/autodl-tmp \
-                --multiprocessing_distributed; /usr/bin/shutdown
+                --datafolder /root/autodl-tmp; /usr/bin/shutdown

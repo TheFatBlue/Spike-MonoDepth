@@ -21,21 +21,21 @@
             "every_x_rgb_frame": 1,
             "baseline": "s"
         },
-        "batch_size": 6,
-        "num_workers": 2,
+        "batch_size": 12,
+        "num_workers": 6,
         "pin_memory": true,
         "normalize": true,
         "shuffle": true
     },
     "lr_scheduler_type": "ExponentialLR",
-    "lr_scheduler_freq": 100,
+    "lr_scheduler_freq": 30,
     "lr_scheduler": {
         "gamma": 0.5
     },
     "optimizer_type": "Adam",
     "optimizer": {
         "lr": 0.0003,
-        "weight_decay": 0
+        "weight_decay": 1e-4
     },
     "loss": {
         "type": "scale_invariant_loss",
@@ -51,9 +51,9 @@
         "median_error"
     ],
     "trainer": {
-        "epochs": 50,
+        "epochs": 200,
         "sequence_length": 1,
-        "save_dir": "s2d_checkpoints/",
+        "save_dir": "/root/autodl-tmp/train_il_200e/",
         "save_freq": 4,
         "verbosity": 2,
         "monitor": "val_loss",
@@ -64,7 +64,6 @@
         "grid_loss": true,
         "loss_composition": "image",
         "loss_weights": [1]
-
     },
     "arch": "S2DepthTransformerUNetConv",
     "use_phased_arch": false,
