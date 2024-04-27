@@ -81,8 +81,11 @@ class SpikeMonoDataset(Dataset):
         
         # clip and normalize
         label = np.clip(label, 0.0, self.clip_distance) / self.clip_distance
+        print(np.max(label), np.min(label))
         label = 1.0 + np.log(label) / self.reg_factor
+        
         label = label.clip(0, 1.0)
+        # print(np.max(label)-np.min(label))
         
         if len(label.shape) == 2:  # [H x W] grayscale image -> [H x W x 1]
             label = np.expand_dims(label, -1)

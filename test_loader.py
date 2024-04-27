@@ -3,6 +3,7 @@ import json
 import logging
 import argparse
 import bisect
+import sys
 from os.path import join
 
 import cv2
@@ -91,7 +92,7 @@ except KeyError:
     reg_factor = 5.7
 
 test_dataset = concatenate_subfolders(
-    base_folder="dataset/Spike-Stero/train",
+    base_folder="dataset/Spike-Stero/validation",
     dataset_type=dataset_type,
     scene=scene,
     side=side,
@@ -103,12 +104,16 @@ test_dataset = concatenate_subfolders(
 )
 
 N = len(test_dataset)
-    
+print(f'N={N}')
+
 idx = 0
 prev_dataset_idx = -1
 while idx < N:
     item, dataset_idx = test_dataset[idx]
-    print(dataset_idx)
+    # print(item)
+    # fuck = input()
+    continue
+    print(f'dataset_idx={dataset_idx}, idx={idx}, prev_dataset_idx={prev_dataset_idx}')
     if dataset_idx > prev_dataset_idx:
         print("hello")
         sequence_idx = 0
@@ -121,3 +126,4 @@ while idx < N:
     sequence_idx += 1
     prev_dataset_idx = dataset_idx
     idx += 1
+    print(f'sequence_idx={sequence_idx}')

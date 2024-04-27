@@ -93,7 +93,11 @@ def eval_metrics(output, target):
 def make_colormap(img, color_mapper):
     color_map_inv = np.ones_like(img[0]) * np.amax(img[0]) - img[0]
     color_map_inv = np.nan_to_num(color_map_inv, nan=1)
-    color_map_inv = color_map_inv / np.amax(color_map_inv)
+    cmi_max = np.amax(color_map_inv)
+    if cmi_max != 0:
+        color_map_inv = color_map_inv / cmi_max
+    else:
+        color_map_inv = np.where(color_map_inv != 0, color_map_inv, np.inf)
     color_map_inv = np.nan_to_num(color_map_inv)
     color_map_inv = color_mapper.to_rgba(color_map_inv)
     color_map_inv[:, :, 0:3] = color_map_inv[:, :, 0:3][..., ::-1]
@@ -105,6 +109,9 @@ def main(config, initial_checkpoint, output_folder, data_folder):
     calculate_scale = True
 
     total_metrics = []
+    
+    every_x_rgb_frame = {}
+    every_x_rgb_frame['validation'] = 1
 
     # this will raise an exception is the env variable is not set
     # preprocessed_datasets_folder = os.environ['PREPROCESSED_DATASETS_FOLDER']
@@ -142,7 +149,7 @@ def main(config, initial_checkpoint, output_folder, data_folder):
     dataset_type = config['data_loader']['validation']['type']
     # base_folder['validation'] = data_folder
     scene = config['data_loader']['validation']['scene']
-    side = config['data_loader']['validation']['scene']
+    side = config['data_loader']['validation']['side']
 
     try:
         clip_distance = config['data_loader']['validation']['clip_distance']
@@ -212,7 +219,11 @@ def main(config, initial_checkpoint, output_folder, data_folder):
 
     color_map_inv = np.ones_like(frame[0]) * np.amax(frame[0]) - frame[0]
     color_map_inv = np.nan_to_num(color_map_inv, nan=1)
-    color_map_inv = color_map_inv / np.amax(color_map_inv)
+    cmi_max = np.amax(color_map_inv)
+    if cmi_max != 0:
+        color_map_inv = color_map_inv / cmi_max
+    else:
+        color_map_inv = np.where(color_map_inv != 0, color_map_inv, np.inf)
     color_map_inv = np.nan_to_num(color_map_inv)
     vmax = np.percentile(color_map_inv, 95)
     normalizer = mpl.colors.Normalize(vmin=color_map_inv.min(), vmax=vmax)
@@ -329,13 +340,13 @@ def main(config, initial_checkpoint, output_folder, data_folder):
                         cv2.imwrite(join(semantic_seg_dir_frames_key, 'frame_{:010d}.png'.format(idx)), img)
 
                 # save data for video of consecutive inputs
-                if baseline['validation'] == "rgb" or config['arch'] == "ERGB2Depth":
+                if baseline == "rgb" or config['arch'] == "ERGB2Depth":
                     keys = ["image"]
                 else:
                     keys = []
                     for i in range(every_x_rgb_frame['validation']-1):
                         keys.append("events{}".format(i))
-                    if not baseline['validation']:
+                    if not baseline:
                         keys.append("events{}".format(every_x_rgb_frame['validation']-1))
                     keys.append("image")
 
@@ -387,8 +398,8 @@ def main(config, initial_checkpoint, output_folder, data_folder):
                                                                            dtype=np.float32)))
                     target = np.exp(reg_factor * (target - np.ones((target.shape[0], target.shape[1]),
                                                                    dtype=np.float32)))
-                    target *= clip_distance['validation']
-                    prediction *= clip_distance['validation']
+                    target *= clip_distance
+                    prediction *= clip_distance
                     scale[idx] = np.sum(prediction * target) / np.sum(prediction * prediction)
 
             prev_super_states = new_super_states
