@@ -17,7 +17,7 @@ from model.model import *
 from model.loss import *
 from model.metric import *
 from model.S2DepthNet import S2DepthTransformerUNetConv
-from data_loader.SpikesDENSE_dataset import *
+from data_loader.SpikeMono import *
 from utils.data_augmentation import Compose, RandomRotationFlip, RandomCrop, CenterCrop
 
 
@@ -142,7 +142,7 @@ def main(config, initial_checkpoint, output_folder, data_folder):
     dataset_type = config['data_loader']['validation']['type']
     # base_folder['validation'] = data_folder
     scene = config['data_loader']['validation']['scene']
-    side = config['data+loader']['validation']['scene']
+    side = config['data_loader']['validation']['scene']
 
     try:
         clip_distance = config['data_loader']['validation']['clip_distance']
