@@ -80,8 +80,8 @@ class SpikeMonoDataset(Dataset):
         label = np.load(path_dict['label']).astype(np.float32)
         
         # clip and normalize
-        label = np.clip(label, 0.0, self.clip_distance) / self.clip_distance
-        print(np.max(label), np.min(label))
+        label = np.clip(label, 1e-3, self.clip_distance) / self.clip_distance
+        # print(np.max(label), np.min(label))
         label = 1.0 + np.log(label) / self.reg_factor
         
         label = label.clip(0, 1.0)

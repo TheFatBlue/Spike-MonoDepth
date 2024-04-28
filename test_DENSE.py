@@ -93,11 +93,14 @@ def eval_metrics(output, target):
 def make_colormap(img, color_mapper):
     color_map_inv = np.ones_like(img[0]) * np.amax(img[0]) - img[0]
     color_map_inv = np.nan_to_num(color_map_inv, nan=1)
+    color_map_inv = color_map_inv / np.amax(color_map_inv)
+    """
     cmi_max = np.amax(color_map_inv)
     if cmi_max != 0:
         color_map_inv = color_map_inv / cmi_max
     else:
         color_map_inv = np.where(color_map_inv != 0, color_map_inv, np.inf)
+        """
     color_map_inv = np.nan_to_num(color_map_inv)
     color_map_inv = color_mapper.to_rgba(color_map_inv)
     color_map_inv[:, :, 0:3] = color_map_inv[:, :, 0:3][..., ::-1]
@@ -219,11 +222,14 @@ def main(config, initial_checkpoint, output_folder, data_folder):
 
     color_map_inv = np.ones_like(frame[0]) * np.amax(frame[0]) - frame[0]
     color_map_inv = np.nan_to_num(color_map_inv, nan=1)
+    color_map_inv = color_map_inv / np.amax(color_map_inv)
+    """
     cmi_max = np.amax(color_map_inv)
     if cmi_max != 0:
         color_map_inv = color_map_inv / cmi_max
     else:
         color_map_inv = np.where(color_map_inv != 0, color_map_inv, np.inf)
+        """
     color_map_inv = np.nan_to_num(color_map_inv)
     vmax = np.percentile(color_map_inv, 95)
     normalizer = mpl.colors.Normalize(vmin=color_map_inv.min(), vmax=vmax)
