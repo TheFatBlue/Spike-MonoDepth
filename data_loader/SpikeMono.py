@@ -81,15 +81,13 @@ class SpikeMonoDataset(Dataset):
         
         # clip and normalize
         label = np.clip(label, 1e-3, self.clip_distance) / self.clip_distance
-        # print(np.max(label), np.min(label))
         label = 1.0 + np.log(label) / self.reg_factor
-        
         label = label.clip(0, 1.0)
-        # print(np.max(label)-np.min(label))
         
         if len(label.shape) == 2:  # [H x W] grayscale image -> [H x W x 1]
             label = np.expand_dims(label, -1)
         label = np.moveaxis(label, -1, 0)  # H x W x 1 -> 1 x H x W
+        label = np.rot90(label, 2)  # turn gt up side down
         label = torch.from_numpy(label)  # numpy to tensor
 
         if self.transform:

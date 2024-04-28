@@ -6,7 +6,7 @@
         "train": {
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/train",
-            "scene": "indoor",
+            "scene": "outdoor",
             "side": "left",
             "clip_distance": 20.0,
             "reg_factor": 9.91,
@@ -16,7 +16,7 @@
         "validation": {
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/validation",
-            "scene": "indoor",
+            "scene": "outdoor",
             "side": "left",
             "clip_distance": 20.0,
             "reg_factor": 9.91,

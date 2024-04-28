@@ -213,7 +213,7 @@ def main(config, initial_checkpoint, output_folder, data_folder):
 
     # construct color mapper, such that same color map is used for all outputs.
     # get groundtruth that is not at the beginning
-    item, dataset_idx = test_dataset[20]
+    item, dataset_idx = test_dataset[2]
     frame = item[0]['depth_image'].cpu().numpy()
 
     print("======================================")
