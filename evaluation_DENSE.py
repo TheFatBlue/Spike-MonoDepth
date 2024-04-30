@@ -161,7 +161,8 @@ def display_high_contrast_colormap (idx, target, prediction, prefix="", colormap
         pcm = ax[1].pcolormesh(prediction_plot, cmap=colormap, vmin=np.min(target), vmax=percent*second_largest)
         ax[1].set_title("Prediction")
         fig.colorbar(pcm, ax=ax[1], extend='both', orientation='vertical')
-        fig.canvas.set_window_title(prefix+"High_Contrast_Depth_Evaluation")
+        # fig.canvas.set_window_title(prefix+"High_Contrast_Depth_Evaluation")
+        fig.canvas.manager.set_window_title(prefix + "High_Contrast_Depth_Evaluation")
     if folder_name is not None:
         plt.savefig('%s/frame_%010d.png' % (folder_name, idx))
         plt.close(fig)
@@ -182,7 +183,8 @@ def display_high_contrast_color_logmap (idx, data, prefix="", name="data", color
         ax.set_xticklabels([]) # no tick numbers in the target plot horizontal axis
         #cbar = fig.colorbar(pcm, ax=ax, extend='both', orientation='vertical')
         #cbar.ax.set_yticklabels(['10', '20', '30', '40', '50' '60'])  # vertically oriented colorbar
-        fig.canvas.set_window_title(prefix+"High_Contrast_Depth_Evaluation")
+        # fig.canvas.set_window_title(prefix+"High_Contrast_Depth_Evaluation")
+        fig.canvas.manager.set_window_title(prefix + "High_Contrast_Depth_Evaluation")
         plt.savefig('%s/%s_frame_%010d.png' % (folder_name, name, idx))
         #plt.show()
 

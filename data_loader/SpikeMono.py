@@ -88,6 +88,7 @@ class SpikeMonoDataset(Dataset):
             label = np.expand_dims(label, -1)
         label = np.moveaxis(label, -1, 0)  # H x W x 1 -> 1 x H x W
         label = np.rot90(label, 2)  # turn gt up side down
+        label = label.copy()
         label = torch.from_numpy(label)  # numpy to tensor
 
         if self.transform:

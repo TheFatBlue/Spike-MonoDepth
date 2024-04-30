@@ -106,6 +106,14 @@ def make_colormap(img, color_mapper):
     color_map_inv[:, :, 0:3] = color_map_inv[:, :, 0:3][..., ::-1]
     return color_map_inv
 
+def remove_module_prefix(state_dict):
+    """Remove the 'module.' prefix from each key in the state_dict."""
+    new_state_dict = {}
+    for key, value in state_dict.items():
+        new_key = key.replace('module.', '')  # remove `module.` prefix
+        new_state_dict[new_key] = value
+    return new_state_dict
+
 def main(config, initial_checkpoint, output_folder, data_folder):
     train_logger = None
 
@@ -191,13 +199,14 @@ def main(config, initial_checkpoint, output_folder, data_folder):
 
     print('Loading initial model weights from: {}'.format(initial_checkpoint))
     checkpoint = torch.load(initial_checkpoint)
+    modified_state_dict = remove_module_prefix(checkpoint['state_dict'])
     # model = torch.nn.DataParallel(model).cuda()
     if use_phased_arch:
         C, (H, W) = config["model"]["num_bins_events"], config["model"]["spatial_resolution"]
         dummy_input = torch.Tensor(1, C, H, W)
         times = torch.Tensor(1)
         _ = model.forward(dummy_input, times=times, prev_states=None)
-    model.load_state_dict(checkpoint['state_dict'])
+    model.load_state_dict(modified_state_dict)
 
     gpu = torch.device('cuda:' + str(config['gpu']))
     model.to(gpu)

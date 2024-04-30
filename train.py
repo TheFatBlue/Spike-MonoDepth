@@ -91,6 +91,13 @@ def concatenate_subfolders(base_folder,
 
     return concat_dataset
 
+def remove_module_prefix(state_dict):
+    """Remove the 'module.' prefix from each key in the state_dict."""
+    new_state_dict = {}
+    for key, value in state_dict.items():
+        new_key = key.replace('module.', '')  # remove `module.` prefix
+        new_state_dict[new_key] = value
+    return new_state_dict
 
 def main_worker(gpu, ngpus_per_node, args):
 # def main_worker(config, resume, initial_checkpoint=None, DeviceIds=None):
@@ -243,13 +250,20 @@ def main_worker(gpu, ngpus_per_node, args):
     if initial_checkpoint is not None:
         print('Loading initial model weights from: {}'.format(initial_checkpoint))
         checkpoint = torch.load(initial_checkpoint)
+        modified_state_dict = remove_module_prefix(checkpoint['state_dict'])
         # model.load_state_dict(checkpoint['state_dict'])
         if use_phased_arch:
             C, (H, W) = config["model"]["num_bins_events"], config["model"]["spatial_resolution"]
             dummy_input = torch.Tensor(1, C, H, W)
             times = torch.Tensor(1)
             _ = model.forward(dummy_input, times=times, prev_states=None)  # tag="events"
-        model.load_state_dict(checkpoint['state_dict'])
+        model.load_state_dict(modified_state_dict)
+        
+        for name, param in model.named_parameters():
+            if 'encoder' in name or 'resblocks' in name:
+                param.requires_grad = False
+        print("Encoder layers frozen")
+        model.summary()
     
     cudnn.benchmark = True
     

@@ -1,0 +1,150 @@
+Setting up Multi Scale Gradient loss...
+Done
+/root/autodl-tmp/baseline/npy/image/
+['/root/autodl-tmp/baseline/npy/image/depth_0000000002.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000003.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000004.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000005.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000006.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000007.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000008.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000009.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000010.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000011.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000012.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000013.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000014.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000015.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000016.npy', '/root/autodl-tmp/baseline/npy/image/depth_0000000017.npy']
+len of prediction files 16
+len of target files 16
+/root/autodl-tmp/baseline/npy/image/
+/root/autodl-tmp/baseline/ground_truth/npy/depth_image/
+_abs_rel_diff : 0.548063
+_squ_rel_diff : 1.336046
+_RMS_linear : 0.908851
+_RMS_log : 0.530866
+_SILog : 0.168610
+_mean_depth_error : 0.455371
+_median_diff : 0.024776
+_threshold_delta_1.25 : 0.561359
+_threshold_delta_1.25^2 : 0.813185
+_threshold_delta_1.25^3 : 0.872230
+_10_abs_rel_diff : 0.548063
+_10_squ_rel_diff : 1.336046
+_10_RMS_linear : 0.908851
+_10_RMS_log : 0.530866
+_10_SILog : 0.168610
+_10_mean_depth_error : 0.455371
+_10_median_diff : 0.024776
+_10_threshold_delta_1.25 : 0.561359
+_10_threshold_delta_1.25^2 : 0.813185
+_10_threshold_delta_1.25^3 : 0.872230
+_20_abs_rel_diff : 0.548063
+_20_squ_rel_diff : 1.336046
+_20_RMS_linear : 0.908851
+_20_RMS_log : 0.530866
+_20_SILog : 0.168610
+_20_mean_depth_error : 0.455371
+_20_median_diff : 0.024776
+_20_threshold_delta_1.25 : 0.561359
+_20_threshold_delta_1.25^2 : 0.813185
+_20_threshold_delta_1.25^3 : 0.872230
+_30_abs_rel_diff : 0.548063
+_30_squ_rel_diff : 1.336046
+_30_RMS_linear : 0.908851
+_30_RMS_log : 0.530866
+_30_SILog : 0.168610
+_30_mean_depth_error : 0.455371
+_30_median_diff : 0.024776
+_30_threshold_delta_1.25 : 0.561359
+_30_threshold_delta_1.25^2 : 0.813185
+_30_threshold_delta_1.25^3 : 0.872230
+_80_abs_rel_diff : 0.548063
+_80_squ_rel_diff : 1.336046
+_80_RMS_linear : 0.908851
+_80_RMS_log : 0.530866
+_80_SILog : 0.168610
+_80_mean_depth_error : 0.455371
+_80_median_diff : 0.024776
+_80_threshold_delta_1.25 : 0.561359
+_80_threshold_delta_1.25^2 : 0.813185
+_80_threshold_delta_1.25^3 : 0.872230
+_250_abs_rel_diff : 0.548063
+_250_squ_rel_diff : 1.336046
+_250_RMS_linear : 0.908851
+_250_RMS_log : 0.530866
+_250_SILog : 0.168610
+_250_mean_depth_error : 0.455371
+_250_median_diff : 0.024776
+_250_threshold_delta_1.25 : 0.561359
+_250_threshold_delta_1.25^2 : 0.813185
+_250_threshold_delta_1.25^3 : 0.872230
+_500_abs_rel_diff : 0.548063
+_500_squ_rel_diff : 1.336046
+_500_RMS_linear : 0.908851
+_500_RMS_log : 0.530866
+_500_SILog : 0.168610
+_500_mean_depth_error : 0.455371
+_500_median_diff : 0.024776
+_500_threshold_delta_1.25 : 0.561359
+_500_threshold_delta_1.25^2 : 0.813185
+_500_threshold_delta_1.25^3 : 0.872230
+----------------------------------------------
+0.548063
+1.336046
+0.908851
+0.530866
+0.168610
+0.455371
+0.024776
+0.561359
+0.813185
+0.872230
+0.548063
+1.336046
+0.908851
+0.530866
+0.168610
+0.455371
+0.024776
+0.561359
+0.813185
+0.872230
+0.548063
+1.336046
+0.908851
+0.530866
+0.168610
+0.455371
+0.024776
+0.561359
+0.813185
+0.872230
+0.548063
+1.336046
+0.908851
+0.530866
+0.168610
+0.455371
+0.024776
+0.561359
+0.813185
+0.872230
+0.548063
+1.336046
+0.908851
+0.530866
+0.168610
+0.455371
+0.024776
+0.561359
+0.813185
+0.872230
+0.548063
+1.336046
+0.908851
+0.530866
+0.168610
+0.455371
+0.024776
+0.561359
+0.813185
+0.872230
+0.548063
+1.336046
+0.908851
+0.530866
+0.168610
+0.455371
+0.024776
+0.561359
+0.813185
+0.872230
+total metrics:  [0.83331769 0.54806279 0.62481698 0.1907773  0.45537086 0.90885149]

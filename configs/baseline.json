@@ -6,20 +6,20 @@
         "train": {
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/train",
-            "scene": "outdoor",
+            "scene": "indoor",
             "side": "left",
-            "clip_distance": 20.0,
-            "reg_factor": 9.91,
+            "clip_distance": 4.0,
+            "reg_factor": 1.86,
             "every_x_rgb_frame": 1,
             "baseline": "s"
         },
         "validation": {
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/validation",
-            "scene": "outdoor",
+            "scene": "indoor",
             "side": "left",
-            "clip_distance": 20.0,
-            "reg_factor": 9.91,
+            "clip_distance": 4.0,
+            "reg_factor": 1.86,
             "every_x_rgb_frame": 1,
             "baseline": "s"
         },
@@ -30,14 +30,14 @@
         "shuffle": true
     },
     "lr_scheduler_type": "ExponentialLR",
-    "lr_scheduler_freq": 30,
+    "lr_scheduler_freq": 50,
     "lr_scheduler": {
         "gamma": 0.5
     },
     "optimizer_type": "Adam",
     "optimizer": {
         "lr": 0.0003,
-        "weight_decay": 1e-4
+        "weight_decay": 0
     },
     "loss": {
         "type": "scale_invariant_loss",
@@ -55,7 +55,7 @@
     "trainer": {
         "epochs": 100,
         "sequence_length": 1,
-        "save_dir": "/root/autodl-tmp/train_ol_100e/",
+        "save_dir": "/root/autodl-tmp/train_il_100e/",
         "save_freq": 10,
         "verbosity": 2,
         "monitor": "val_loss",
@@ -73,8 +73,8 @@
         "num_bins_rgb": 128,
         "num_bins_events": 128,
         "skip_type": "sum",
-        "recurrent_block_type": "none",
-        "state_combination": "none",
+        "recurrent_block_type": "conv",
+        "state_combination": "convlstm",
         "spatial_resolution": [112, 112],
         "num_encoders": 3,
         "base_num_channels": 96,
