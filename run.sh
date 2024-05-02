@@ -4,7 +4,6 @@ export LD_PRELOAD=/root/miniconda3/pkgs/libstdcxx-ng-11.2.0-h1234567_1/lib/libst
 
 python='/root/miniconda3/envs/scv/bin/python'
 
-python train.py --config /root/code/smde/configs/train_il_100e.json \
+python train.py --config /root/code/smde/configs/ft_ol_60e.json \
                 --datafolder /root/autodl-tmp \
-                --initial_checkpoint /root/autodl-tmp/SpikeT/model_best.pth.tar
-                # ; /usr/bin/shutdown
+                --initial_checkpoint /root/autodl-tmp/SpikeT/model_best.pth.tar; /usr/bin/shutdown
