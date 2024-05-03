@@ -57,7 +57,7 @@ class SpikeMonoDataset(Dataset):
                     path_list.append(os.path.join(rootfolder, side, folder))
         else:
             for folder in folders:
-                path_list.append(os.path.join(rootfolder, folder))
+                path_list.append(os.path.join(rootfolder, side, folder))
 
         return path_list
     
