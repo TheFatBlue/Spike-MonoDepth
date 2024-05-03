@@ -1,0 +1,708 @@
+/root/miniconda3/envs/scv/lib/python3.9/site-packages/torch/functional.py:445: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at  ../aten/src/ATen/native/TensorShape.cpp:2157.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Trainable parameters: 20545951
+S2DepthTransformerUNetConv(
+  (encoder): LongSpikeStreamEncoderConv(
+    (swin3d): SwinTransformer3D(
+      (patch_embed): PatchEmbedLocalGlobal(
+        (head): Conv2d(32, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (global_head): Conv2d(128, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (residual_encoding): residual_feature_generator(
+          (resblock1): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock2): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock3): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock4): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (global_residual_encoding): residual_feature_generator(
+          (resblock1): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock2): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock3): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock4): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (proj): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (global_proj): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      )
+      (pos_drop): Dropout(p=0.0, inplace=False)
+      (layers): ModuleList(
+        (0): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=96, out_features=288, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=96, out_features=96, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): Identity()
+              (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=96, out_features=384, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=384, out_features=96, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=96, out_features=288, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=96, out_features=96, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=96, out_features=384, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=384, out_features=96, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+          (downsample): PatchMerging(
+            (reduction): Linear(in_features=384, out_features=192, bias=False)
+            (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (1): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=192, out_features=576, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=192, out_features=192, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=192, out_features=768, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=768, out_features=192, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=192, out_features=576, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=192, out_features=192, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=192, out_features=768, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=768, out_features=192, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+          (downsample): PatchMerging(
+            (reduction): Linear(in_features=768, out_features=384, bias=False)
+            (norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (2): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (2): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (3): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (4): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (5): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+        )
+      )
+      (norm0): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+      (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+    )
+    (conv_layers): ModuleList(
+      (0): ModuleList(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (1): ModuleList(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): ModuleList(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+  (resblocks): ModuleList(
+    (0): ResidualBlock(
+      (conv1): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): ReLU()
+      (conv2): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (1): ResidualBlock(
+      (conv1): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): ReLU()
+      (conv2): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (decoders): ModuleList(
+    (0): UpsampleConvLayer(
+      (conv2d): Conv2d(384, 192, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+    (1): UpsampleConvLayer(
+      (conv2d): Conv2d(192, 96, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+    (2): UpsampleConvLayer(
+      (conv2d): Conv2d(96, 48, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+  )
+  (pred): ConvLayer(
+    (conv2d): Conv2d(48, 1, kernel_size=(1, 1), stride=(1, 1))
+  )
+)
+Trainable parameters: 2419585
+S2DepthTransformerUNetConv(
+  (encoder): LongSpikeStreamEncoderConv(
+    (swin3d): SwinTransformer3D(
+      (patch_embed): PatchEmbedLocalGlobal(
+        (head): Conv2d(32, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (global_head): Conv2d(128, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (residual_encoding): residual_feature_generator(
+          (resblock1): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock2): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock3): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock4): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (global_residual_encoding): residual_feature_generator(
+          (resblock1): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock2): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock3): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+          (resblock4): ResidualBlock(
+            (conv1): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+            (bn1): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (bn2): BatchNorm2d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (relu): ReLU()
+            (conv2): Conv2d(48, 48, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          )
+        )
+        (proj): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+        (global_proj): Conv2d(48, 48, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      )
+      (pos_drop): Dropout(p=0.0, inplace=False)
+      (layers): ModuleList(
+        (0): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=96, out_features=288, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=96, out_features=96, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): Identity()
+              (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=96, out_features=384, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=384, out_features=96, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=96, out_features=288, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=96, out_features=96, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=96, out_features=384, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=384, out_features=96, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+          (downsample): PatchMerging(
+            (reduction): Linear(in_features=384, out_features=192, bias=False)
+            (norm): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (1): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=192, out_features=576, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=192, out_features=192, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=192, out_features=768, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=768, out_features=192, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=192, out_features=576, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=192, out_features=192, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=192, out_features=768, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=768, out_features=192, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+          (downsample): PatchMerging(
+            (reduction): Linear(in_features=768, out_features=384, bias=False)
+            (norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (2): BasicLayer(
+          (blocks): ModuleList(
+            (0): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (1): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (2): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (3): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (4): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+            (5): SwinTransformerBlock3D(
+              (norm1): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (attn): WindowAttention3D(
+                (qkv): Linear(in_features=384, out_features=1152, bias=True)
+                (attn_drop): Dropout(p=0.0, inplace=False)
+                (proj): Linear(in_features=384, out_features=384, bias=True)
+                (proj_drop): Dropout(p=0.0, inplace=False)
+                (softmax): Softmax(dim=-1)
+              )
+              (drop_path): DropPath()
+              (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+              (mlp): Mlp(
+                (fc1): Linear(in_features=384, out_features=1536, bias=True)
+                (act): GELU()
+                (fc2): Linear(in_features=1536, out_features=384, bias=True)
+                (drop): Dropout(p=0.0, inplace=False)
+              )
+            )
+          )
+        )
+      )
+      (norm0): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+      (norm1): LayerNorm((192,), eps=1e-05, elementwise_affine=True)
+      (norm2): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+    )
+    (conv_layers): ModuleList(
+      (0): ModuleList(
+        (0): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(96, 24, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (1): ModuleList(
+        (0): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(192, 48, kernel_size=(1, 1), stride=(1, 1))
+      )
+      (2): ModuleList(
+        (0): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (1): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (2): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+        (3): Conv2d(384, 96, kernel_size=(1, 1), stride=(1, 1))
+      )
+    )
+  )
+  (resblocks): ModuleList(
+    (0): ResidualBlock(
+      (conv1): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): ReLU()
+      (conv2): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+    (1): ResidualBlock(
+      (conv1): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): ReLU()
+      (conv2): Conv2d(384, 384, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    )
+  )
+  (decoders): ModuleList(
+    (0): UpsampleConvLayer(
+      (conv2d): Conv2d(384, 192, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+    (1): UpsampleConvLayer(
+      (conv2d): Conv2d(192, 96, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+    (2): UpsampleConvLayer(
+      (conv2d): Conv2d(96, 48, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+    )
+  )
+  (pred): ConvLayer(
+    (conv2d): Conv2d(48, 1, kernel_size=(1, 1), stride=(1, 1))
+  )
+)
+Setting up Multi Scale Gradient loss...
+Done
+---- Single Training ----
+Use GPU: 0 for training
+Found 26 samples in /root/autodl-tmp/Spike-Stero/train
+Found 8 samples in /root/autodl-tmp/Spike-Stero/validation
+-----  [3, 6, 12]
+---- new version 4 ----
+[384, 192, 96]
+Model Initialized
+Loading initial model weights from: /root/autodl-tmp/SpikeT/model_best.pth.tar
+Encoder layers frozen
+Using scale_invariant_loss with config {'weight': 1.0, 'n_lambda': 1.0}
+Will not use phased architecture
+Using Multi Scale Gradient loss with weight=0.25
+Will not use MSE loss
+Train Epoch: 1 [0/1620 (0%)] loss: 0.1223 L_si: 0.0466 L_grad: 0.0757 
+Train Epoch: 1 [36/1620 (2%)] loss: 0.1342 L_si: 0.0569 L_grad: 0.0772 
+Train Epoch: 1 [72/1620 (4%)] loss: 0.0986 L_si: 0.0347 L_grad: 0.0639 
+Train Epoch: 1 [108/1620 (7%)] loss: 0.0849 L_si: 0.0346 L_grad: 0.0503 
+Train Epoch: 1 [144/1620 (9%)] loss: 0.0935 L_si: 0.0334 L_grad: 0.0601 
+Train Epoch: 1 [180/1620 (11%)] loss: 0.0972 L_si: 0.0352 L_grad: 0.0620 
+Train Epoch: 1 [216/1620 (13%)] loss: 0.0964 L_si: 0.0379 L_grad: 0.0585 
+Train Epoch: 1 [252/1620 (16%)] loss: 0.0865 L_si: 0.0299 L_grad: 0.0566 
+Train Epoch: 1 [288/1620 (18%)] loss: 0.0824 L_si: 0.0277 L_grad: 0.0547 
+Train Epoch: 1 [324/1620 (20%)] loss: 0.0735 L_si: 0.0256 L_grad: 0.0479 
+Train Epoch: 1 [360/1620 (22%)] loss: 0.0624 L_si: 0.0190 L_grad: 0.0434 
+Train Epoch: 1 [396/1620 (24%)] loss: 0.0629 L_si: 0.0171 L_grad: 0.0458 
+Train Epoch: 1 [432/1620 (27%)] loss: 0.0560 L_si: 0.0163 L_grad: 0.0397 
+Train Epoch: 1 [468/1620 (29%)] loss: 0.0528 L_si: 0.0107 L_grad: 0.0421 
+Train Epoch: 1 [504/1620 (31%)] loss: 0.0491 L_si: 0.0124 L_grad: 0.0367 
+Train Epoch: 1 [540/1620 (33%)] loss: 0.0651 L_si: 0.0218 L_grad: 0.0433 
+Train Epoch: 1 [576/1620 (36%)] loss: 0.0501 L_si: 0.0154 L_grad: 0.0346 
+Train Epoch: 1 [612/1620 (38%)] loss: 0.0442 L_si: 0.0118 L_grad: 0.0323 
+Train Epoch: 1 [648/1620 (40%)] loss: 0.0450 L_si: 0.0121 L_grad: 0.0329 
+Train Epoch: 1 [684/1620 (42%)] loss: 0.0508 L_si: 0.0148 L_grad: 0.0361 
+Train Epoch: 1 [720/1620 (44%)] loss: 0.0525 L_si: 0.0153 L_grad: 0.0372 
+Train Epoch: 1 [756/1620 (47%)] loss: 0.0593 L_si: 0.0224 L_grad: 0.0369 
+Train Epoch: 1 [792/1620 (49%)] loss: 0.0449 L_si: 0.0116 L_grad: 0.0333 
+Train Epoch: 1 [828/1620 (51%)] loss: 0.0492 L_si: 0.0148 L_grad: 0.0344 
+Traceback (most recent call last):
+  File "/root/code/smde/train.py", line 328, in <module>
+    main()
+  File "/root/code/smde/train.py", line 323, in main
+    main_worker(args.gpu, ngpus_per_node, args)
+  File "/root/code/smde/train.py", line 287, in main_worker
+    trainer.train()
+  File "/root/code/smde/base/base_trainer.py", line 85, in train
+    result = self._train_epoch(epoch)
+  File "/root/code/smde/trainer/spiket_trainer.py", line 452, in _train_epoch
+    losses, _, _, _, _, _ = self.forward_pass_sequence(sequence)
+  File "/root/code/smde/trainer/spiket_trainer.py", line 284, in forward_pass_sequence
+    new_target = item['depth_' + key].to(self.gpu)
+  File "/root/miniconda3/envs/scv/lib/python3.9/site-packages/torch/utils/data/_utils/signal_handling.py", line 66, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 1649) is killed by signal: Terminated. 
