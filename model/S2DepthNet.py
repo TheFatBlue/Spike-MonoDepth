@@ -7,6 +7,24 @@ from model.encoder_transformer import LongSpikeStreamEncoderConv
 from model.submodules import ResidualBlock, ConvLayer, UpsampleConvLayer
 
 
+class ChannelAttention(nn.Module):
+    def __init__(self, num_channels, reduction_ratio=16):
+        super(ChannelAttention, self).__init__()
+        self.avg_pool = nn.AdaptiveAvgPool2d(1)
+        self.fc = nn.Sequential(
+            nn.Linear(num_channels, num_channels // reduction_ratio, bias=False),
+            nn.ReLU(inplace=True),
+            nn.Linear(num_channels // reduction_ratio, num_channels, bias=False),
+            nn.Sigmoid()
+        )
+
+    def forward(self, x):
+        b, c, _, _ = x.size()
+        y = self.avg_pool(x).view(b, c)
+        y = self.fc(y).view(b, c, 1, 1)
+        return x * y.expand_as(x)
+
+
 def skip_concat(x1, x2):
     return torch.cat([x1, x2], dim=1)
 
@@ -76,6 +94,7 @@ class S2DepthTransformerUNetConv(BaseERGB2Depth):
 
     def build_decoders(self):
         decoder_input_sizes = list(reversed([self.base_num_channels * pow(2, i) for i in range(self.num_encoders)]))
+        print(decoder_input_sizes)
 
         self.decoders = nn.ModuleList()
         for input_size in decoder_input_sizes:

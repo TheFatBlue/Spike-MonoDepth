@@ -68,7 +68,7 @@ def concatenate_subfolders(base_folder,
 
     return concat_dataset
 
-config = json.load(open('configs/train_s2d_spikeT.json'))
+config = json.load(open('configs/ft_ib_100e.json'))
 
 normalize = config['data_loader'].get('normalize', True)
 
@@ -92,7 +92,7 @@ except KeyError:
     reg_factor = 5.7
 
 test_dataset = concatenate_subfolders(
-    base_folder="dataset/Spike-Stero/validation",
+    base_folder="dataset/Spike-Stero/test",
     dataset_type=dataset_type,
     scene=scene,
     side=side,
@@ -112,7 +112,6 @@ while idx < N:
     item, dataset_idx = test_dataset[idx]
     # print(item)
     # fuck = input()
-    continue
     print(f'dataset_idx={dataset_idx}, idx={idx}, prev_dataset_idx={prev_dataset_idx}')
     if dataset_idx > prev_dataset_idx:
         print("hello")

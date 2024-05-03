@@ -25,10 +25,10 @@ class SpikeMonoDataset(Dataset):
         self.base_folder = kwargs.get('base_folder')
         
         self.scene = kwargs.get('scene')
-        assert self.scene in ['indoor', 'outdoor', 'both'], "Invalid option, \'scene\' should be \'indoor\' or \'outdoor\'."
+        assert self.scene in ['indoor', 'outdoor'], "Invalid option, \'scene\' should be \'indoor\' or \'outdoor\'."
         
         self.side = kwargs.get('side')
-        assert self.side in ['left', 'right'], "Invalid option, \'side\' should be in \'left\', \'right\'."
+        assert self.side in ['left', 'right', 'both'], "Invalid option, \'side\' should be in \'left\', \'right\' or \'both\'."
 
         self.spike_h = kwargs.get('spike_h', 250)
         self.spike_w = kwargs.get('spike_w', 400)
@@ -48,11 +48,16 @@ class SpikeMonoDataset(Dataset):
     def __gen_data_list(self):
         path_list = []
 
-        rootfolder = os.path.join(self.base_folder, self.scene, self.side)
+        rootfolder = os.path.join(self.base_folder, self.scene)
         
-        folders = sorted(os.listdir(rootfolder))
-        for folder in folders:
-            path_list.append(os.path.join(rootfolder, folder))
+        folders = sorted(os.listdir(os.path.join(rootfolder, 'left')))
+        if self.side == 'both':
+            for side in ['left', 'right']:
+                for folder in folders:
+                    path_list.append(os.path.join(rootfolder, side, folder))
+        else:
+            for folder in folders:
+                path_list.append(os.path.join(rootfolder, folder))
 
         return path_list
     
@@ -73,7 +78,7 @@ class SpikeMonoDataset(Dataset):
         path = self.path_list[index]
 
         path_dict = {
-            'label': os.path.join(path, "{}_gt.npy".format(path.split('/')[-1])),
+            'label': os.path.join(path.replace('/right/', '/left/'), "{}_gt.npy".format(path.split('/')[-1])),
             'spike': os.path.join(path, "{}.dat".format(path.split('/')[-1]))
         }
         
