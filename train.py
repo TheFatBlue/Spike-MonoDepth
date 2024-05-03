@@ -257,7 +257,7 @@ def main_worker(gpu, ngpus_per_node, args):
             dummy_input = torch.Tensor(1, C, H, W)
             times = torch.Tensor(1)
             _ = model.forward(dummy_input, times=times, prev_states=None)  # tag="events"
-        model.load_state_dict(modified_state_dict)
+        model.load_state_dict(modified_state_dict, strict=False)
         
         for name, param in model.named_parameters():
             if 'encoder' in name or 'resblocks' in name:

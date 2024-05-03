@@ -147,7 +147,7 @@ def main(config, initial_checkpoint, data_folder):
     print('Loading initial model weights from: {}'.format(initial_checkpoint))
     checkpoint = torch.load(initial_checkpoint)
     modified_state_dict = remove_module_prefix(checkpoint['state_dict'])
-    model.load_state_dict(modified_state_dict)
+    model.load_state_dict(modified_state_dict, strict=False)
 
     gpu = torch.device('cuda:' + str(config['gpu']))
     model.to(gpu)

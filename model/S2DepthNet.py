@@ -22,7 +22,7 @@ class ChannelAttention(nn.Module):
         b, c, _, _ = x.size()
         y = self.avg_pool(x).view(b, c)
         y = self.fc(y).view(b, c, 1, 1)
-        return x * y.expand_as(x)
+        return y
 
 
 def skip_concat(x1, x2):
@@ -78,14 +78,17 @@ class S2DepthTransformerUNetConv(BaseERGB2Depth):
             self.apply_skip_connection = skip_concat
         elif self.skip_type == 'no_skip' or self.skip_type is None:
             self.apply_skip_connection = identity
+        elif self.skip_type == 'attention':
+            self.apply_skip_connection = self.skip_attention
         else:
             raise KeyError('Could not identify skip_type, please add "skip_type":'
                            ' "sum", "concat" or "no_skip" to config["model"]')
 
         self.build_resblocks()
         self.build_decoders()
+        self.build_attentions()
         self.build_prediction_layer()
-    
+
     def build_resblocks(self):
         self.resblocks = nn.ModuleList()
         for i in range(self.num_residual_blocks):
@@ -93,18 +96,35 @@ class S2DepthTransformerUNetConv(BaseERGB2Depth):
     
 
     def build_decoders(self):
-        decoder_input_sizes = list(reversed([self.base_num_channels * pow(2, i) for i in range(self.num_encoders)]))
-        print(decoder_input_sizes)
+        self.decoder_input_sizes = list(reversed([self.base_num_channels * pow(2, i) for i in range(self.num_encoders)]))
 
         self.decoders = nn.ModuleList()
-        for input_size in decoder_input_sizes:
-            self.decoders.append(self.UpsampleLayer(input_size if self.skip_type == 'sum' else 2 * input_size,
+        for input_size in self.decoder_input_sizes:
+            self.decoders.append(self.UpsampleLayer(input_size if self.skip_type in ['sum', 'attention']  else 2 * input_size,
                                                     input_size // 2,
                                                     kernel_size=5, padding=2, norm=self.norm))
 
     def build_prediction_layer(self):
-        self.pred = ConvLayer(self.base_num_channels // 2 if self.skip_type == 'sum' else 2 * self.base_num_channels,
+        self.pred = ConvLayer(self.base_num_channels // 2 if self.skip_type in ['sum', 'attention'] else 2 * self.base_num_channels,
                               self.num_output_channels, 1, activation=None, norm=self.norm)
+    
+    def build_attentions(self):
+        self.channel_attentions = nn.ModuleList()
+        self.attention_convs = nn.ModuleList()
+        for input_size in self.decoder_input_sizes[:-1]:
+            # print(input_size)
+            self.channel_attentions.append(ChannelAttention(input_size))
+            self.attention_convs.append(nn.Conv2d(input_size, input_size // 2, kernel_size=1))
+        
+    def skip_attention(self, x, y):
+        combined_features = torch.cat((x, y), dim=1)
+        num_channels = combined_features.shape[1]
+        for i in range(self.num_encoders-1):
+            if num_channels == self.decoder_input_sizes[i]:
+                attention_weights = self.channel_attentions[i](combined_features)
+                attention_applied = combined_features * attention_weights.expand_as(combined_features)
+                return self.attention_convs[i](attention_applied)
+                
 
     def forward_decoder(self, super_states):
         # last superstate is taken as input for decoder.
@@ -120,17 +140,12 @@ class S2DepthTransformerUNetConv(BaseERGB2Depth):
         for i, decoder in enumerate(self.decoders):
             if i == 0:
                 x = decoder(x)
-                # print(x.shape)
             else:
                 if not bool(self.baseline) and self.state_combination == "convlstm":
                     x = decoder(self.apply_skip_connection(x, super_states[self.num_encoders - i - 1][0]))
                 else:
                     x = decoder(self.apply_skip_connection(x, super_states[self.num_encoders - i - 1]))
-                    # print(x.shape)
-            # x = decoder(x)
 
-        # tail
-        # img = self.activation(self.pred(self.apply_skip_connection(x, head)))
         img = self.activation(self.pred(x))
 
         return img
