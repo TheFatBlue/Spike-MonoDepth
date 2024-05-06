@@ -86,7 +86,8 @@ class S2DepthTransformerUNetConv(BaseERGB2Depth):
 
         self.build_resblocks()
         self.build_decoders()
-        self.build_attentions()
+        if self.skip_type == 'attention':
+            self.build_attentions()
         self.build_prediction_layer()
 
     def build_resblocks(self):
@@ -97,16 +98,27 @@ class S2DepthTransformerUNetConv(BaseERGB2Depth):
 
     def build_decoders(self):
         self.decoder_input_sizes = list(reversed([self.base_num_channels * pow(2, i) for i in range(self.num_encoders)]))
+        # print(self.decoder_input_sizes)
 
         self.decoders = nn.ModuleList()
+        first_decoder = True
         for input_size in self.decoder_input_sizes:
-            self.decoders.append(self.UpsampleLayer(input_size if self.skip_type in ['sum', 'attention']  else 2 * input_size,
+            if first_decoder:
+                self.decoders.append(self.UpsampleLayer(input_size, input_size // 2,
+                                                        kernel_size=5, padding=2, norm=self.norm))
+                first_decoder = False
+            else:
+                self.decoders.append(self.UpsampleLayer(input_size if self.skip_type in ['sum', 'attention']  else 2 * input_size,
                                                     input_size // 2,
                                                     kernel_size=5, padding=2, norm=self.norm))
+        # print(self.decoders)
 
     def build_prediction_layer(self):
+        '''
         self.pred = ConvLayer(self.base_num_channels // 2 if self.skip_type in ['sum', 'attention'] else 2 * self.base_num_channels,
                               self.num_output_channels, 1, activation=None, norm=self.norm)
+                              '''
+        self.pred = ConvLayer(self.base_num_channels // 2, self.num_output_channels, 1, activation=None, norm=self.norm)
     
     def build_attentions(self):
         self.channel_attentions = nn.ModuleList()

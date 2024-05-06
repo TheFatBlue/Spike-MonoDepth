@@ -221,7 +221,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
     torch.manual_seed(111)
     model = eval(config['arch'])(config['model'])
-    model.summary()
+    # model.summary()
     
     if args.distributed:
         if args.gpu is not None:
@@ -257,13 +257,18 @@ def main_worker(gpu, ngpus_per_node, args):
             dummy_input = torch.Tensor(1, C, H, W)
             times = torch.Tensor(1)
             _ = model.forward(dummy_input, times=times, prev_states=None)  # tag="events"
-        model.load_state_dict(modified_state_dict, strict=False)
+        # modify checkpoint loading
+        model_dict = model.state_dict()
+        filtered_dict = {k: v for k, v in modified_state_dict.items() if k.startswith('encoder') or k.startswith('resblocks')}
+        model_dict.update(filtered_dict)
+        
+        model.load_state_dict(model_dict)
         
         for name, param in model.named_parameters():
             if 'encoder' in name or 'resblocks' in name:
                 param.requires_grad = False
         print("Encoder layers frozen")
-        model.summary()
+        # model.summary()
     
     cudnn.benchmark = True
     

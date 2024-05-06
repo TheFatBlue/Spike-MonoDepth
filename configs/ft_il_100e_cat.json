@@ -7,7 +7,7 @@
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/train",
             "scene": "indoor",
-            "side": "both",
+            "side": "left",
             "clip_distance": 4.0,
             "reg_factor": 1.86,
             "every_x_rgb_frame": 1,
@@ -17,7 +17,7 @@
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/validation",
             "scene": "indoor",
-            "side": "both",
+            "side": "left",
             "clip_distance": 4.0,
             "reg_factor": 1.86,
             "every_x_rgb_frame": 1,
@@ -36,7 +36,7 @@
     },
     "optimizer_type": "Adam",
     "optimizer": {
-        "lr": 0.0001,
+        "lr": 0.0003,
         "weight_decay": 0
     },
     "loss": {
@@ -55,7 +55,7 @@
     "trainer": {
         "epochs": 100,
         "sequence_length": 1,
-        "save_dir": "/root/autodl-tmp/ft_ib_100e_at/",
+        "save_dir": "/root/autodl-tmp/ft_il_100e_cat/",
         "save_freq": 10,
         "verbosity": 2,
         "monitor": "val_loss",
@@ -72,7 +72,7 @@
     "model": {
         "num_bins_rgb": 128,
         "num_bins_events": 128,
-        "skip_type": "attention",
+        "skip_type": "concat",
         "recurrent_block_type": "none",
         "state_combination": "none",
         "spatial_resolution": [112, 112],

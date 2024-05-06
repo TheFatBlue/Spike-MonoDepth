@@ -44,8 +44,8 @@ class BaseTrainer:
         
 
         self.train_logger = train_logger
-        self.optimizer = getattr(optim, config['optimizer_type'])(model.parameters(),
-                                                                  **config['optimizer'])
+        self.optimizer = getattr(optim, config['optimizer_type'])(model.parameters(), **config['optimizer'])
+        # self.optimizer = self.create_optimizer()
         self.lr_scheduler = getattr(
             optim.lr_scheduler,
             config['lr_scheduler_type'], None)
@@ -71,6 +71,23 @@ class BaseTrainer:
 
         if resume:
             self._resume_checkpoint(resume)
+            
+    def create_optimizer(self):
+        # 使用config中的优化器类型和参数
+        optimizer_type = self.config['optimizer_type']
+        base_lr = self.config['optimizer']['lr']
+        weight_decay = self.config['optimizer']['weight_decay']
+
+        # 为decoders和pred模块设置不同的学习率
+        optimizer = getattr(optim, optimizer_type)(
+            [{'params': self.model.decoders.parameters(), 'lr': 5e-5},
+             {'params': self.model.pred.parameters(), 'lr': 5e-5},
+             {'params': self.model.attention_convs.parameters(), 'lr': base_lr, 'weight_decay': weight_decay},
+             {'params': self.model.channel_attentions.parameters(), 'lr': base_lr, 'weight_decay': weight_decay}],
+            lr=base_lr,
+            weight_decay=weight_decay
+        )
+        return optimizer
 
     def cleanup(self):
         self.writer.close()
