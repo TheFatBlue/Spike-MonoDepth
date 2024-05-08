@@ -268,7 +268,7 @@ def main_worker(gpu, ngpus_per_node, args):
             if 'encoder' in name or 'resblocks' in name:
                 param.requires_grad = False
         print("Encoder layers frozen")
-        # model.summary()
+        model.summary()
     
     cudnn.benchmark = True
     

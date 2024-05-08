@@ -108,7 +108,7 @@ class S2DepthTransformerUNetConv(BaseERGB2Depth):
                                                         kernel_size=5, padding=2, norm=self.norm))
                 first_decoder = False
             else:
-                self.decoders.append(self.UpsampleLayer(input_size if self.skip_type in ['sum', 'attention']  else 2 * input_size,
+                self.decoders.append(self.UpsampleLayer(input_size if self.skip_type in ['sum', 'attention', 'no_skip']  else 2 * input_size,
                                                     input_size // 2,
                                                     kernel_size=5, padding=2, norm=self.norm))
         # print(self.decoders)
