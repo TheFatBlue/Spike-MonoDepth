@@ -18,7 +18,7 @@ class LongSpikeStreamEncoderConv(nn.Module):
         patch_norm=False,
         out_indices=(0,1,2),
         frozen_stages=-1,
-        new_version=3,
+        new_version=4,
         ):
         super(LongSpikeStreamEncoderConv, self).__init__()
 
@@ -37,7 +37,7 @@ class LongSpikeStreamEncoderConv(nn.Module):
 
         self.num_encoders = len(self.depths)
         self.out_channels = [self.embed_dim*(2**i) for i in range(self.num_encoders)]
-
+        
         self.swin3d = SwinTransformer3D(
             patch_size=self.patch_size,
             in_chans=self.in_chans,

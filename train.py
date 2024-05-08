@@ -259,13 +259,13 @@ def main_worker(gpu, ngpus_per_node, args):
             _ = model.forward(dummy_input, times=times, prev_states=None)  # tag="events"
         # modify checkpoint loading
         model_dict = model.state_dict()
-        filtered_dict = {k: v for k, v in modified_state_dict.items() if k.startswith('encoder') or k.startswith('resblocks')}
+        filtered_dict = {k: v for k, v in modified_state_dict.items() if k.startswith('encoder.swin3d')}
         model_dict.update(filtered_dict)
         
         model.load_state_dict(model_dict)
         
         for name, param in model.named_parameters():
-            if 'encoder' in name or 'resblocks' in name:
+            if 'encoder.swin3d' in name:
                 param.requires_grad = False
         print("Encoder layers frozen")
         model.summary()
