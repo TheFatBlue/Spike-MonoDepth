@@ -221,7 +221,7 @@ def main_worker(gpu, ngpus_per_node, args):
 
     torch.manual_seed(111)
     model = eval(config['arch'])(config['model'])
-    # model.summary()
+    model.summary()
     
     if args.distributed:
         if args.gpu is not None:
