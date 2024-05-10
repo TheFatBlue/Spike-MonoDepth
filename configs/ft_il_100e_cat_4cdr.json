@@ -23,8 +23,8 @@
             "every_x_rgb_frame": 1,
             "baseline": "s"
         },
-        "batch_size": 32,
-        "num_workers": 16,
+        "batch_size": 24,
+        "num_workers": 12,
         "pin_memory": true,
         "normalize": true,
         "shuffle": true
@@ -36,7 +36,7 @@
     },
     "optimizer_type": "Adam",
     "optimizer": {
-        "lr": 0.0003,
+        "lr": 7e-5,
         "weight_decay": 0
     },
     "loss": {
@@ -55,7 +55,7 @@
     "trainer": {
         "epochs": 100,
         "sequence_length": 1,
-        "save_dir": "/root/autodl-tmp/ft_il_100e_cat_4cdr/",
+        "save_dir": "/root/autodl-tmp/ft_il_100e_cat_4cdr_ctn/",
         "save_freq": 10,
         "verbosity": 2,
         "monitor": "val_loss",

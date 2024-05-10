@@ -17,7 +17,7 @@
             "type": "SpikeMonoDataset",
             "base_folder": "Spike-Stero/validation",
             "scene": "indoor",
-            "side": "both",
+            "side": "left",
             "clip_distance": 4.0,
             "reg_factor": 1.86,
             "every_x_rgb_frame": 1,

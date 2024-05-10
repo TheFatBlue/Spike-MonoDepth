@@ -4,6 +4,7 @@ import logging
 import argparse
 import bisect
 from os.path import join
+from tqdm import tqdm
 
 import cv2
 import matplotlib as mpl
@@ -195,7 +196,7 @@ def main(config, initial_checkpoint, output_folder, data_folder):
     config['model']['loss_composition'] = config['trainer']['loss_composition']
     
     model = eval(config['arch'])(config['model'])
-    model.summary()
+    # model.summary()
 
     print('Loading initial model weights from: {}'.format(initial_checkpoint))
     checkpoint = torch.load(initial_checkpoint)
@@ -216,6 +217,7 @@ def main(config, initial_checkpoint, output_folder, data_folder):
     video_idx = 0
 
     N = len(test_dataset)
+    N = 160
     print(N)
     if calculate_scale:
         scale = np.empty(N)
@@ -248,7 +250,7 @@ def main(config, initial_checkpoint, output_folder, data_folder):
         idx = 0
         prev_dataset_idx = -1
         # for batch_idx, sequence in enumerate(data_loader):
-
+        pbar = tqdm(total=N)
         while idx < N:
             item, dataset_idx = test_dataset[idx]
 
@@ -271,7 +273,7 @@ def main(config, initial_checkpoint, output_folder, data_folder):
                                                                              prev_super_states['image'],
                                                                              prev_states_lstm)
 
-            if idx > 20 and idx < 24:
+            if idx > 20 and idx < 24 and False:
                 print("test preview of index ", idx)
                 fig, ax = plt.subplots(ncols=every_x_rgb_frame['validation']+1, nrows=4)
                 for i, key in enumerate(new_predicted_targets.keys()):
@@ -422,6 +424,9 @@ def main(config, initial_checkpoint, output_folder, data_folder):
             sequence_idx += 1
             prev_dataset_idx = dataset_idx
             idx += 1
+            pbar.update(1)
+            
+        pbar.close() 
 
         if calculate_scale:
             total_scale = np.mean(scale)

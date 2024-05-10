@@ -8,8 +8,8 @@
             "base_folder": "Spike-Stero/train",
             "scene": "indoor",
             "side": "left",
-            "clip_distance": 4.0,
-            "reg_factor": 1.86,
+            "clip_distance": 20.0,
+            "reg_factor": 5.7,
             "every_x_rgb_frame": 1,
             "baseline": "s"
         },
@@ -18,8 +18,8 @@
             "base_folder": "Spike-Stero/validation",
             "scene": "indoor",
             "side": "left",
-            "clip_distance": 4.0,
-            "reg_factor": 1.86,
+            "clip_distance": 20.0,
+            "reg_factor": 5.7,
             "every_x_rgb_frame": 1,
             "baseline": "s"
         },
