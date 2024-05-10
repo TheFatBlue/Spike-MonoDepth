@@ -41,10 +41,12 @@ def identity(x1, x2=None):
 class S2DepthTransformerUNetConv(BaseERGB2Depth):
     def __init__(self, config):
         super(S2DepthTransformerUNetConv, self).__init__(config)
+        print(self.num_encoders)
         assert self.base_num_channels % 48 == 0
 
         self.depths=[int(i) for i in config["swin_depths"]]
         self.num_encoders = len(self.depths)
+        print(self.num_encoders)
         self.num_heads=[int(i) for i in config["swin_num_heads"]]
         self.patch_size=[int(i) for i in config["swin_patch_size"]]
         self.out_indices=[int(i) for i in config["swin_out_indices"]]
