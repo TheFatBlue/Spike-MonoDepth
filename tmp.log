@@ -1,8 +1,0 @@
-Setting up Multi Scale Gradient loss...
-Done
-Found 1 samples in /root/code/smde/dataset/Spike-Stero/test
------  [3, 6, 12]
----- new version 4 ----
-384
-192
-Loading initial model weights from: /root/autodl-tmp/SpikeT/model_best.pth.tar
